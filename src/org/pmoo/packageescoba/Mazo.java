@@ -20,6 +20,6 @@ public class Mazo {
 		return miMazo;
 	}
 	
-	
+	public void repartirCartas(Jugador pJugador) {}
 	
 }
