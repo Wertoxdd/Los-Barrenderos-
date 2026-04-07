@@ -13,8 +13,11 @@ public class ListaCartas {
 	}
 	
 	// METODOS
+	protected ArrayList<Carta> getCartas(){
+		return this.cartas;
+	}
 	
-	private Iterator<Carta> getIterador() {
+	protected Iterator<Carta> getIterador() {
 		return this.cartas.iterator();
 	}
 	

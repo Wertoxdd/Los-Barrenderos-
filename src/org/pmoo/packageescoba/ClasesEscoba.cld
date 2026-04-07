@@ -695,6 +695,28 @@
                                   <isStatic>false</isStatic>
                                   <isFinal>false</isFinal>
                                 </net.java.amateras.uml.classdiagram.model.OperationModel>
+                                <net.java.amateras.uml.classdiagram.model.OperationModel>
+                                  <backgroundColor reference="../../../../../../../../../backgroundColor"/>
+                                  <foregroundColor reference="../../../../../../../../../foregroundColor"/>
+                                  <showIcon>true</showIcon>
+                                  <parent class="net.java.amateras.uml.classdiagram.model.ClassModel" reference="../../.."/>
+                                  <listeners serialization="custom">
+                                    <java.beans.PropertyChangeSupport>
+                                      <default>
+                                        <source class="net.java.amateras.uml.classdiagram.model.OperationModel" reference="../../../.."/>
+                                        <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                      </default>
+                                      <null/>
+                                    </java.beans.PropertyChangeSupport>
+                                  </listeners>
+                                  <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1"/>
+                                  <name>numCartas</name>
+                                  <type>int</type>
+                                  <params/>
+                                  <isAbstract>false</isAbstract>
+                                  <isStatic>false</isStatic>
+                                  <isFinal>false</isFinal>
+                                </net.java.amateras.uml.classdiagram.model.OperationModel>
                               </children>
                               <filterProperty/>
                               <propertyDescriptors>
@@ -1226,28 +1248,6 @@
                                                   <null/>
                                                 </java.beans.PropertyChangeSupport>
                                               </listeners>
-                                              <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../../../../../../../../../../../net.java.amateras.uml.classdiagram.model.ClassModel[3]/children/net.java.amateras.uml.classdiagram.model.OperationModel[3]/visibility"/>
-                                              <name>ContarPuntos</name>
-                                              <type>void</type>
-                                              <params/>
-                                              <isAbstract>false</isAbstract>
-                                              <isStatic>false</isStatic>
-                                              <isFinal>false</isFinal>
-                                            </net.java.amateras.uml.classdiagram.model.OperationModel>
-                                            <net.java.amateras.uml.classdiagram.model.OperationModel>
-                                              <backgroundColor reference="../../../backgroundColor"/>
-                                              <foregroundColor reference="../../../foregroundColor"/>
-                                              <showIcon>true</showIcon>
-                                              <parent class="net.java.amateras.uml.classdiagram.model.ClassModel" reference="../../.."/>
-                                              <listeners serialization="custom">
-                                                <java.beans.PropertyChangeSupport>
-                                                  <default>
-                                                    <source class="net.java.amateras.uml.classdiagram.model.OperationModel" reference="../../../.."/>
-                                                    <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
-                                                  </default>
-                                                  <null/>
-                                                </java.beans.PropertyChangeSupport>
-                                              </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1"/>
                                               <name>getMesa</name>
                                               <type>Mesa</type>
@@ -1581,7 +1581,7 @@
                                       <null/>
                                     </java.beans.PropertyChangeSupport>
                                   </listeners>
-                                  <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[10]/children/net.java.amateras.uml.classdiagram.model.OperationModel[3]/visibility"/>
+                                  <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[10]/children/net.java.amateras.uml.classdiagram.model.OperationModel[2]/visibility"/>
                                   <name>jugarTurno</name>
                                   <type>void</type>
                                   <params/>
@@ -2252,7 +2252,7 @@
                 </listeners>
                 <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$3" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.GeneralizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[4]/children/net.java.amateras.uml.classdiagram.model.OperationModel[2]/visibility"/>
                 <name>getCartas</name>
-                <type>ListaCartas</type>
+                <type>ArrayList&lt;Carta&gt;</type>
                 <params/>
                 <isAbstract>false</isAbstract>
                 <isStatic>false</isStatic>
@@ -2272,7 +2272,7 @@
                     <null/>
                   </java.beans.PropertyChangeSupport>
                 </listeners>
-                <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.GeneralizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[4]/targetConnections/net.java.amateras.uml.classdiagram.model.GeneralizationModel/source/targetConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[10]/children/net.java.amateras.uml.classdiagram.model.OperationModel[3]/visibility"/>
+                <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$1" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.GeneralizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[4]/targetConnections/net.java.amateras.uml.classdiagram.model.GeneralizationModel/source/targetConnections/net.java.amateras.uml.classdiagram.model.RealizationModel/source/parent/children/net.java.amateras.uml.classdiagram.model.ClassModel[10]/children/net.java.amateras.uml.classdiagram.model.OperationModel[2]/visibility"/>
                 <name>sumaCartas</name>
                 <type>int</type>
                 <params/>
