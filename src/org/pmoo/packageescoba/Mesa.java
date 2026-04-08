@@ -5,7 +5,7 @@ public class Mesa {
 	// atributos
 	private ArrayList<Jugador> jugadores; // lista de jugadores
 	private ListaCartasMesa cartasMesa;
-	private static Mesa miMesa = new Mesa(); // instancia de la mesa
+	private static Mesa miMesa = null; // atributo para el singleton de la mesa
 	
 	private int puntosJugador = 0; // puntos de cada partida
 	private int puntosIA = 0;
@@ -32,10 +32,27 @@ public class Mesa {
 	
 	//Métodos
 	public static Mesa getMesa() {
+		if (miMesa == null) {
+			miMesa = new Mesa();
+		}
+		
 		return miMesa;
 	}
 	
+	// metodos
 	
+	// metodo para repartir las cartas a los jugadores y a la mesa
+	private void repartirCartas(boolean esRepartoInicial) { // el parametro esRepartoInicial muestra si es el reparto inicial para saber si es la primera vez que se reparte, PARA NO VOLVER A REPARTIR 4 CARTAS A LA MESA CADA RONDA 
+		Mazo mazo = Mazo.getMazo();
+		
+		// 4 cartas en la mesa (SOLO REPARTO INICIAL)
+		if (esRepartoInicial) {
+			for (int i = 0; i < 4, i++) {
+				cartasMesa.agregar(mazo.darCarta());
+			}
+		}
+		
+	}
 	
 	
 	
