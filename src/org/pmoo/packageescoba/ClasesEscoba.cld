@@ -1365,7 +1365,7 @@
                                               </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2"/>
                                               <name>puntosJugador</name>
-                                              <type>int</type>
+                                              <type>int = 0</type>
                                               <isStatic>false</isStatic>
                                               <isFinal>false</isFinal>
                                               <isEnumCst>false</isEnumCst>
@@ -1386,7 +1386,7 @@
                                               </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../net.java.amateras.uml.classdiagram.model.AttributeModel[4]/visibility"/>
                                               <name>puntosIA</name>
-                                              <type>int</type>
+                                              <type>int = 0</type>
                                               <isStatic>false</isStatic>
                                               <isFinal>false</isFinal>
                                               <isEnumCst>false</isEnumCst>
@@ -1406,8 +1406,8 @@
                                                 </java.beans.PropertyChangeSupport>
                                               </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../net.java.amateras.uml.classdiagram.model.AttributeModel[4]/visibility"/>
-                                              <name>attr6</name>
-                                              <type>int</type>
+                                              <name>puntosAcumuladosJugador</name>
+                                              <type>int = 0</type>
                                               <isStatic>false</isStatic>
                                               <isFinal>false</isFinal>
                                               <isEnumCst>false</isEnumCst>
@@ -1427,10 +1427,31 @@
                                                 </java.beans.PropertyChangeSupport>
                                               </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../net.java.amateras.uml.classdiagram.model.AttributeModel[4]/visibility"/>
-                                              <name>attr7</name>
-                                              <type>int</type>
+                                              <name>puntosAcumuladosIA</name>
+                                              <type>int = 0</type>
                                               <isStatic>false</isStatic>
                                               <isFinal>false</isFinal>
+                                              <isEnumCst>false</isEnumCst>
+                                            </net.java.amateras.uml.classdiagram.model.AttributeModel>
+                                            <net.java.amateras.uml.classdiagram.model.AttributeModel>
+                                              <backgroundColor reference="../../../backgroundColor"/>
+                                              <foregroundColor reference="../../../foregroundColor"/>
+                                              <showIcon>true</showIcon>
+                                              <parent class="net.java.amateras.uml.classdiagram.model.ClassModel" reference="../../.."/>
+                                              <listeners serialization="custom">
+                                                <java.beans.PropertyChangeSupport>
+                                                  <default>
+                                                    <source class="net.java.amateras.uml.classdiagram.model.AttributeModel" reference="../../../.."/>
+                                                    <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                                  </default>
+                                                  <null/>
+                                                </java.beans.PropertyChangeSupport>
+                                              </listeners>
+                                              <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2"/>
+                                              <name>ficheroRanking</name>
+                                              <type>String = &quot;ranking.txt&quot;</type>
+                                              <isStatic>true</isStatic>
+                                              <isFinal>true</isFinal>
                                               <isEnumCst>false</isEnumCst>
                                             </net.java.amateras.uml.classdiagram.model.AttributeModel>
                                           </children>

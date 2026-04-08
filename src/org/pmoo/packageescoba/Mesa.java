@@ -41,6 +41,12 @@ public class Mesa {
 	
 	// metodos
 	
+	private Iterator<Jugador> getIterador(){
+		return this.jugadores.iterator();
+	}
+	
+	
+	
 	// metodo para repartir las cartas a los jugadores y a la mesa
 	private void repartirCartas(boolean esRepartoInicial) { // el parametro esRepartoInicial muestra si es el reparto inicial para saber si es la primera vez que se reparte, PARA NO VOLVER A REPARTIR 4 CARTAS A LA MESA CADA RONDA 
 		Mazo mazo = Mazo.getMazo();
@@ -51,6 +57,9 @@ public class Mesa {
 				cartasMesa.agregar(mazo.darCarta());
 			}
 		}
+		
+		Iterator<Jugador> it = jugadores.getIterador();
+		
 		
 	}
 	
