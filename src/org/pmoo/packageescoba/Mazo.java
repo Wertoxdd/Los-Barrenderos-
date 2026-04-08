@@ -24,8 +24,7 @@ public class Mazo {
 	}
 	
 	// Singleton
-	@SuppressWarnings("unused")
-	private static Mazo getMazo() {
+	public static Mazo getMazo() {
 		if(miMazo == null) {
 			miMazo = new Mazo();
 		} 
