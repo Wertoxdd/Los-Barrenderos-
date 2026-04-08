@@ -3,16 +3,43 @@ import java.util.ArrayList;
 import java.util.Iterator;
 public class Mesa {
 	// atributos
-	private ArrayList<Jugador> jugadores;
-	private static Mesa miMesa = new Mesa();
+	private ArrayList<Jugador> jugadores; // lista de jugadores
+	private ListaCartasMesa cartasMesa;
+	private static Mesa miMesa = new Mesa(); // instancia de la mesa
+	
+	private int puntosJugador = 0; // puntos de cada partida
+	private int puntosIA = 0;
+	
+	private int puntosAcumuladosJugador = 0; // puntos que se acumulan despues de cada partida (HASTA LLEGAR A 11, 15 o 21 (depende)) 
+	private int puntosAcumuladosIA = 0;
+	
+	private static final String ficheroRanking = "ranking.txt"; // atributo para generar el fichero
+	
 	// Constructora
 	private Mesa() {
-		// TODO Auto-generated constructor stub
+		this.jugadores = new ArrayList<Jugador>(); // inicializar la lista de jugadores
+		this.jugadores.add(new JugadorPersona(0)); // inicializar el jugador con 0 puntos
+		this.jugadores.add(new JugadorIA(0)); // inicializar la ia con 0 puntos
+		
+		this.cartasMesa = new ListaCartasMesa(); // crear las cartas de la mesa
+		
+		this.puntosJugador = 0;
+		this.puntosIA = 0;
+		this.puntosAcumuladosJugador = 0;
+		this.puntosAcumuladosIA = 0;
+		
 	}
+	
 	//Métodos
 	public static Mesa getMesa() {
 		return miMesa;
 	}
+	
+	
+	
+	
+	
+	
 	public void jugarPartida() {
 		// TODO PROGRAMA PRINCIPAL, AQUÍ OCURRE EL BUCLE DE JUEGO CON LOS TURNOS DE CADA JUGADOR Y EL RECUENTO FINAL, LA PARTIDA TERMINA CUANDO SE ACABAN LAS CARTAS DE LAS MANOS DE LOS JUGADORES Y SE ACABAN LAS CARTAS DEL MAZO	
 	}
