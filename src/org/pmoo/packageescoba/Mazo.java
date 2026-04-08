@@ -49,6 +49,12 @@ public class Mazo {
 				System.out.println("El mazo está vacío");
 			}
 		}
+
+	// dar carta, aprovechamos la propiedad de remove(): al eliminar una carta de una lista la selecciona.
+	public Carta darCarta() {
+		return mazo.remove(mazo.size() - 1);
 	}
+	
+}
 	
 
