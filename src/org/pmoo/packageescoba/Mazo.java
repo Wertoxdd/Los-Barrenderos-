@@ -49,9 +49,22 @@ public class Mazo {
 			}
 		}
 
+<<<<<<< HEAD
+	public Carta darCarta() {
+		
+		if (!mazo.isEmpty()) {
+		return this.mazo.get(0);
+		}
+		else {
+			System.out.println("El mazo está vacío");
+		return null;
+		}
+	}
+=======
 	// dar carta, aprovechamos la propiedad de remove(): al eliminar una carta de una lista la selecciona.
 	public Carta darCarta() {
 		return mazo.remove(mazo.size() - 1);
+>>>>>>> branch 'master' of https://github.com/Wertoxdd/Los-Barrenderos-.git
 	}
 	
 }
