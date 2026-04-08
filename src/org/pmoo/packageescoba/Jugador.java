@@ -27,6 +27,10 @@ public abstract class Jugador {
 	protected int getPuntos() {
 		return this.puntos;
 	}
-	
+
+	public void recibirCarta(Carta pCarta) {
+		 this.mano.agregar(pCarta);
+	}
+
 	public abstract void jugarTurno();
 }

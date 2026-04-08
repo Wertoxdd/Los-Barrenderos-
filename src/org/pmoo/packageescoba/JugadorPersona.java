@@ -4,7 +4,6 @@ public class JugadorPersona extends Jugador {
 
 	public JugadorPersona(int pPuntos) {
 		super(pPuntos);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
