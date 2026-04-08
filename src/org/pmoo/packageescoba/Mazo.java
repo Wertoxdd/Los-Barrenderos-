@@ -49,6 +49,17 @@ public class Mazo {
 				System.out.println("El mazo está vacío");
 			}
 		}
+
+	public Carta darCarta() {
+		// TODO Auto-generated method stub
+		if (!mazo.isEmpty()) {
+		return this.mazo.get(0);
+		}
+		else {
+			System.out.println("El mazo está vacío");
+		return null;
+		}
+	}
 	}
 	
 

@@ -47,7 +47,7 @@ public class Mesa {
 		
 		// 4 cartas en la mesa (SOLO REPARTO INICIAL)
 		if (esRepartoInicial) {
-			for (int i = 0; i < 4, i++) {
+			for (int i = 0; i < 4; i++) {
 				cartasMesa.agregar(mazo.darCarta());
 			}
 		}
