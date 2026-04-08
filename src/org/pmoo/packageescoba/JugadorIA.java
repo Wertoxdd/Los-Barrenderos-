@@ -12,6 +12,8 @@ public class JugadorIA extends Jugador {
 		// TODO Auto-generated method stub
 
 	}
-	private void jugarCombinacion15()
+	private void jugarCombinacion15() {
+		
+	}
 
 }

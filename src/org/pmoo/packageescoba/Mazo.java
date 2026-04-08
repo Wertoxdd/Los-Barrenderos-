@@ -51,7 +51,7 @@ public class Mazo {
 		}
 
 	public Carta darCarta() {
-		// TODO Auto-generated method stub
+		
 		if (!mazo.isEmpty()) {
 		return this.mazo.get(0);
 		}
