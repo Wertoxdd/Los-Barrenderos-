@@ -1364,7 +1364,7 @@
                                               </listeners>
                                               <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../net.java.amateras.uml.classdiagram.model.AttributeModel[4]/visibility"/>
                                               <name>puntosIA</name>
-                                              <type>int = 0</type>
+                                              <type>int</type>
                                               <isStatic>false</isStatic>
                                               <isFinal>false</isFinal>
                                               <isEnumCst>false</isEnumCst>
