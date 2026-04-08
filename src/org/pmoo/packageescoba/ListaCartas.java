@@ -47,42 +47,10 @@ public class ListaCartas {
 	}
 	
 	
-	public int cuantosOros() {
-		Iterator<Carta> it = getIterador();
-		int cont = 0;
-		while(it.hasNext()) {
-			Carta c = it.next();
-			if (c.getPalo() == "oros"){
-					cont++;
-			}
-		}
-		return cont;
-	}
 	
 	
-	public int cuantosSietes() {
-		Iterator<Carta> it = getIterador();
-		int cont = 0;
-		while(it.hasNext()) {
-			Carta c = it.next();
-			if (c.getValor() == 7) {
-				cont++;
-			}
-		}
-		return cont;
-	}	
 	
-	
-	public boolean tieneSieteDeOros() {
-		Iterator<Carta> it = getIterador();
-		while(it.hasNext()) {
-			Carta c = it.next();
-			if(c.getPalo() == "oros" && c.getValor() == 7) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 	
 	
 }

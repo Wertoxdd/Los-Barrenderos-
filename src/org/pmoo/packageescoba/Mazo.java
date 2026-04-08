@@ -24,6 +24,7 @@ public class Mazo {
 	}
 	
 	// Singleton
+	@SuppressWarnings("unused")
 	private static Mazo getMazo() {
 		if(miMazo == null) {
 			miMazo = new Mazo();
@@ -37,7 +38,17 @@ public class Mazo {
 	}
 	//Dado un objeto de tipo jugador se le daran 3 cartas del mazo a la mano del jugador
 	public void repartirCartas(Jugador pJugador) {
-		// TODO 
+		if (!this.mazo.isEmpty()) {
+			for (int i=0 ; i<3;i++) {
+			
+			Carta miCarta = this.mazo.remove(0);
+			pJugador.recibirCarta(miCarta);
+			}
+		}
+			else {
+				System.out.println("El mazo está vacío");
+			}
+		}
 	}
 	
-}
+

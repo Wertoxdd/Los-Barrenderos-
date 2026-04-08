@@ -22,7 +22,7 @@ public class ListaCartasBarridas extends ListaCartas {
 		return loTiene;
 	}
 	public int numCartas() {
-		return super.getCartas().size();
+		return super.tamaño();
 	}
 	public int cuantosSietes() {
 			// devuelve el numero de sietes de la lista
