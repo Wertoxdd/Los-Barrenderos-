@@ -58,9 +58,12 @@ public class Mesa {
 			}
 		}
 		
-		Iterator<Jugador> it = jugadores.getIterador();
-		
-		
+		// 3 a cada jugador
+		Iterator<Jugador> it = getIterador();
+		while (it.hasNext()) {
+			Jugador j = it.next();
+			mazo.repartirCartas(j);
+			}
 	}
 	
 	
