@@ -51,7 +51,7 @@ public abstract class Jugador {
 		return this.mano.estaVacia();
 	}
 	
-	// metodo para agregar una lista de cartas a tu monton (se usa para tener el 
+	// metodo para agregar una lista de cartas a tu monton
 	public void agregarCapturadas(ListaCartasMonton pLista) {
 		this.monton.agregarCartas(pLista);
 	}
@@ -91,6 +91,6 @@ public abstract class Jugador {
 	// metodo que derivan a las hijas para elegir la carta (la persona la elige manualmente y la IA lo elije aleatoriamente)
 	public abstract Carta elegirCarta();
 	
-	// metodo que derivan a las hijas para elegir la captura de la mesa (
+	// metodo que derivan a las hijas para elegir la captura de la mesa 
 	public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
 }
