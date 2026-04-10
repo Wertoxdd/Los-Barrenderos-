@@ -51,15 +51,9 @@ public class Teclado {
 	}
 	
 	public static void mostrarCartasEnHorizontal(ArrayList<Carta> cartas) {
-	    ArrayList<String[]> lineasCartas = new ArrayList<String[]>();
 	    for (int i = 0; i < cartas.size(); i++) {
-	        lineasCartas.add(cartas.get(i).toString().split("\n"));
+	        System.out.print(cartas.get(i).toString() + "  ");
 	    }
-	    for (int linea = 0; linea < 7; linea++) {
-	        for (int carta = 0; carta < lineasCartas.size(); carta++) {
-	            System.out.print(lineasCartas.get(carta)[linea] + "  ");
-	        }
-	        System.out.println();
-	    }
+	    System.out.println();
 	}
 }
