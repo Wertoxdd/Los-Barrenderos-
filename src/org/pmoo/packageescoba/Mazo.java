@@ -1,67 +1,90 @@
 package org.pmoo.packageescoba;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Random;
 
 public class Mazo {
 	// atributos
-	private ArrayList<Carta> mazo;
+	private ArrayList<Carta> baraja;
 	private static Mazo miMazo = null;
 	
-	// constructora 
-	// No solo genera un nuevo arrayList de Cartas sino que también va a generar todas las cartas que necesitamos en nuestro mazo. 
-	private Mazo() {
-		this.mazo = new ArrayList<Carta>();	
-		String[] palos = {"Oros", "Copas", "Espadas", "Bastos"};
-		
-		 for (String paloActual : palos)       {  
-		     for (int valor = 1; valor <= 10; valor++) {         
-		         Carta nuevaCarta = new Carta(paloActual, valor);
-		         this.mazo.add(nuevaCarta);
-		        }
-		    }
-		this.barajarMazo();
+	// constructora
+	private Mazo () {
+		this.baraja = new ArrayList<Carta >();
 	}
+	
 	
 	// Singleton
 	public static Mazo getMazo() {
-		if(miMazo == null) {
+		if (miMazo == null) {
 			miMazo = new Mazo();
-		} 
+		}
 		return miMazo;
 	}
-	// se baraja el arrayList de Cartas en mazo
-	private void barajarMazo() {
-		Collections.shuffle(mazo);
-		System.out.println("Se ha barajado el mazo");
-	}
-	//Dado un objeto de tipo jugador se le daran 3 cartas del mazo a la mano del jugador
-	public void repartirCartas(Jugador pJugador) {
-		if (!this.mazo.isEmpty()) {
-			for (int i=0 ; i<3;i++) {
-			
-			Carta miCarta = this.mazo.remove(0);
-			pJugador.recibirCarta(miCarta);
-			}
-		}
-			else {
-				System.out.println("El mazo está vacío");
-			}
-		}
-
-
-	public Carta darCarta() {
+	
+	// METODOS
+	
+	public void generarMazo() {
+		int i;
 		
-		if (!mazo.isEmpty()) {
-		return this.mazo.remove(0);
+		// OROS
+		i = 1;
+		while (i <= 10) {
+			baraja.add(new Carta(Palo.Oros, i));
+			i++;
 		}
-		else {
-			System.out.println("El mazo está vacío");
-		return null;
+		
+		// COPAS
+		i = 1;
+		while (i <= 10) {
+			baraja.add(new Carta(Palo.Copas, i));
+			i++;
+		}
+		
+		// ESPADAS
+		i = 1;
+		while (i <= 10) {
+			baraja.add(new Carta(Palo.Espadas, i));
+			i++;
+		}
+		
+		// BASTOS
+		i = 1;
+		while (i <= 10) {
+			baraja.add(new Carta(Palo.Bastos, i));
+			i++;
 		}
 	}
-
+	
+	public void barajarMazo() {
+		Random random = new Random();
+		int i = baraja.size() - 1;
+		while(i > 0) {
+			int j = random.nextInt(i + 1); // nuevo indice para el random, que comprueba si hay una siguiente carta.
+										   // si la hay la asigna.
+			Carta aux = baraja.get(i); // Carta auxiliar para que no se pierda la carta.
+			baraja.set(i, baraja.get(j)); // asigna en la posicion i la carta que esta en una posicion random.
+			baraja.set(j,  aux); // asigna la carta que queda pendiente en la posicion auxiliar.
+			i--;
+		}
+	}
+	
+	public Carta darCarta() {
+		return baraja.remove(baraja.size()-1);
+	}
+		
+	public boolean estaVacio() {
+		return baraja.isEmpty();
+	}
+	
+	public int tamaño() {
+	    return baraja.size();
+	}
+	
+	public void resetear() {
+		baraja.clear();
+	}
+	
+	
 	
 }
-	
-

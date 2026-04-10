@@ -1,21 +1,22 @@
 package org.pmoo.packageescoba;
 
-import java.util.Iterator;
-
 public class ListaCartasMano extends ListaCartas {
-
-	public ListaCartasMano() {
-		super();
+	// atributos -> heredados
+	
+	// constructora
+	public ListaCartasMano() {}
+	
+	// METODOS (propios)
+		
+	public Carta obtenerCarta(int pos) {
+		return getCartas().get(pos);
 	}
-	public void mostrarCartas() {
-		
-		// ENSEÑA TODAS LAS CARTAS DE LA MANO POR PANTALLA//
-		
-		Iterator<Carta> itr= super.getIterador();
-		Carta miCarta = null;
-		while (itr.hasNext()) {
-			miCarta = itr.next();
-			System.out.println(miCarta);
-		}
+	
+	public Carta elegirCarta(int pos){
+		return this.getCartas().remove(pos); // lo elimina y lo devuelve a la vez.
+	}
+	
+	public boolean estaVacia() {
+		return this.getCartas().size() == 0;
 	}
 }

@@ -1,27 +1,37 @@
 package org.pmoo.packageescoba;
 
 public class Carta {
-	//atributos
-	private String palo;
+	// atributos
+	private Palo palo;
 	private int valor;
 	
 	// constructora
-	public Carta(String pPalo, int pValor) {
+	public Carta(Palo pPalo, int pValor) {
 		this.palo = pPalo;
 		this.valor = pValor;
 	}
 	
 	// METODOS
-	public String getPalo() {
+	public Palo getPalo() {
 		return this.palo;
 	}
 	
 	public int getValor() {
 		return this.valor;
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.valor + " de " + this.palo;
+	    String val;
+	    if (valor == 8) {
+	        val = "Sota";
+	    } else if (valor == 9) {
+	        val = "Caballo";
+	    } else if (valor == 10) {
+	        val = "Rey";
+	    } else {
+	        val = String.valueOf(valor);
+	    }
+	    return val + " de " + palo;
 	}
 }

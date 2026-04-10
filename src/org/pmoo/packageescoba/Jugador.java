@@ -1,36 +1,83 @@
 package org.pmoo.packageescoba;
 
 public abstract class Jugador {
-	//atributos
+	// atributos
+	private String nombre; 
 	private ListaCartasMano mano;
-	private ListaCartasBarridas barridas;
-	private int puntos;
+	private ListaCartasMonton monton;
+	private int escobas; 
 	
-	protected  Jugador(int pPuntos) {
+	// constructora
+	protected Jugador(String pNombre) {
+		this.nombre = pNombre;
 		this.mano = new ListaCartasMano();
-		this.barridas = new ListaCartasBarridas();
-		this.puntos = pPuntos;
+		this.monton = new ListaCartasMonton();
+		this.escobas = 0;
 	}
 	
-	public void sumarPuntos(int pPuntos) {
-		this.puntos = this.puntos + pPuntos;
+	// metodos
+	
+	
+	// metodo para obtener el nombre del jugador (para imprimirlo por consola principalmente)
+	public String getNombre() {
+		return this.nombre;
 	}
 	
+	// metodo para obtener la lista de cartas de la mano de un jugador
 	protected ListaCartasMano getMano() {
 		return this.mano;
 	}
 	
-	protected ListaCartasBarridas getBarridas() {
-		return this.barridas;
+	// metodo para agregar una carta a un jugador en su mano
+	public void recibirCarta(Carta pCarta) {
+		this.mano.agregarCarta(pCarta);
 	}
 	
-	protected int getPuntos() {
-		return this.puntos;
+	// metodo para saber si un jugador tiene su mano vacia (se usa para saber si se ha acabado la ronda)
+	public boolean manoVacia() {
+		return this.mano.estaVacia();
 	}
-
-	public void recibirCarta(Carta pCarta) {
-		 this.mano.agregar(pCarta);
+	
+	// metodo para agregar una lista de cartas a tu monton (se usa para tener el 
+	public void agregarCapturadas(ListaCartasMonton pLista) {
+		this.monton.agregarCartas(pLista);
 	}
-
-	public abstract void jugarTurno();
+	
+	// metodo para añadir una escoba al contador de escobas de un jugador
+	public void añadirEscoba() {
+		this.escobas++;
+	}
+	
+	// metodo para obtener las escobas de un jugador
+	public int obtenerEscobas() {
+		return this.escobas;		
+	}
+	
+	// metodo para contar las cartas de un monton de un jugador
+	public int totalCartas() {
+		return this.monton.tamaño();
+	}
+	
+	// metodo para contar los oros de un monton de un jugador
+	public int totalOros() {
+		return this.monton.contarOros();
+	}
+	
+	// metodo para contar los sietes de un monton de un jugador
+	public int totalSietes() {
+		return this.monton.contarSietes();
+	}
+	
+	// metodo para comprobar si en un monton esta el 7 de oros
+	public boolean tieneSieteDeOros() {
+		return this.monton.tieneSieteDeOros();
+	}
+	
+	// METODOS ABSTRACTOS
+	
+	// metodo que derivan a las hijas para elegir la carta (la persona la elige manualmente y la IA lo elije aleatoriamente)
+	public abstract Carta elegirCarta();
+	
+	// metodo que derivan a las hijas para elegir la captura de la mesa (
+	public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
 }

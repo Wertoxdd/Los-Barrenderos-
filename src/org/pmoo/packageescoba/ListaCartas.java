@@ -6,51 +6,38 @@ import java.util.Iterator;
 public class ListaCartas {
 	// atributos
 	private ArrayList<Carta> cartas;
-
+	
 	// constructora
-	public ListaCartas() {
+	protected ListaCartas() {
 		this.cartas = new ArrayList<Carta>();
 	}
 	
-	// METODOS
+	// metodos
+	
 	protected ArrayList<Carta> getCartas(){
-		return this.cartas;
+		return cartas;
 	}
 	
-	protected Iterator<Carta> getIterador() {
-		return this.cartas.iterator();
-	}
-	
-	
-	public void agregar(Carta pCarta) {
+	public void agregarCarta(Carta pCarta) {
 		this.cartas.add(pCarta);
 	}
-	
-	
-	public Carta obtenerCarta(int pos) {
-		return this.cartas.get(pos);
-	}
-	
-	
-	public void eliminar(Carta pCarta) {
-		this.cartas.remove(pCarta);
-	}
-	
 	
 	public int tamaño() {
 		return this.cartas.size();
 	}
 	
-	
-	public boolean estaVacia() {
-		return this.cartas.size() == 0;
+	public Iterator<Carta> getIterador(){
+		return this.cartas.iterator();
 	}
 	
-	
-	
-	
-	
-
-	
-	
+	@Override
+	public String toString() {
+		String resultado = "";
+		Iterator<Carta> it = getIterador();
+		while (it.hasNext()) {
+			resultado += it.next().toString();
+			if (it.hasNext()) resultado += " + ";
+		}
+		return resultado;
+	}
 }
