@@ -18,22 +18,35 @@ public abstract class Jugador {
 	// metodos
 	
 	
-	// metodo para obtener el nombre del jugador (para imprimirlo por consola principalmente)
+	/**
+	 * Devuelve el nombre de un jugador
+	 * @return
+	 */
 	public String getNombre() {
 		return this.nombre;
 	}
 	
-	// metodo para obtener la lista de cartas de la mano de un jugador
+	/**
+	 * Devuelve la lista de cartas de la mano de un jugador
+	 * @return
+	 */
 	protected ListaCartasMano getMano() {
 		return this.mano;
 	}
 	
-	// metodo para agregar una carta a un jugador en su mano
+	/**
+	 * Añade una carta a un jugador en su mano, usando polimorfismo
+	 * @param pCarta (una carta)
+	 */
 	public void recibirCarta(Carta pCarta) {
 		this.mano.agregarCarta(pCarta);
 	}
 	
-	// metodo para saber si un jugador tiene su mano vacia (se usa para saber si se ha acabado la ronda)
+	/**
+	 * metodo para saber si un jugador tiene su mano vacia (se usa para saber si se ha acabado la ronda)
+	 * usando polimorfismo
+	 * @return un booleano
+	 */
 	public boolean manoVacia() {
 		return this.mano.estaVacia();
 	}
