@@ -13,7 +13,7 @@ import java.io.FileWriter;
 
 public class Mesa {
 	// atributos
-	private ArrayList<Jugador> jugadores;
+	private ListaJugadores jugadores;
 	private ListaCartasMesa cartasMesa;
 	private static Mesa miMesa = null;
 	private int puntosJugador = 0;
@@ -25,7 +25,7 @@ public class Mesa {
 	
 	// constructora privada
 	private Mesa() {
-		jugadores = new ArrayList<Jugador>();
+		jugadores = new ListaJugadores();
 		jugadores.agregarJugador(new JugadorPersona());
 		jugadores.agregarJugador(new JugadorIA());
 		cartasMesa = new ListaCartasMesa();
@@ -199,8 +199,8 @@ public class Mesa {
 			// Reset de la partida
 			cartasMesa = new ListaCartasMesa();
 			jugadores = new ListaJugadores();
-			jugadores.agregarJugador(new Persona());
-			jugadores.agregarJugador(new IA());
+			jugadores.agregarJugador(new JugadorPersona());
+			jugadores.agregarJugador(new JugadorIA());
 			puntosJugador = 0;
 			puntosIA = 0;
 			

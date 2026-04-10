@@ -10,7 +10,7 @@ public class JugadorIA extends Jugador {
 	private Random random;
 	
 	// constructora
-	public IA() {
+	public JugadorIA() {
 		super("IA");
 		random = new Random();
 	}

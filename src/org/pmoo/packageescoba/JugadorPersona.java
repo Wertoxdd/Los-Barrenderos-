@@ -7,7 +7,7 @@ public class JugadorPersona extends Jugador{
 	// atributos -> heredados
 	
 	// constructora
-	public Persona() {
+	public JugadorPersona() {
 		super("Jugador 1");
 	}
 	
