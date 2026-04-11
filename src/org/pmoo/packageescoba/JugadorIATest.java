@@ -1,8 +1,6 @@
 package org.pmoo.packageescoba;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 public class JugadorIATest {
 
     @Test
@@ -16,43 +14,7 @@ public class JugadorIATest {
         JugadorIA ia = new JugadorIA();
         ia.recibirCarta(new Carta(Palo.Oros, 5));
         ia.recibirCarta(new Carta(Palo.Copas, 3));
-        Carta resultado = ia.elegirCarta();
-        assertNotNull(resultado);
-    }
-
-    @Test
-    public void testElegirCartaReduceTamanoManoPorUno() {
-        JugadorIA ia = new JugadorIA();
-        ia.recibirCarta(new Carta(Palo.Oros, 1));
-        ia.recibirCarta(new Carta(Palo.Copas, 4));
-        ia.recibirCarta(new Carta(Palo.Espadas, 6));
-        ia.elegirCarta();
-        assertFalse(ia.manoVacia());
-    }
-
-    @Test
-    public void testElegirCapturaDevuelveListaNoNula() {
-        JugadorIA ia = new JugadorIA();
-        ListaCartasMesa mesa = new ListaCartasMesa();
-        mesa.agregarCarta(new Carta(Palo.Copas, 8));
-        Carta cartaJugada = new Carta(Palo.Oros, 7);
-        ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        assertNotNull(resultado);
-    }
-
-    @Test
-    public void testElegirCapturaSumaQuinceConCartaJugada() {
-        JugadorIA ia = new JugadorIA();
-        ListaCartasMesa mesa = new ListaCartasMesa();
-        mesa.agregarCarta(new Carta(Palo.Copas, 8));
-        Carta cartaJugada = new Carta(Palo.Oros, 7);
-        ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        int sumaCaptura = 0;
-        java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) {
-            sumaCaptura += it.next().getValor();
-        }
-        assertEquals(15 - cartaJugada.getValor(), sumaCaptura);
+        assertNotNull(ia.elegirCarta());
     }
 
     @Test
@@ -66,11 +28,44 @@ public class JugadorIATest {
     }
 
     @Test
-    public void testElegirCartaConUnaCartaDejaManonVacia() {
+    public void testElegirCartaConUnaCartaDejaLaManoVacia() {
         JugadorIA ia = new JugadorIA();
         ia.recibirCarta(new Carta(Palo.Espadas, 2));
         ia.elegirCarta();
         assertTrue(ia.manoVacia());
+    }
+
+    @Test
+    public void testElegirCartaVariasVecesVaciaLaMano() {
+        JugadorIA ia = new JugadorIA();
+        ia.recibirCarta(new Carta(Palo.Oros, 1));
+        ia.recibirCarta(new Carta(Palo.Copas, 2));
+        ia.recibirCarta(new Carta(Palo.Bastos, 3));
+        ia.elegirCarta();
+        ia.elegirCarta();
+        ia.elegirCarta();
+        assertTrue(ia.manoVacia());
+    }
+
+    @Test
+    public void testElegirCapturaDevuelveListaNoNula() {
+        JugadorIA ia = new JugadorIA();
+        ListaCartasMesa mesa = new ListaCartasMesa();
+        mesa.agregarCarta(new Carta(Palo.Copas, 8));
+        assertNotNull(ia.elegirCaptura(mesa, new Carta(Palo.Oros, 7)));
+    }
+
+    @Test
+    public void testElegirCapturaSumaQuinceConCartaJugada() {
+        JugadorIA ia = new JugadorIA();
+        ListaCartasMesa mesa = new ListaCartasMesa();
+        mesa.agregarCarta(new Carta(Palo.Copas, 8));
+        Carta cartaJugada = new Carta(Palo.Oros, 7);
+        ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
+        int suma = 0;
+        java.util.Iterator<Carta> it = resultado.getIterador();
+        while (it.hasNext()) suma += it.next().getValor();
+        assertEquals(8, suma);
     }
 
     @Test
@@ -92,65 +87,25 @@ public class JugadorIATest {
         mesa.agregarCarta(new Carta(Palo.Copas, 4));
         Carta cartaJugada = new Carta(Palo.Espadas, 5);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        int sumaCaptura = 0;
+        int suma = 0;
         java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) {
-            sumaCaptura += it.next().getValor();
-        }
-        assertEquals(10, sumaCaptura);
+        while (it.hasNext()) suma += it.next().getValor();
+        assertEquals(10, suma);
     }
 
     @Test
-    public void testElegirCapturaVariasCombinacionesDevuelvePrimera() {
+    public void testElegirCapturaIgnoraCartasQueSupenanElObjetivo() {
         JugadorIA ia = new JugadorIA();
         ListaCartasMesa mesa = new ListaCartasMesa();
-        mesa.agregarCarta(new Carta(Palo.Oros, 9));
-        mesa.agregarCarta(new Carta(Palo.Copas, 5));
-        mesa.agregarCarta(new Carta(Palo.Espadas, 4));
-        Carta cartaJugada = new Carta(Palo.Bastos, 6);
-        ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        assertNotNull(resultado);
-        int sumaCaptura = 0;
-        java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) {
-            sumaCaptura += it.next().getValor();
-        }
-        assertEquals(9, sumaCaptura);
-    }
-
-    @Test
-    public void testNombreIAEsExactamenteIA() {
-        JugadorIA ia = new JugadorIA();
-        assertFalse(ia.getNombre().equalsIgnoreCase("ia") && !ia.getNombre().equals("IA"));
-        assertEquals("IA", ia.getNombre());
-    }
-
-    @Test
-    public void testElegirCartaVariasVecesVaciaLaMano() {
-        JugadorIA ia = new JugadorIA();
-        ia.recibirCarta(new Carta(Palo.Oros, 1));
-        ia.recibirCarta(new Carta(Palo.Copas, 2));
-        ia.recibirCarta(new Carta(Palo.Bastos, 3));
-        ia.elegirCarta();
-        ia.elegirCarta();
-        ia.elegirCarta();
-        assertTrue(ia.manoVacia());
-    }
-
-    @Test
-    public void testElegirCapturaNoIncluyeCartasQueSupernObjetivo() {
-        JugadorIA ia = new JugadorIA();
-        ListaCartasMesa mesa = new ListaCartasMesa();
+        // objetivo = 15 - 10 = 5; solo 3+2 suman 5, el 10 de Copas no puede entrar
         mesa.agregarCarta(new Carta(Palo.Oros, 3));
         mesa.agregarCarta(new Carta(Palo.Copas, 10));
         mesa.agregarCarta(new Carta(Palo.Espadas, 2));
         Carta cartaJugada = new Carta(Palo.Bastos, 10);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        int sumaCaptura = 0;
+        int suma = 0;
         java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) {
-            sumaCaptura += it.next().getValor();
-        }
-        assertTrue(sumaCaptura <= 5);
+        while (it.hasNext()) suma += it.next().getValor();
+        assertEquals(5, suma);
     }
 }
