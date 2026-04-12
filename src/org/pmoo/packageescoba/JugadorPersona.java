@@ -18,7 +18,7 @@ public class JugadorPersona extends Jugador{
 	}
  	
 	public Carta elegirCarta() {
-		System.out.println("\nTu mano: ");// \n es siguiente linea antes de escribir (por si acaso)
+		System.out.println("\nTu mano: ");// \n es siguiente linea antes de escribir (por si las mosquillas)
 		return Teclado.leerCarta(getMano());	
 	}
 	
