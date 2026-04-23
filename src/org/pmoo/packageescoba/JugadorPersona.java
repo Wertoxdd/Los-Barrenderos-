@@ -50,7 +50,7 @@ public class JugadorPersona extends Jugador{
 		
 		Carta c = pLista.get(i);		
 		if (c.getValor() <= objetivo) {
-			ListaCartasMonton nuevaLista = new ListaCartasMonton();
+			ListaCartasMonton nuevaLista = new ListaCartasMonton();//Hacer New ListaCartas Auxiliar
 			nuevaLista.agregarCartas(listaActual);
 			nuevaLista.agregarCarta(c);
 			buscarCombinaciones(pLista, i+1, objetivo - c.getValor(), nuevaLista, posiblesCombinaciones);

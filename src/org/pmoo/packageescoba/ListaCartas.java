@@ -26,7 +26,7 @@ public class ListaCartas {
 		return this.cartas.size();
 	}
 	
-	public Iterator<Carta> getIterador(){
+	private Iterator<Carta> getIterador(){
 		return this.cartas.iterator();
 	}
 	
