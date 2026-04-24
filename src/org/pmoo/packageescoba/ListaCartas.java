@@ -26,7 +26,8 @@ public class ListaCartas {
 		return this.cartas.size();
 	}
 	
-	public Iterator<Carta> getIterador(){
+	// iterador en protected porque se accede desde ListaCartasMesa
+	protected Iterator<Carta> getIterador(){
 		return this.cartas.iterator();
 	}
 	

@@ -13,7 +13,7 @@ public class JugadorPersona extends Jugador{
 	
 	// METODOS (propios)
 	
-	public Iterator<Carta> getIterador(){
+	private Iterator<Carta> getIterador(){
 		return this.getMano().getIterador();
 	}
  	

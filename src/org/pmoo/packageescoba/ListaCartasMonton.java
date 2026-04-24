@@ -16,7 +16,7 @@ public class ListaCartasMonton extends ListaCartas{
 	    Iterator<Carta> it = pLista.getIterador();  // itera sobre pLista
 	    while (it.hasNext()) {
 	        Carta c = it.next();
-	        this.agregarCarta(c);  // añade a this
+	        this.agregarCarta(c); 
 	    }
 	}
 	
