@@ -6,6 +6,7 @@ public abstract class Jugador {
 	private ListaCartasMano mano;
 	private ListaCartasMonton monton;
 	private int escobas; 
+	private int puntos;
 	
 	// constructora
 	protected Jugador(String pNombre) {
@@ -13,10 +14,25 @@ public abstract class Jugador {
 		this.mano = new ListaCartasMano();
 		this.monton = new ListaCartasMonton();
 		this.escobas = 0;
+		this.puntos = 0;
 	}
 	
 	// metodos
 	
+	/*
+	 * Añade un punto a un jugador
+	 */
+	public void añadirPunto() {
+		this.puntos++;
+	}
+	
+	/**
+	 * Devuelve los puntos de un jugador
+	 * @return
+	 */
+	public int obtenerPuntos() {
+		return this.puntos;
+	}
 	
 	/**
 	 * Devuelve el nombre de un jugador

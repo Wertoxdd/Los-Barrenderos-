@@ -109,22 +109,7 @@ public class Mesa {
 	}
 	
 	private void contarPuntos() {		
-		// Más cartas
-		if (jugadores.obtenerJugador(0).totalCartas() > jugadores.obtenerJugador(1).totalCartas()) puntosJugador++;
-		else if (jugadores.obtenerJugador(1).totalCartas() < jugadores.obtenerJugador(0).totalCartas()) puntosIA++;
-		
-		// Más oros
-		if (jugadores.obtenerJugador(0).totalOros() > jugadores.obtenerJugador(1).totalOros()) puntosJugador++;
-		else if (jugadores.obtenerJugador(1).totalOros() < jugadores.obtenerJugador(0).totalOros()) puntosIA++;
-		
-		// Siete de oro
-		if (jugadores.obtenerJugador(0).tieneSieteDeOros()) puntosJugador++;
-		else if (jugadores.obtenerJugador(1).tieneSieteDeOros()) puntosIA++;
-		
-		// Escobas
-		puntosJugador += jugadores.obtenerJugador(0).obtenerEscobas();
-		puntosIA += jugadores.obtenerJugador(1).obtenerEscobas();
-		
+				
 	}
 	
 	private void mostrarResultados() {
