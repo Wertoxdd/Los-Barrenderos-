@@ -26,7 +26,12 @@ public class ListaCartas {
 		return this.cartas.size();
 	}
 	
+<<<<<<< HEAD
 	private Iterator<Carta> getIterador(){
+=======
+	// iterador en protected porque se accede desde ListaCartasMesa
+	protected Iterator<Carta> getIterador(){
+>>>>>>> branch 'master' of https://github.com/Wertoxdd/Los-Barrenderos-.git
 		return this.cartas.iterator();
 	}
 	

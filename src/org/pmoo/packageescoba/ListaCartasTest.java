@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class ListaCartasTest {
 
     @Test
-    public void testConstructorIniciaTamanoCero() {
+    public void testTamaño() {
         ListaCartas lista = new ListaCartas();
         assertEquals(0, lista.tamaño());
     }

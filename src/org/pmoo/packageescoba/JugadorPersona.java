@@ -13,23 +13,22 @@ public class JugadorPersona extends Jugador{
 	
 	// METODOS (propios)
 	
-	public Iterator<Carta> getIterador(){
+	private Iterator<Carta> getIterador(){
 		return this.getMano().getIterador();
 	}
  	
 	public Carta elegirCarta() {
-		System.out.println("\nTu mano: ");// \n es siguiente linea antes de escribir (por si acaso)
+		System.out.println("\nTu mano: ");// \n es siguiente linea antes de escribir (por si las mosquillas)
 		return Teclado.leerCarta(getMano());	
 	}
 	
 	public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
-	    ArrayList<ListaCartasMonton> posiblesCombinaciones = new ArrayList<ListaCartasMonton>();
-	    ArrayList<Carta> cartasMesa = new ArrayList<Carta>();
+	    ListaCartasAuxiliar cartasMesa = new ListaCartasAuxiliar();
 	    Iterator<Carta> it = mesa.getIterador();
-	    
 	    while (it.hasNext()) {
-	        cartasMesa.add(it.next());
+	        cartasMesa.agregarCarta(it.next());
 	    }
+<<<<<<< HEAD
 	    
 	    buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton(), posiblesCombinaciones);
 	    
@@ -58,5 +57,9 @@ public class JugadorPersona extends Jugador{
 		
 		buscarCombinaciones(pLista, i+1, objetivo, listaActual, posiblesCombinaciones);
 		
+=======
+	    buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton());
+	    return Teclado.leerCaptura(cartasMesa.getCombinaciones());
+>>>>>>> branch 'master' of https://github.com/Wertoxdd/Los-Barrenderos-.git
 	}
 }
