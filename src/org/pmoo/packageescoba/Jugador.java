@@ -102,6 +102,29 @@ public abstract class Jugador {
 		return this.monton.tieneSieteDeOros();
 	}
 	
+	// metodo para buscar combinaciones usando "backtracking"/recursividad
+	
+	protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, ListaCartasMonton listaActual) {
+		
+		if (objetivo == 0) {
+			pLista.añadirCombinacion(listaActual);
+			return;
+		}
+		
+		if (i >= pLista.tamaño()) return;
+		Carta c = pLista.obtener(i);
+		if (c.getValor() <= objetivo) {
+			ListaCartasMonton nuevaLista = new ListaCartasMonton();
+			nuevaLista.agregarCartas(listaActual);
+			nuevaLista.agregarCarta(c);
+			buscarCombinaciones(pLista, i+1, objetivo - c.getValor(), nuevaLista);	
+		}
+		
+		buscarCombinaciones(pLista, i+1, objetivo, listaActual);
+	}
+	
+	
+	
 	// METODOS ABSTRACTOS
 	
 	// metodo que derivan a las hijas para elegir la carta (la persona la elige manualmente y la IA lo elije aleatoriamente)

@@ -23,40 +23,12 @@ public class JugadorPersona extends Jugador{
 	}
 	
 	public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
-	    ArrayList<ListaCartasMonton> posiblesCombinaciones = new ArrayList<ListaCartasMonton>();
-	    ArrayList<Carta> cartasMesa = new ArrayList<Carta>();
+	    ListaCartasAuxiliar cartasMesa = new ListaCartasAuxiliar();
 	    Iterator<Carta> it = mesa.getIterador();
-	    
 	    while (it.hasNext()) {
-	        cartasMesa.add(it.next());
+	        cartasMesa.agregarCarta(it.next());
 	    }
-	    
-	    buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton(), posiblesCombinaciones);
-	    
-	    // Siempre pasa por Teclado para mostrar las combinaciones
-	    return Teclado.leerCaptura(posiblesCombinaciones);
-	}
-	
-	
-	// para evitar un codigo redundante y excesivo lleno de iterators, se usa la recursividad.
-	private void buscarCombinaciones(ArrayList<Carta> pLista, int i, int objetivo, ListaCartasMonton listaActual, ArrayList<ListaCartasMonton> posiblesCombinaciones) {
-		
-		if (objetivo == 0) {
-			posiblesCombinaciones.add(listaActual);
-			return;
-		}
-		
-		if (i >= pLista.size()) return;
-		
-		Carta c = pLista.get(i);		
-		if (c.getValor() <= objetivo) {
-			ListaCartasMonton nuevaLista = new ListaCartasMonton();
-			nuevaLista.agregarCartas(listaActual);
-			nuevaLista.agregarCarta(c);
-			buscarCombinaciones(pLista, i+1, objetivo - c.getValor(), nuevaLista, posiblesCombinaciones);
-		}
-		
-		buscarCombinaciones(pLista, i+1, objetivo, listaActual, posiblesCombinaciones);
-		
+	    buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton());
+	    return Teclado.leerCaptura(cartasMesa.getCombinaciones());
 	}
 }
