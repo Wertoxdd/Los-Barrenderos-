@@ -1,6 +1,7 @@
 package org.pmoo.packageescoba;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ListaCartasAuxiliar extends ListaCartas {
 	private ArrayList<ListaCartasMonton> combinaciones;
@@ -14,7 +15,7 @@ public class ListaCartasAuxiliar extends ListaCartas {
 		return getCartas().get(i);
 	}
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return getCartas().size();
 	}
 	
@@ -22,7 +23,7 @@ public class ListaCartasAuxiliar extends ListaCartas {
 		return combinaciones;
 	}
 	
-	public void añadirCombinacion(ListaCartasMonton pLista) {
+	public void aÃ±adirCombinacion(ListaCartasMonton pLista) {
 		combinaciones.add(pLista);
 	}
 	
@@ -34,4 +35,8 @@ public class ListaCartasAuxiliar extends ListaCartas {
 		return combinaciones.get(i);
 	}
 	
+	// âœ… PRIVATE - No exponer
+	private Iterator<Carta> getIterador(){
+		return super.getCartas().iterator();
+	}
 }

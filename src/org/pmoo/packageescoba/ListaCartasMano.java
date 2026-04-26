@@ -1,10 +1,13 @@
 package org.pmoo.packageescoba;
 
+import java.util.Iterator;
+
 public class ListaCartasMano extends ListaCartas {
 	// atributos -> heredados
 	
 	// constructora
 	public ListaCartasMano() {}
+	
 	
 	// METODOS (propios)
 		
@@ -19,4 +22,7 @@ public class ListaCartasMano extends ListaCartas {
 	public boolean estaVacia() {
 		return this.getCartas().size() == 0;
 	}
-}
+
+	    
+	}
+

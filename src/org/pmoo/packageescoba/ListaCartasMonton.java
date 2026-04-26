@@ -2,22 +2,23 @@ package org.pmoo.packageescoba;
 
 import java.util.Iterator;
 
-public class ListaCartasMonton extends ListaCartas{
-	// atributos -> heredados
+public class ListaCartasMonton extends ListaCartas {
 	
-	// constructora
 	public ListaCartasMonton() {
 		super();
 	}
 	
-	// METODOS (propios)
+	// ✅ PRIVATE - No exponer
+	private Iterator<Carta> getIterador(){
+		return super.getCartas().iterator();
+	}
 	
 	public void agregarCartas(ListaCartasMonton pLista) {
-	    Iterator<Carta> it = pLista.getIterador();  // itera sobre pLista
-	    while (it.hasNext()) {
-	        Carta c = it.next();
-	        this.agregarCarta(c); 
-	    }
+		Iterator<Carta> it = pLista.getIterador();  // Uso interno OK
+		while (it.hasNext()) {
+			Carta c = it.next();
+			this.agregarCarta(c); 
+		}
 	}
 	
 	public int contarOros() {
@@ -29,7 +30,6 @@ public class ListaCartasMonton extends ListaCartas{
 				cont++;
 			}
 		} 
-		
 		return cont;
 	}
 	
@@ -42,7 +42,6 @@ public class ListaCartasMonton extends ListaCartas{
 				cont++;
 			}
 		}
-		
 		return cont;
 	}
 	
@@ -54,10 +53,14 @@ public class ListaCartasMonton extends ListaCartas{
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
+	public Carta get(int pPos) {
+		return obtenerCarta(pPos);  // Usar método heredado
+	}
 	
-	
+	public int size() {
+		return tamaño();  // Usar método heredado
+	}
 }

@@ -1,18 +1,14 @@
 package org.pmoo.packageescoba;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 public class ListaCartas {
-	// atributos
 	private ArrayList<Carta> cartas;
 	
-	// constructora
 	protected ListaCartas() {
 		this.cartas = new ArrayList<Carta>();
 	}
-	
-	// metodos
 	
 	protected ArrayList<Carta> getCartas(){
 		return cartas;
@@ -22,17 +18,29 @@ public class ListaCartas {
 		this.cartas.add(pCarta);
 	}
 	
-	public int tama�o() {
+	public int tamaño() {
 		return this.cartas.size();
 	}
 	
-<<<<<<< HEAD
+	// ✅ PRIVATE - Solo accesible dentro de la clase y subclases
 	private Iterator<Carta> getIterador(){
-=======
-	// iterador en protected porque se accede desde ListaCartasMesa
-	protected Iterator<Carta> getIterador(){
->>>>>>> branch 'master' of https://github.com/Wertoxdd/Los-Barrenderos-.git
 		return this.cartas.iterator();
+	}
+	
+	// ✅ Método público para copiar cartas a otra lista (encapsula el iterador)
+	public void copiarA(ListaCartas destino) {
+		Iterator<Carta> it = getIterador();
+		while (it.hasNext()) {
+			destino.agregarCarta(it.next());
+		}
+	}
+	
+	// ✅ Método público para obtener carta por posición
+	public Carta obtenerCarta(int posicion) {
+		if (posicion >= 0 && posicion < cartas.size()) {
+			return cartas.get(posicion);
+		}
+		return null;
 	}
 	
 	@Override

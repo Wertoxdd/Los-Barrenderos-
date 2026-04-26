@@ -16,44 +16,46 @@ public class Teclado {
 	}
 	
 	public static Carta leerCarta(ListaCartasMano pMano) {
-		ArrayList<Carta> listaMano = new ArrayList<Carta>();
-		Iterator<Carta> it = pMano.getIterador();
-		while (it.hasNext()) {
-			Carta c = it.next();
-		    listaMano.add(c);
+		// ✅ Usar bucle con índice en vez de iterador
+		for (int i = 0; i < pMano.tamaño(); i++) {
+			System.out.print(pMano.obtenerCarta(i).toString() + "  ");
 		}
-		mostrarCartasEnHorizontal(listaMano);
-	    System.out.println();
-	    int eleccion = leerNumero("Elige una carta(1-" + pMano.tama�o() + "): ");
-	    return pMano.elegirCarta(eleccion - 1);
+		System.out.println();
+		
+		int eleccion = leerNumero("Elige una carta(1-" + pMano.tamaño() + "): ");
+		return pMano.elegirCarta(eleccion - 1);
 	}
 
-	public static ListaCartasMonton leerCaptura(ArrayList<ListaCartasMonton> pLista) {
-	    for (int i = 0; i < pLista.size(); i++) {
-	        System.out.println("Combinacion " + (i+1) + ":");
-	        ArrayList<Carta> cartasCombinacion = new ArrayList<Carta>();
-	        Iterator<Carta> it = pLista.get(i).getIterador();
-	        while (it.hasNext()) {
-	            cartasCombinacion.add(it.next());
-	        }
-	        mostrarCartasEnHorizontal(cartasCombinacion);
-	    }
-	    if (pLista.size() == 1){
-	    	System.out.println("\nPulsa enter para continuar...");
-	    	sc.nextLine();
-	    	sc.nextLine();
-	    	return pLista.get(0); }
-	    int eleccion = leerNumero("Elige combinacion (1-" + pLista.size() + "): ");
-	    System.out.println("\nPulsa enter para continuar");
-	    sc.nextLine();
-	    sc.nextLine();
-	    return pLista.get(eleccion - 1);
+
+	public static ListaCartasMonton leerCaptura(ListaListas pLista) {
+		for (int i = 0; i < pLista.size(); i++) {
+			System.out.println("Combinacion " + (i+1) + ":");
+			ListaCartasMonton cartasCombinacion = pLista.get(i);
+			
+			for (int j = 0; j < cartasCombinacion.tamaño(); j++) {
+				System.out.print(cartasCombinacion.obtenerCarta(j).toString() + "  ");
+			}
+			System.out.println();
+		}
+		
+		if (pLista.size() == 1){
+			System.out.println("\nPulsa enter para continuar...");
+			sc.nextLine();
+			sc.nextLine();
+			return pLista.get(0);
+		}
+		
+		int eleccion = leerNumero("Elige combinacion (1-" + pLista.size() + "): ");
+		System.out.println("\nPulsa enter para continuar");
+		sc.nextLine();
+		sc.nextLine();
+		return pLista.get(eleccion - 1);
 	}
 	
-	public static void mostrarCartasEnHorizontal(ArrayList<Carta> cartas) {
-	    for (int i = 0; i < cartas.size(); i++) {
-	        System.out.print(cartas.get(i).toString() + "  ");
-	    }
-	    System.out.println();
+	public static void mostrarCartasEnHorizontal(ListaCartasMonton cartas) {
+		for (int i = 0; i < cartas.tamaño(); i++) {
+			System.out.print(cartas.obtenerCarta(i).toString() + "  ");
+		}
+		System.out.println();
 	}
 }

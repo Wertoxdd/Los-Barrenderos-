@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ListaJugadores {
-	// atributos
 	private ArrayList<Jugador> jugadores;
-	// constructora privada
 	
 	public ListaJugadores() {
 		this.jugadores = new ArrayList<Jugador>();
 	}
 	
-	public Iterator<Jugador> getIterador(){
+	// ✅ PRIVATE - No exponer
+	private Iterator<Jugador> getIterador(){
 		return this.jugadores.iterator();
 	}
 	
@@ -24,12 +23,12 @@ public class ListaJugadores {
 		return this.jugadores.get(pos);
 	}
 	
-	public int tama�o() {
+	public int tamaño() {
 		return this.jugadores.size();
 	}
 	
 	public boolean todosConSusManosVacias() {
-		Iterator<Jugador> it = getIterador();
+		Iterator<Jugador> it = getIterador();  // Uso interno OK
 		while (it.hasNext()) {
 			Jugador j = it.next();
 			if (!j.manoVacia()) return false;
@@ -41,17 +40,16 @@ public class ListaJugadores {
 		Iterator<Jugador> it = getIterador();
 		int max = 0;
 		Jugador ganador = null;
-		boolean empate = false; // se puede obviar pero es necesario si existe un 3er jugador
+		boolean empate = false;
 		while (it.hasNext()) {
 			Jugador j = it.next();
-			if (j.totalCartas() > max) { // el maximo se actualiza
+			if (j.totalCartas() > max) {
 				max = j.totalCartas();
 				ganador = j;
-			} else if (j.totalCartas() == max) { // empate
+			} else if (j.totalCartas() == max) {
 				empate = true;
 			}
 		}
-		// comprobacion final
 		if (empate) return null;
 		else return ganador;
 	}
@@ -70,11 +68,9 @@ public class ListaJugadores {
 				empate = true;
 			}
 		}
-		
 		if (empate) return null;
 		else return ganador;
 	}
-	
 	
 	public Jugador jugadorConMasSietes() {
 		Iterator<Jugador> it = getIterador();
@@ -86,11 +82,10 @@ public class ListaJugadores {
 			if (j.totalSietes() > max) {
 				max = j.totalSietes();
 				ganador = j;
-			} else if (j.totalOros() == max) {
+			} else if (j.totalSietes() == max) {
 				empate = true;
 			}
 		}
-		
 		if (empate) return null;
 		else return ganador;
 	}
@@ -102,20 +97,19 @@ public class ListaJugadores {
 			if (j.tieneSieteDeOros()) {
 				return j;
 			}
-		} return null;
+		}
+		return null;
+	}
+	
+	// ✅ Método para ejecutar acción en todos los jugadores (evita exponer iterador)
+	public void ejecutarEnTodos(AccionJugador accion) {
+		Iterator<Jugador> it = getIterador();
+		while (it.hasNext()) {
+			accion.ejecutar(it.next());
+		}
+	}
+	
+	public interface AccionJugador {
+		void ejecutar(Jugador j);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
