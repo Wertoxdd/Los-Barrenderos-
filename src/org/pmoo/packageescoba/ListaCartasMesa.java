@@ -21,7 +21,7 @@ public class ListaCartasMesa extends ListaCartas {
      * @param pCarta El objeto Carta a eliminar del tablero.
      */
     public void eliminarCarta(Carta pCarta) {
-        eliminarCartaPorObjeto(pCarta);
+        this.cartas.remove(pCarta);
     }
     
     /**
