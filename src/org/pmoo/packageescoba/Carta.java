@@ -2,7 +2,7 @@ package org.pmoo.packageescoba;
 
 /**
  * 
- * Cartas: Representa una única carta de la baraja con su valor y su palo. 
+ * Carta: Representa una única carta de la baraja con su valor y su palo. 
  *
  */
 
