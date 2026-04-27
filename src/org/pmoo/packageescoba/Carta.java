@@ -8,20 +8,22 @@ package org.pmoo.packageescoba;
 
 public class Carta {
 	
-	// Atributos ------------------------------------------------------------------------------------------------------------------
+	// ==============   Atributos   ==============
+	
 	private Palo palo; 
 	private int valor;
 	
-	// Constructora ---------------------------------------------------------------------------------------------------------------
+	// ==============   Constructora   ==============
+	
 	public Carta(Palo pPalo, int pValor) {
 		this.palo = pPalo;
 		this.valor = pValor;
 	}
 	
-	// Metodos --------------------------------------------------------------------------------------------------------------------
+	// ==============   Metodos   ==============
 	
 	/**
-	 * getPalo(): Método para devolver el palo de una carta.
+	 * Método para devolver el palo de una carta.
 	 * @return palo
 	 */
 	public Palo getPalo() {
@@ -29,7 +31,7 @@ public class Carta {
 	}
 	
 	/**
-	 * getValor(): Método para devolver el valor de una carta.
+	 * Método para devolver el valor de una carta.
 	 * @return valor
 	 */
 	public int getValor() {
@@ -38,9 +40,9 @@ public class Carta {
 
 	
 	/**
-	 * toString(): Método para convertir una carta en formato String.
+	 * Método para convertir una carta en formato String.
 	 * 
-	 * @Override porque toString es un metodo que ya existe. Por eso lo que hacemos es sobreescribirlo.
+	 * "Override" porque toString es un metodo que ya existe. Por eso lo que hacemos es sobreescribirlo.
 	 * 
 	 * @return
 	 */

@@ -3,26 +3,12 @@ package org.pmoo.packageescoba;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-/**
- * 
- * Mazo: Gestión del mazo completo de la baraja. 
- *
- * En esta clase se implementa el patrón Singleton, ya que solamente puede haber un mazo en todo el juego. 
- *
- */
-public class Mazo {
+public class Mazo extends ListaCartas {
 	
-	// Atributos
-	
-	/**
-	 * @baraja: 
-	 */
-	private ArrayList<Carta> baraja;
 	private static Mazo miMazo = null;
 	
 	private Mazo () {
-		this.baraja = new ArrayList<Carta >();
+		super();
 	}
 	
 	public static Mazo getMazo() {
@@ -35,56 +21,54 @@ public class Mazo {
 	public void generarMazo() {
 		int i;
 		
+		// OROS
 		i = 1;
 		while (i <= 10) {
-			baraja.add(new Carta(Palo.Oros, i));
+			this.agregarCarta(new Carta(Palo.Oros, i));
 			i++;
 		}
 		
+		// COPAS
 		i = 1;
 		while (i <= 10) {
-			baraja.add(new Carta(Palo.Copas, i));
+			this.agregarCarta(new Carta(Palo.Copas, i));
 			i++;
 		}
 		
+		// ESPADAS
 		i = 1;
 		while (i <= 10) {
-			baraja.add(new Carta(Palo.Espadas, i));
+			this.agregarCarta(new Carta(Palo.Espadas, i));
 			i++;
 		}
 		
+		// BASTOS
 		i = 1;
 		while (i <= 10) {
-			baraja.add(new Carta(Palo.Bastos, i));
+			this.agregarCarta(new Carta(Palo.Bastos, i));
 			i++;
 		}
 	}
 	
 	public void barajarMazo() {
 		Random random = new Random();
-		int i = baraja.size() - 1;
-		while(i > 0) {
-			int j = random.nextInt(i + 1);
-			Carta aux = baraja.get(i);
-			baraja.set(i, baraja.get(j));
-			baraja.set(j,  aux);
-			i--;
+		ArrayList<Carta> temp = new ArrayList<Carta>();
+		int total = this.tamaño();
+		for (int i = 0; i < total; i++) {
+			temp.add(this.eliminarCarta(0));
+		}
+		
+		while (!temp.isEmpty()) {
+			int r = random.nextInt(temp.size());
+			this.agregarCarta(temp.remove(r));
 		}
 	}
 	
 	public Carta darCarta() {
-		return baraja.remove(baraja.size()-1);
+		return this.eliminarCarta(this.tamaño() - 1);
 	}
 	
 	public boolean estaVacio() {
-		return baraja.isEmpty();
-	}
-	
-	public int tamaño() {
-	    return baraja.size();
-	}
-	
-	public void resetear() {
-		baraja.clear();
+		return this.tamaño() == 0;
 	}
 }

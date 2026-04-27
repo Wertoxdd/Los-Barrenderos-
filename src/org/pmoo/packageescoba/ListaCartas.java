@@ -47,6 +47,10 @@ public class ListaCartas {
         }
     }
     
+    public void resetear() {
+        this.cartas.clear();
+    }
+
     @Override
     public String toString() {
         String resultado = "";
