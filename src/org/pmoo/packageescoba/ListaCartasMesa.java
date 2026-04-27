@@ -3,52 +3,49 @@ package org.pmoo.packageescoba;
 import java.util.ArrayList;
 
 /**
- * ListaCartasMesa - Gestiona las cartas que están sobre la mesa
- * 
- * ⚠️ DISEÑO: No accede directamente al ArrayList de la superclase.
- * Utiliza únicamente métodos públicos/protected de ListaCartas.
+ * Gestiona las cartas que se encuentran boca arriba sobre la mesa.
+ * Proporciona métodos para verificar la posibilidad de capturas que sumen 15.
  */
 public class ListaCartasMesa extends ListaCartas {
     
     /**
-     * Constructora
+     * Constructor que inicializa la mesa vacía.
      */
     public ListaCartasMesa() {
         super();
     }
     
     /**
-     * Elimina una carta específica de la mesa
-     * @param pCarta La carta a eliminar
+     * Elimina una carta física de la mesa tras haber sido capturada.
+     * 
+     * @param pCarta El objeto Carta a eliminar del tablero.
      */
     public void eliminarCarta(Carta pCarta) {
-        // ✅ Usar método heredado de ListaCartas (sin acceder a getCartas())
-        // Necesitas añadir este método en ListaCartas (ver más abajo)
         eliminarCartaPorObjeto(pCarta);
     }
     
     /**
-     * Comprueba si la mesa está vacía
-     * @return true si no hay cartas en la mesa
+     * Comprueba si el tablero de juego se ha quedado sin cartas.
+     * 
+     * @return true si la mesa está vacía, false si quedan cartas.
      */
     public boolean estaVacia() {
-        // ✅ Usar método público tamaño() en vez de getCartas().size()
         return this.tamaño() == 0;
     }
     
     /**
-     * Comprueba si se puede sumar 15 con la carta jugada y cartas de la mesa
-     * @param pCarta La carta que juega el jugador
-     * @return true si existe alguna combinación que sume 15
+     * Verifica si existe alguna combinación de cartas en la mesa que, 
+     * sumada al valor de la carta jugada, dé como resultado exactamente 15.
+     * 
+     * @param pCarta La carta que el jugador pone en juego.
+     * @return true si existe al menos una combinación válida para captura.
      */
     public boolean sumaQuince(Carta pCarta) {
         int objetivo = 15 - pCarta.getValor();
         
-        // ✅ Crear lista auxiliar usando métodos públicos
         ListaCartasAuxiliar listaAux = new ListaCartasAuxiliar();
-        this.copiarA(listaAux);  // Método heredado de ListaCartas
+        this.copiarA(listaAux); 
         
-        // ✅ Convertir a ArrayList SOLO para la recursividad (uso interno)
         ArrayList<Carta> arrayList = new ArrayList<Carta>();
         for (int i = 0; i < listaAux.tamaño(); i++) {
             arrayList.add(listaAux.obtenerCarta(i));
@@ -58,18 +55,19 @@ public class ListaCartasMesa extends ListaCartas {
     }
     
     /**
-     * Copia todas las cartas de la mesa a otra lista
-     * @param destino La lista de destino
+     * Transfiere todas las cartas de la mesa a otro contenedor.
+     * 
+     * @param destino Lista donde se agregarán las cartas de la mesa.
      */
     public void agregarCartas(ListaCartas destino) {
-        // ✅ Usar método heredado de ListaCartas (encapsula el iterador)
         this.copiarA(destino);
     }
     
     /**
-     * Obtiene una carta por posición (heredado de ListaCartas)
-     * @param posicion La posición de la carta
-     * @return La carta en esa posición, o null si no existe
+     * Obtiene la carta situada en una posición específica de la mesa.
+     * 
+     * @param posicion Índice de la carta.
+     * @return La carta encontrada en dicho índice.
      */
     @Override
     public Carta obtenerCarta(int posicion) {
@@ -77,33 +75,31 @@ public class ListaCartasMesa extends ListaCartas {
     }
     
     /**
-     * Recursividad para buscar combinaciones que sumen 15
-     * @param pLista Lista de cartas a comprobar
-     * @param objetivo El valor objetivo (15 - valor de la carta jugada)
-     * @param indice Índice actual en la recursividad
-     * @param sumaActual Suma acumulada hasta ahora
-     * @return true si se encuentra una combinación válida
+     * Algoritmo recursivo interno para determinar si es posible alcanzar 
+     * una suma objetivo mediante cualquier combinación de cartas.
+     * 
+     * @param pLista Lista de cartas disponibles para la suma.
+     * @param objetivo Valor total que se desea alcanzar.
+     * @param indice Posición actual del análisis en la lista.
+     * @param sumaActual Valor acumulado hasta el momento en la rama de la recursión.
+     * @return true si se halla una combinación satisfactoria, false en caso contrario.
      */
     private boolean puedeSumarQuince(ArrayList<Carta> pLista, int objetivo, 
             int indice, int sumaActual) {
         
-        // Caso base: se alcanzó el objetivo
         if (sumaActual == objetivo) {
             return true;
         }
         
-        // Caso base: se superó el objetivo o no hay más cartas
         if (sumaActual > objetivo || indice >= pLista.size()) {
             return false;
         }
         
-        // Opción 1: Incluir la carta actual en la suma
         if (puedeSumarQuince(pLista, objetivo, indice + 1, 
                 sumaActual + pLista.get(indice).getValor())) {
             return true;
         }
         
-        // Opción 2: Excluir la carta actual
         return puedeSumarQuince(pLista, objetivo, indice + 1, sumaActual);
     }
 }

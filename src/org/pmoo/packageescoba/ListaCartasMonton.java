@@ -1,26 +1,24 @@
 package org.pmoo.packageescoba;
 
 /**
- * ListaCartasMonton - Gestiona las cartas capturadas por un jugador
- * 
- * ⚠️ DISEÑO: No accede directamente al ArrayList de la superclase.
- * Utiliza únicamente métodos públicos/protected de ListaCartas.
+ * Gestiona el montón de cartas que un jugador ha logrado capturar.
+ * Incluye métodos específicos para el recuento de méritos al finalizar la ronda.
  */
 public class ListaCartasMonton extends ListaCartas {
     
     /**
-     * Constructora
+     * Constructor que inicializa el montón vacío.
      */
     public ListaCartasMonton() {
         super();
     }
     
     /**
-     * Añade todas las cartas de otra lista a este montón
-     * @param pLista La lista de cartas a añadir
+     * Añade un conjunto completo de cartas capturadas a este montón.
+     * 
+     * @param pLista La colección de cartas a integrar.
      */
     public void agregarCartas(ListaCartasMonton pLista) {
-        // ✅ Usar bucle con índices en vez de iterador
         for (int i = 0; i < pLista.tamaño(); i++) {
             Carta c = pLista.obtenerCarta(i);
             this.agregarCarta(c);
@@ -28,12 +26,12 @@ public class ListaCartasMonton extends ListaCartas {
     }
     
     /**
-     * Cuenta cuántas cartas de oros hay en el montón
-     * @return Número de cartas de oros
+     * Cuenta cuántas cartas pertenecen al palo de oros en este montón.
+     * 
+     * @return El número total de oros capturados.
      */
     public int contarOros() {
         int cont = 0;
-        // ✅ Usar bucle con índices en vez de iterador
         for (int i = 0; i < this.tamaño(); i++) {
             Carta c = this.obtenerCarta(i);
             if (c.getPalo().equals(Palo.Oros)) {
@@ -44,12 +42,12 @@ public class ListaCartasMonton extends ListaCartas {
     }
     
     /**
-     * Cuenta cuántos sietes hay en el montón
-     * @return Número de sietes
+     * Cuenta cuántas cartas con valor numérico 7 hay en el montón.
+     * 
+     * @return El número total de sietes capturados.
      */
     public int contarSietes() {
         int cont = 0;
-        // ✅ Usar bucle con índices en vez de iterador
         for (int i = 0; i < this.tamaño(); i++) {
             Carta c = this.obtenerCarta(i);
             if (c.getValor() == 7) {
@@ -60,11 +58,11 @@ public class ListaCartasMonton extends ListaCartas {
     }
     
     /**
-     * Comprueba si el montón tiene el 7 de oros
-     * @return true si tiene el 7 de oros
+     * Verifica si el siete de oros se encuentra entre las cartas capturadas.
+     * 
+     * @return true si el jugador posee el siete de oros, false en caso contrario.
      */
     public boolean tieneSieteDeOros() {
-        // ✅ Usar bucle con índices en vez de iterador
         for (int i = 0; i < this.tamaño(); i++) {
             Carta c = this.obtenerCarta(i);
             if (c.getPalo().equals(Palo.Oros) && c.getValor() == 7) {
@@ -74,5 +72,3 @@ public class ListaCartasMonton extends ListaCartas {
         return false;
     }
 }
-    
-   
