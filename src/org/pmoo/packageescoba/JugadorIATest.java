@@ -1,5 +1,5 @@
 package org.pmoo.packageescoba;
-import static org.junit.Assert.*;
+import static org.junit.Assert.*; 
 import org.junit.Test;
 public class JugadorIATest {
 
