@@ -1,7 +1,6 @@
 package org.pmoo.packageescoba;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * ListaCartasMesa - Gestiona las cartas que están sobre la mesa

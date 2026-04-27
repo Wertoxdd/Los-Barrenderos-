@@ -39,7 +39,6 @@ public class Mesa {
     private static Mesa miMesa = null;
     
     // ⚠️ DISEÑO: Constantes que reflejan la limitación a 2 jugadores
-    private static final int NUM_JUGADORES = 2;
     private static final int INDICE_JUGADOR_HUMANO = 0;
     private static final int INDICE_JUGADOR_IA = 1;
     private static final int PUNTOS_OBJETIVO_PARTIDA = 15;
@@ -53,8 +52,6 @@ public class Mesa {
     /**
      * Constructora privada (Singleton)
      * 
-     * ⚠️ DISEÑO: Inicializa EXCLUSIVAMENTE 1 JugadorPersona + 1 JugadorIA
-     * No hay parámetros para configurar otros modos de juego.
      */
     private Mesa() {
         jugadores = new ListaJugadores();

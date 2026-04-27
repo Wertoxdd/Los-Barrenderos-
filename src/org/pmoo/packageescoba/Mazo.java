@@ -77,7 +77,7 @@ public class Mazo {
 		return baraja.isEmpty();
 	}
 	
-	public int tamaÃ±o() {
+	public int tamaño() {
 	    return baraja.size();
 	}
 	

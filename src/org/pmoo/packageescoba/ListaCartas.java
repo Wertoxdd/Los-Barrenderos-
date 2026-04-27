@@ -6,12 +6,12 @@ import java.util.ArrayList;
 /**
  * ListaCartas - Clase base para todas las listas de cartas
  * 
- * ⚠️ DISEÑO: El ArrayList es completamente privado.
+ *  DISEÑO: El ArrayList es completamente privado.
  * Las subclases NO pueden acceder a él directamente.
  */
 public class ListaCartas {
     
-    // ✅ COMPLETEMENTE PRIVADO - Ni siquiera protected
+   
     private ArrayList<Carta> cartas;
     
     /**
