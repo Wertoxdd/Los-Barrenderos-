@@ -22,15 +22,12 @@ public class JugadorIA extends Jugador {
     @Override
     public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
         ListaCartasAuxiliar cartasMesa = new ListaCartasAuxiliar();
-        ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
-        
         mesa.agregarCartas(cartasMesa);
-        
-        buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), 
-                           new ListaCartasMonton(), posiblesCombinaciones);
-        
-        if (posiblesCombinaciones.size() > 0) {
-            return posiblesCombinaciones.get(0);
+
+        buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton());
+
+        if (getPosiblesCombinaciones().size() > 0) {
+            return getPosiblesCombinaciones().get(0);
         }
         return new ListaCartasMonton();
     }

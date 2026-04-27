@@ -1,15 +1,41 @@
 package org.pmoo.packageescoba;
 
+/**
+ * 
+ * 
+ * Jugador: Representa el participante de la partida. Contiene el nombre del jugador, el cumulo de cartas en su mano y en su monton, 
+ * y el algoritmo de busqueda de combinaciones.
+ * 
+ * Es una clase abstracta, ya que se divide en si es una persona (JugadorPersona) o una IA (JugadorIA).
+ *
+ */
 public abstract class Jugador {
-
+	
+	// ==============   Atributos   ==============
+	
+	// nombre: Guarda el nombre del jugador.
     private String nombre;
+    
+    // mano: Guarda la lista de cartas de la mano.
     private ListaCartasMano mano;
+    
+    // monton: Guarda la lista de cartas que tienes acumuladas en el montón
     private ListaCartasMonton monton;
+    
+    // escobas: Guarda las escobas de cada jugador.
     private int escobas;
     
+    // puntosRonda: Guarda los puntos que se han hecho en una ronda
     private int puntosRonda;
+    
+    // puntosAcumulados: Guarda los puntos que se han hecho durante la partida.
     private int puntosAcumulados;
     
+    // posiblesCombinaciones: Guarda los resultados de la busqueda recursiva de sumas de 15. 
+    private ListaCartasCombinaciones posiblesCombinaciones;
+    
+    
+    // ==============   Constructora   ==============
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.mano = new ListaCartasMano();
@@ -19,77 +45,239 @@ public abstract class Jugador {
         this.puntosAcumulados = 0;
     }
     
-    public String getNombre() { return nombre; }
-    public ListaCartasMano getMano() { return mano; }
-    public ListaCartasMonton getMonton() { return monton; }
     
+    // ==============   Metodos   ==============
+    
+    /**
+     * 
+     * Método que devuelve el nombre de un jugador.
+     * 
+     * @return nombre
+     */
+    public String getNombre() { 
+    	return this.nombre; 
+    }
+    
+    /**
+     * 
+     * Método que devuelve la mano de un jugador
+     * 
+     * 
+     * @return mano
+     */
+    public ListaCartasMano getMano() {
+    	return this.mano; 
+    }
+    
+    /**
+     * 
+     * Método que devuelve el monton de cartas acumuladas de un jugador.
+     * 
+     * @return
+     */
+    public ListaCartasMonton getMonton() { return this.monton; }
+    
+    
+    /**
+     * 
+     * Método que añade una carta que viene del mazo directamente a la mano del jugador.
+     * 
+     * @param pCarta: Recibe la carta del mazo.
+     */
     public void recibirCarta(Carta pCarta) {
         mano.agregarCarta(pCarta);
     }
     
+    /**
+     * 
+     * Método que añade un grupo de cartas capturadas del tablero al monton del jugador.
+     * 
+     * @param pCartas: Recibe un cúmulo de cartas.
+     */
     public void agregarCapturadas(ListaCartasMonton pCartas) {
         monton.agregarCartas(pCartas);
     }
     
+    /**
+     * 
+     * Método que añade escobas.
+     * 
+     */
     public void añadirEscoba() {
         escobas++;
     }
     
-    public int obtenerEscobas() { return escobas; }
+    /**
+     * 
+     * Método que devuelve las escobas
+     * 
+     * @return escobas
+     */
+    public int obtenerEscobas() {
+    	return this.escobas; 
+    }
     
-    public boolean manoVacia() { return mano.estaVacia(); }
+    /**
+     * 
+     * Método que comprueba si la mano de un jugador esta vacía.
+     * 
+     * @return booleano
+     */
+    public boolean manoVacia() {
+    	return this.mano.estaVacia();
+    }
     
-    public int totalCartas() { return monton.tamaño(); }
+    /**
+     * 
+     * Método que cuenta la cantida de cartas que hay en el monton de cartas de un jugador.
+     * 
+     * @return la cantidad de cartas.
+     */
+    public int totalCartas() {
+    	return this.monton.tamaño(); 
+    	}
     
+    /**
+     * 
+     * Método que cuenta la cantida de oros que tiene un jugador en su monton.
+     * 
+     * @return la cantidad de oros.
+     */
     public int totalOros() {
-        return monton.contarOros();
+        return this.monton.contarOros();
     }
     
+    /**
+     * 
+     * Método que cuenta la cantida de oros que tiene un jugador en su monton.
+     * 
+     * @return la cantidad de oros.
+     */
     public int totalSietes() {
-        return monton.contarSietes();
+        return this.monton.contarSietes();
     }
     
+    /**
+     * 
+     * Método que comprueba quien tiene el siete de oros en su monton.
+     * 
+     * @return booleano.
+     */
     public boolean tieneSieteDeOros() {
-        return monton.tieneSieteDeOros();
+        return this.monton.tieneSieteDeOros();
     }
     
-    public int getPuntosRonda() { return puntosRonda; }
-    public int getPuntosAcumulados() { return puntosAcumulados; }
+    /**
+     * 
+     * Método que devuelve los puntos que ha hecho un jugador en una ronda.
+     * 
+     * @return los puntos de la ronda.
+     */
+    public int getPuntosRonda() {
+    	return this.puntosRonda; 
+    }
     
+    /**
+     * 
+     * Método que devuelve los puntos acumulados durante la partida.
+     * 
+     * @return los puntos acumulados.
+     */
+    public int getPuntosAcumulados() {
+    	return this.puntosAcumulados; 
+    }
+    
+    /**
+     * 
+     * Método que añade los puntos que ha hecho durante la ronda al atributo de puntosRonda
+     * 
+     * @param puntos que se han hecho durante la ronda
+     */
     public void añadirPuntosRonda(int puntos) {
         this.puntosRonda += puntos;
     }
     
+    /**
+     * 
+     * Método que añade los puntos que ha hecho en total al atributo de puntosAcumulados
+     * 
+     * @param puntos que se han hecho durante la partida
+     */
     public void añadirPuntosAcumulados(int puntos) {
         this.puntosAcumulados += puntos;
     }
     
+    /**
+     * 
+     * Método para resetear los puntos de la ronda a cada jugador.
+     * 
+     */
     public void resetearPuntosRonda() {
         this.puntosRonda = 0;
     }
+
+    /**
+     * 
+     * Método para obtener las posibles combinaciones al calcular. 
+     * 
+     * @return posibles combinaciones
+     */
+    public ListaCartasCombinaciones getPosiblesCombinaciones() {
+        return this.posiblesCombinaciones;
+    }
     
+    // ==============   Métodos abstractos   ==============
     public abstract Carta elegirCarta();
     public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
     
-    protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, 
-            ListaCartasMonton listaActual, ListaCartasCombinaciones posiblesCombinaciones) {
-        
+    
+    /**
+     * 
+     * Método recursivo, que mediante "backtracking" explora todas las combinaciones posibles de cartas en la mesa que, sumadas al valor de 
+     * la carta que se ha decidido jugar, den exactamente 15. Si se encuentra una combinación válida, la guarda en posiblesCombinaciones.
+     * 
+     * INICIALIZACIÓN: Cuando i = 0, entonces se crea una nueva instancia de ListaCartasCombinaciones para limpiar resultados previos.
+     * 
+     * CASO 1 (caso de éxito): Si el objetivo es 0, se ha encontrado una suma válida, por lo que se clona a la lista actual y se guarda.
+     * 
+     * CASO 2 (caso de detención): Si se recorre toda la lista sin alcanzar el objetivo, se detiene la búsqueda en esa rama.
+     * 
+     * RECURSIVIDAD: El método intenta dos caminos:
+     *    * Incluyendo la carta actual (si no supera el objetivo)
+     * 	  * Saltando la carta actual, así se exploran todas las combinaciones posibles.
+     *  
+     * @param pLista: Recibe la lista de cartas auxiliares de la mesa sobre la que se realiza la búsqueda.
+     * @param i: Recibe el índice que indica qué carta de la lista se esta evaluando en este paso. 
+     * @param objetivo: Recibe el valor númerico que falta para completar la suma de 15.
+     * @param listaActual: La combinación temporal de cartas que se va formando durante la exploración de combinaciones.
+     */
+    protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, ListaCartasMonton listaActual) {
+    	
+        // INICIALIZACIÓN
+    	if (i == 0) {
+            this.posiblesCombinaciones = new ListaCartasCombinaciones();
+        }
+    	
+    	// CASO 1
         if (objetivo == 0) {
-            posiblesCombinaciones.add(listaActual);
+            ListaCartasMonton copia = new ListaCartasMonton();
+            listaActual.copiarA(copia);
+            this.posiblesCombinaciones.add(copia);
             return;
         }
         
+        // CASO 2
         if (i >= pLista.tamaño()) return;
+
+        Carta c = pLista.obtener(i);
         
-        Carta c = pLista.obtener(i);        
-        
+        // RECURSIVIDAD
         if (c.getValor() <= objetivo) {
-            ListaCartasMonton nuevaLista = new ListaCartasMonton();
-            nuevaLista.agregarCartas(listaActual);
-            nuevaLista.agregarCarta(c);
-            buscarCombinaciones(pLista, i+1, objetivo - c.getValor(), nuevaLista, posiblesCombinaciones);
+            listaActual.agregarCarta(c);
+            buscarCombinaciones(pLista, i + 1, objetivo - c.getValor(), listaActual);
+            listaActual.eliminarCarta(listaActual.tamaño() - 1);
         }
-        
-        buscarCombinaciones(pLista, i+1, objetivo, listaActual, posiblesCombinaciones);
+
+        buscarCombinaciones(pLista, i + 1, objetivo, listaActual);
     }
 }

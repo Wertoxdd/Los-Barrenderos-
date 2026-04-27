@@ -16,6 +16,8 @@ import java.util.Random;
 public class Mazo extends ListaCartas {
 	
 	// ==============   Atributos   ==============
+	
+	// miMazo: Instancia del mazo
 	private static Mazo miMazo = null;
 	
 	// ==============   Constructora (privada)   ============== 

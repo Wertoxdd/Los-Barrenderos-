@@ -5,22 +5,41 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 
+
+/**
+ * 
+ * Mesa: El cerebro del juego. Gestiona las rondas, los turnos, el recuento de puntos y el sistema del ranking. 
+ *
+ * Utiliza el Patrón Singleton porque es una MAE (no puede haber más de una mesa en todo el juego). 
+ * 
+ */
 public class Mesa {
     
-    private ListaCartasMesa cartasMesa;
+	// ==============   Atributos   ==============
+    
+	// cartasMesa: La lista de cartas que estan en el tablero de la mesa.
+	private ListaCartasMesa cartasMesa;
+	
+	// miMesa: Instancia de la mesa.
     private static Mesa miMesa = null;
     
-    private static final int PuntosFinalPartida = 15;
+    // puntosFinalPartida: Puntuacion objetivo para ganar el juego.
+    private static final int puntosFinalPartida = 15;
+    
+    // ficheroTexto: El nombre del archivo para guardar los resultados.
     private static final String ficheroTexto = "ranking.txt";
     
+    
+    // ==============   Constructora (privada)   ==============
     private Mesa() {
-        ListaJugadores lj = ListaJugadores.getListaJugadores();
-        lj.agregarJugador(new JugadorPersona("Jugador 1"));
-        lj.agregarJugador(new JugadorPersona("Jugador 2"));
-        lj.agregarJugador(new JugadorIA());
+        ListaJugadores jugadores = ListaJugadores.getListaJugadores();
+        jugadores.agregarJugador(new JugadorPersona("Jugador 1"));
+        jugadores.agregarJugador(new JugadorPersona("Jugador 2"));
+        jugadores.agregarJugador(new JugadorIA());
         cartasMesa = new ListaCartasMesa();
     }
     
+    // ==============   Patrón Singleton   ==============
     public static Mesa getMesa() {
         if (miMesa == null) {
             miMesa = new Mesa();
@@ -28,6 +47,16 @@ public class Mesa {
         return miMesa;
     }
     
+    // ==============   Métodos   ==============
+    
+    
+    /**
+     * 
+     * Metodo que reparte 3 cartas a cada jugador de la partida.
+     * 
+     * @param esRepartoInicial: Si es el inicio de la mano, pone 4 cartas en la mesa.
+     * 
+     */
     private void repartirCartas(boolean esRepartoInicial) {
         Mazo mazo = Mazo.getMazo();
         ListaJugadores lj = ListaJugadores.getListaJugadores();
@@ -46,10 +75,31 @@ public class Mesa {
         }
     }
     
+    
+    /**
+     * 
+     * Método que comprueba si se ha efectuado una escoba.
+     * 
+     * @return booleano 
+     * 
+     */
     private boolean esEscoba() {
         return cartasMesa.estaVacia();
     }
     
+    
+    
+    /**
+     * 
+     * Método que controla los turnos de los jugadores.
+     * 
+     * Muestra la mesa en consola, elige una carta, comprueba si suma 15 (captura), mueve las coartas al monton del jugador y verifica si es escoba (mesa vacía).
+     * 
+     * @param pJugador: Recibe un jugador como parametro, que es el que va a jugar el turno.
+     * @param ultimoEnCapturar: Recibe el jugador que ha sido el ultimo en capturar de la mesa, para que al final de la partida se lleve las cartas que sobran en la mesa.
+     * @return el último jugador que ha capturado de la mesa.
+     * 
+     */
     private Jugador turnoJugador(Jugador pJugador, Jugador ultimoEnCapturar) {
         System.out.println("\n================| TURNO DE " + pJugador.getNombre() + " |================");
         System.out.println("Cartas restantes en el mazo: " + Mazo.getMazo().tamaño());
@@ -91,39 +141,54 @@ public class Mesa {
         return ultimoEnCapturar;
     }
     
+    
+    /**
+     * 
+     * Método para contar los puntos. Llama a ListaJugadores para sumar 1 punto si cumple las condiciones para sumar.
+     * 
+     * Una vez hecho el recuento 
+     * 
+     */
     private void contarPuntos() {
-        ListaJugadores lj = ListaJugadores.getListaJugadores();
-        for (int i = 0; i < lj.tamaño(); i++) {
-            lj.obtenerJugador(i).resetearPuntosRonda();
+        ListaJugadores jugadores = ListaJugadores.getListaJugadores();
+        for (int i = 0; i < jugadores.tamaño(); i++) {
+            jugadores.obtenerJugador(i).resetearPuntosRonda();
         }
 
-        Jugador jMasCartas = lj.jugadorConMasCartas();
+        Jugador jMasCartas = jugadores.jugadorConMasCartas();
         if (jMasCartas != null) {
             jMasCartas.añadirPuntosRonda(1);
         }
 
-        Jugador jMasOros = lj.jugadorConMasOros();
+        Jugador jMasOros = jugadores.jugadorConMasOros();
         if (jMasOros != null) {
             jMasOros.añadirPuntosRonda(1);
         }
 
-        Jugador jMasSietes = lj.jugadorConMasSietes();
+        Jugador jMasSietes = jugadores.jugadorConMasSietes();
         if (jMasSietes != null) {
             jMasSietes.añadirPuntosRonda(1);
         }
 
-        Jugador jSieteOros = lj.jugadorConElSieteDeOros();
+        Jugador jSieteOros = jugadores.jugadorConElSieteDeOros();
         if (jSieteOros != null) {
             jSieteOros.añadirPuntosRonda(1);
         }
 
-        for (int i = 0; i < lj.tamaño(); i++) {
-            Jugador j = lj.obtenerJugador(i);
+        for (int i = 0; i < jugadores.tamaño(); i++) {
+            Jugador j = jugadores.obtenerJugador(i);
             j.añadirPuntosRonda(j.obtenerEscobas());
             j.añadirPuntosAcumulados(j.getPuntosRonda());
         }
     }
     
+    /**
+     * 
+     * Método para mostrar por consola los resultados de la ronda detalladamente.
+     * 
+     * Muestra los puntos, si ha habido empate o si hay un ganador de la ronda. 
+     * 
+     */
     private void mostrarResultados() {
         System.out.println("\n================| RESULTADO FINAL |================");
         ListaJugadores lj = ListaJugadores.getListaJugadores();
@@ -160,6 +225,14 @@ public class Mesa {
         }
     }
     
+    
+    /**
+     * 
+     * Método que accede a ranking.txt y recupera los puntos acumulados de cada jugador. 
+     * 
+     * Si el archivo no existe, se crea uno nuevo.
+     * 
+     */
     private void cargarRanking() {
         ListaJugadores lj = ListaJugadores.getListaJugadores();
         try (Scanner sc = new Scanner(new File(ficheroTexto))) {
@@ -173,6 +246,12 @@ public class Mesa {
         }
     }
     
+    
+    /**
+     * 
+     * Método para guardar el ranking usando PrintWriter.
+     * 
+     */
     private void guardarRanking() {
         ListaJugadores lj = ListaJugadores.getListaJugadores();
         try (PrintWriter pw = new PrintWriter(new FileWriter(ficheroTexto))) { 
@@ -184,6 +263,12 @@ public class Mesa {
         }
     }
     
+    
+    /**
+     * 
+     * Método para mostrar el ranking por pantalla, con el ganador de la partida y los puntos que ha hecho cada jugador.
+     * 
+     */
     private void mostrarRanking() {
         System.out.println("\n================| RANKING |================");
         ListaJugadores lj = ListaJugadores.getListaJugadores();
@@ -192,7 +277,7 @@ public class Mesa {
         for (int i = 0; i < lj.tamaño(); i++) {
             Jugador j = lj.obtenerJugador(i);
             System.out.println(j.getNombre() + ": " + j.getPuntosAcumulados() + " puntos.");
-            if (j.getPuntosAcumulados() >= PuntosFinalPartida) {
+            if (j.getPuntosAcumulados() >= puntosFinalPartida) {
                 if (ganadorPartida == null || j.getPuntosAcumulados() > ganadorPartida.getPuntosAcumulados()) {
                     ganadorPartida = j;
                 }
@@ -204,6 +289,12 @@ public class Mesa {
         }
     }
     
+    
+    /**
+     * 
+     * Método que controla el bucle principal del juego, reiniciando el mazo y las rondas hasta que un jugador gana (llega a 15 puntos).
+     * 
+     */
     public void jugarPartida() {
         cargarRanking();
         ListaJugadores lj = ListaJugadores.getListaJugadores();
@@ -245,7 +336,7 @@ public class Mesa {
             mostrarRanking();
 
             for (int i = 0; i < lj.tamaño(); i++) {
-                if (lj.obtenerJugador(i).getPuntosAcumulados() >= PuntosFinalPartida) {
+                if (lj.obtenerJugador(i).getPuntosAcumulados() >= puntosFinalPartida) {
                     alguienHaGanado = true;
                 }
             }
