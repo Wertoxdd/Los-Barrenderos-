@@ -2,59 +2,51 @@ package org.pmoo.packageescoba;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.Iterator;
 
 public class JugadorPersonaTest {
 
     @Test
     public void testConstructorAsignaNombreJugadorUno() {
-        JugadorPersona alex = new JugadorPersona();
+        JugadorPersona alex = new JugadorPersona("alex");
         assertEquals("Jugador 1", alex.getNombre());
     }
 
     @Test
-    public void testGetIteradorNoTieneElementosAlInicio() {
-        JugadorPersona ahmed = new JugadorPersona();
-        Iterator<Carta> iterador = ahmed.getIterador();
-        assertFalse(iterador.hasNext());
+    public void testManoNoTieneElementosAlInicio() {
+        JugadorPersona ahmed = new JugadorPersona("ahmed");
+        assertEquals(0, ahmed.getMano().tamaño());
     }
 
     @Test
-    public void testGetIteradorRecorreLasCartasRecibidas() {
-        JugadorPersona samuel = new JugadorPersona();
+    public void testManoRecibeLasCartas() {
+        JugadorPersona samuel = new JugadorPersona("samuel");
         Carta cartaOros = new Carta(Palo.Oros, 1);
         Carta cartaCopas = new Carta(Palo.Copas, 7);
         
         samuel.recibirCarta(cartaOros);
         samuel.recibirCarta(cartaCopas);
         
-        Iterator<Carta> iterador = samuel.getIterador();
-        
-        assertTrue(iterador.hasNext());
-        assertEquals(cartaOros, iterador.next());
-        
-        assertTrue(iterador.hasNext());
-        assertEquals(cartaCopas, iterador.next());
-        
-        assertFalse(iterador.hasNext());
+        assertEquals(2, samuel.getMano().tamaño());
+        assertEquals(cartaOros, samuel.getMano().obtenerCarta(0));
+        assertEquals(cartaCopas, samuel.getMano().obtenerCarta(1));
     }
 
     @Test
     public void testManoVaciaDevuelveTrueAlCrearJugador() {
-        JugadorPersona mikel = new JugadorPersona();
+        JugadorPersona mikel = new JugadorPersona("mikel");
         assertTrue(mikel.manoVacia());
     }
 
     @Test
     public void testManoVaciaDevuelveFalseAlRecibirCarta() {
-        JugadorPersona jon = new JugadorPersona();
+        JugadorPersona jon = new JugadorPersona("jon");
         jon.recibirCarta(new Carta(Palo.Bastos, 3));
         assertFalse(jon.manoVacia());
     }
 
     @Test
     public void testObtenerEscobasIniciaEnCeroYSumaCorrectamente() {
-        JugadorPersona alex = new JugadorPersona();
+        JugadorPersona alex = new JugadorPersona("alex");
         assertEquals(0, alex.obtenerEscobas());
         
         alex.añadirEscoba();
@@ -65,7 +57,7 @@ public class JugadorPersonaTest {
 
     @Test
     public void testAgregarCapturadasSumaAlTotalDeCartas() {
-        JugadorPersona ahmed = new JugadorPersona();
+        JugadorPersona ahmed = new JugadorPersona("ahmed");
         ListaCartasMonton montonCapturado = new ListaCartasMonton();
         montonCapturado.agregarCarta(new Carta(Palo.Espadas, 4));
         montonCapturado.agregarCarta(new Carta(Palo.Copas, 5));
@@ -77,7 +69,7 @@ public class JugadorPersonaTest {
 
     @Test
     public void testTotalOrosDelJugadorSumaCorrectamente() {
-        JugadorPersona samuel = new JugadorPersona();
+        JugadorPersona samuel = new JugadorPersona("samuel");
         ListaCartasMonton montonCapturado = new ListaCartasMonton();
         montonCapturado.agregarCarta(new Carta(Palo.Oros, 4));
         montonCapturado.agregarCarta(new Carta(Palo.Copas, 5));
@@ -90,7 +82,7 @@ public class JugadorPersonaTest {
 
     @Test
     public void testTotalSietesDelJugadorSumaCorrectamente() {
-        JugadorPersona jon = new JugadorPersona();
+        JugadorPersona jon = new JugadorPersona("jon");
         ListaCartasMonton montonCapturado = new ListaCartasMonton();
         montonCapturado.agregarCarta(new Carta(Palo.Copas, 7));
         montonCapturado.agregarCarta(new Carta(Palo.Espadas, 7));
@@ -103,7 +95,7 @@ public class JugadorPersonaTest {
 
     @Test
     public void testTieneSieteDeOrosElJugadorDevuelveTrueSiLoCapturo() {
-        JugadorPersona mikel = new JugadorPersona();
+        JugadorPersona mikel = new JugadorPersona("mikel");
         ListaCartasMonton montonCapturado = new ListaCartasMonton();
         montonCapturado.agregarCarta(new Carta(Palo.Oros, 7));
         montonCapturado.agregarCarta(new Carta(Palo.Bastos, 2));
@@ -115,7 +107,7 @@ public class JugadorPersonaTest {
     
     @Test
     public void testTieneSieteDeOrosElJugadorDevuelveFalseSiNoLoTiene() {
-        JugadorPersona alex = new JugadorPersona();
+        JugadorPersona alex = new JugadorPersona("alex");
         ListaCartasMonton montonCapturado = new ListaCartasMonton();
         montonCapturado.agregarCarta(new Carta(Palo.Copas, 7));
         montonCapturado.agregarCarta(new Carta(Palo.Oros, 6));

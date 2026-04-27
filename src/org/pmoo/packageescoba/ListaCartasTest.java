@@ -2,15 +2,13 @@ package org.pmoo.packageescoba;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ListaCartasTest {
 
     @Test
-    public void testTamaÃ±o() {
+    public void testTamaño() {
         ListaCartas lista = new ListaCartas();
-        assertEquals(0, lista.tamaÃ±o());
+        assertEquals(0, lista.tamaño());
     }
 
     @Test
@@ -19,23 +17,21 @@ public class ListaCartasTest {
         lista.agregarCarta(new Carta(Palo.Oros, 1));
         lista.agregarCarta(new Carta(Palo.Copas, 2));
         
-        assertEquals(2, lista.tamaÃ±o());
+        assertEquals(2, lista.tamaño());
     }
 
     @Test
-    public void testGetCartasDevuelveListaCorrecta() {
+    public void testGetCartasMedianteIndice() {
         ListaCartas lista = new ListaCartas();
         Carta carta = new Carta(Palo.Bastos, 5);
         lista.agregarCarta(carta);
         
-        ArrayList<Carta> extraida = lista.getCartas();
-        
-        assertEquals(1, extraida.size());
-        assertEquals(carta, extraida.get(0));
+        assertEquals(1, lista.tamaño());
+        assertEquals(carta, lista.obtenerCarta(0));
     }
 
     @Test
-    public void testGetIteradorRecorreCartasAgregadas() {
+    public void testRecorrerCartasAgregadas() {
         ListaCartas lista = new ListaCartas();
         Carta carta1 = new Carta(Palo.Oros, 3);
         Carta carta2 = new Carta(Palo.Espadas, 7);
@@ -43,15 +39,9 @@ public class ListaCartasTest {
         lista.agregarCarta(carta1);
         lista.agregarCarta(carta2);
         
-        Iterator<Carta> iterador = lista.getIterador();
-        
-        assertTrue(iterador.hasNext());
-        assertEquals(carta1, iterador.next());
-        
-        assertTrue(iterador.hasNext());
-        assertEquals(carta2, iterador.next());
-        
-        assertFalse(iterador.hasNext());
+        assertEquals(2, lista.tamaño());
+        assertEquals(carta1, lista.obtenerCarta(0));
+        assertEquals(carta2, lista.obtenerCarta(1));
     }
 
     @Test

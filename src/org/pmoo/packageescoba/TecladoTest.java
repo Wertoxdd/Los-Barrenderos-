@@ -2,7 +2,6 @@ package org.pmoo.packageescoba;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 
 public class TecladoTest {
@@ -17,7 +16,7 @@ public class TecladoTest {
     }
 
     @Test
-    public void testLeerCartaEligeCorrectamenteSegunEntrada() {
+    public void testLeerCartaEligeCorrectamenteSegunEntrada() throws IndiceCartaInvalidoException {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         
         ListaCartasMano mano = new ListaCartasMano();
@@ -32,10 +31,10 @@ public class TecladoTest {
     }
 
     @Test
-    public void testLeerCapturaDevuelveMontonUnicoDirectamente() {
+    public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException {
         System.setIn(new ByteArrayInputStream("\n\n".getBytes()));
         
-        ArrayList<ListaCartasMonton> posiblesCombinaciones = new ArrayList<ListaCartasMonton>();
+        ListaListas posiblesCombinaciones = new ListaListas();
         ListaCartasMonton montonUnico = new ListaCartasMonton();
         montonUnico.agregarCarta(new Carta(Palo.Espadas, 10));
         posiblesCombinaciones.add(montonUnico);
@@ -46,10 +45,10 @@ public class TecladoTest {
     }
 
     @Test
-    public void testLeerCapturaEligeCorrectamenteConVariasOpciones() {
+    public void testLeerCapturaEligeCorrectamenteConVariasOpciones() throws IndiceCombinacionInvalidoException {
         System.setIn(new ByteArrayInputStream("2\n\n\n".getBytes()));
         
-        ArrayList<ListaCartasMonton> posiblesCombinaciones = new ArrayList<ListaCartasMonton>();
+        ListaListas posiblesCombinaciones = new ListaListas();
         ListaCartasMonton monton1 = new ListaCartasMonton();
         ListaCartasMonton monton2 = new ListaCartasMonton();
         
@@ -66,9 +65,9 @@ public class TecladoTest {
 
     @Test
     public void testMostrarCartasEnHorizontalFuncionaSinErrores() {
-        ArrayList<Carta> cartas = new ArrayList<Carta>();
-        cartas.add(new Carta(Palo.Oros, 3));
-        cartas.add(new Carta(Palo.Espadas, 4));
+        ListaCartasMonton cartas = new ListaCartasMonton();
+        cartas.agregarCarta(new Carta(Palo.Oros, 3));
+        cartas.agregarCarta(new Carta(Palo.Espadas, 4));
         
         Teclado.mostrarCartasEnHorizontal(cartas);
         

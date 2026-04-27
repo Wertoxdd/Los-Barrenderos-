@@ -22,7 +22,7 @@ public class ListaCartasManoTest {
         Carta carta = new Carta(Palo.Copas, 3);
         mano.agregarCarta(carta);
         assertEquals(carta, mano.consultarCarta(0));
-        assertEquals(1, mano.tamaï¿½o());
+        assertEquals(1, mano.tamaño());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ListaCartasManoTest {
         mano.agregarCarta(carta2);
         Carta elegida = mano.elegirCarta(0);
         assertEquals(carta1, elegida);
-        assertEquals(1, mano.tamaï¿½o());
+        assertEquals(1, mano.tamaño());
         assertEquals(carta2, mano.consultarCarta(0));
     }
 
@@ -47,7 +47,7 @@ public class ListaCartasManoTest {
         mano.agregarCarta(carta2);
         Carta elegida = mano.elegirCarta(1);
         assertEquals(carta2, elegida);
-        assertEquals(1, mano.tamaï¿½o());
+        assertEquals(1, mano.tamaño());
         assertEquals(carta1, mano.consultarCarta(0));
     }
 

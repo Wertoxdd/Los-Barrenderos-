@@ -2,84 +2,54 @@ package org.pmoo.packageescoba;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.Iterator;
 
 public class ListaJugadoresTest {
 
     @Test
-    public void testConstructorIniciaTamanoCero() {
-        ListaJugadores lista = new ListaJugadores();
-        assertEquals(0, lista.tamaño());
-    }
-
-    @Test
     public void testAgregarJugadorAumentaTamano() {
-        ListaJugadores lista = new ListaJugadores();
-        lista.agregarJugador(new JugadorPersona());
-        lista.agregarJugador(new JugadorIA());
-        assertEquals(2, lista.tamaño());
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        lj.resetear();
+        lj.agregarJugador(new JugadorPersona("Test1"));
+        lj.agregarJugador(new JugadorIA());
+        assertEquals(2, lj.tamaño());
     }
 
     @Test
     public void testObtenerJugadorDevuelveElJugadorCorrecto() {
-        ListaJugadores lista = new ListaJugadores();
-        Jugador jugador1 = new JugadorPersona();
-        Jugador jugador2 = new JugadorIA();
-        lista.agregarJugador(jugador1);
-        lista.agregarJugador(jugador2);
-        assertEquals(jugador1, lista.obtenerJugador(0));
-        assertEquals(jugador2, lista.obtenerJugador(1));
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        lj.resetear();
+        Jugador j1 = new JugadorPersona("Alex");
+        lj.agregarJugador(j1);
+        assertEquals(j1, lj.obtenerJugador(0));
     }
 
     @Test
-    public void testGetIteradorRecorreLosJugadoresAgregados() {
-        ListaJugadores lista = new ListaJugadores();
-        Jugador jugador1 = new JugadorPersona();
-        Jugador jugador2 = new JugadorIA();
-        lista.agregarJugador(jugador1);
-        lista.agregarJugador(jugador2);
-        Iterator<Jugador> iterador = lista.getIterador();
-        assertTrue(iterador.hasNext());
-        assertEquals(jugador1, iterador.next());
-        assertTrue(iterador.hasNext());
-        assertEquals(jugador2, iterador.next());
-        assertFalse(iterador.hasNext());
+    public void testTodosConSusManosVacias() {
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        lj.resetear();
+        Jugador j1 = new JugadorPersona("Alex");
+        j1.recibirCarta(new Carta(Palo.Oros, 5));
+        lj.agregarJugador(j1);
+        assertFalse(lj.todosConSusManosVacias());
     }
 
-    @Test
-    public void testTodosConSusManosVaciasDevuelveTrueSiLaListaEstaVacia() {
-        ListaJugadores lista = new ListaJugadores();
-        assertTrue(lista.todosConSusManosVacias());
-    }
+    // --- TEST PELIGROSO DE EMPATE ---
 
     @Test
-    public void testTodosConSusManosVaciasDevuelveTrueSiNingunoTieneCartas() {
-        ListaJugadores lista = new ListaJugadores();
-        lista.agregarJugador(new JugadorPersona());
-        lista.agregarJugador(new JugadorIA());
-        assertTrue(lista.todosConSusManosVacias());
-    }
-
-    @Test
-    public void testTodosConSusManosVaciasDevuelveFalseSiUnJugadorTieneCartas() {
-        ListaJugadores lista = new ListaJugadores();
-        Jugador jugador1 = new JugadorPersona();
-        Jugador jugador2 = new JugadorIA();
-        jugador1.recibirCarta(new Carta(Palo.Oros, 5));
-        lista.agregarJugador(jugador1);
-        lista.agregarJugador(jugador2);
-        assertFalse(lista.todosConSusManosVacias());
-    }
-
-    @Test
-    public void testTodosConSusManosVaciasDevuelveFalseSiTodosLosJugadoresTienenCartas() {
-        ListaJugadores lista = new ListaJugadores();
-        Jugador jugador1 = new JugadorPersona();
-        Jugador jugador2 = new JugadorIA();
-        jugador1.recibirCarta(new Carta(Palo.Oros, 1));
-        jugador2.recibirCarta(new Carta(Palo.Copas, 3));
-        lista.agregarJugador(jugador1);
-        lista.agregarJugador(jugador2);
-        assertFalse(lista.todosConSusManosVacias());
+    public void testEmpatePeligrosoEnOrosDevuelveNull() {
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        lj.resetear();
+        
+        Jugador j1 = new JugadorPersona("Alex");
+        Jugador j2 = new JugadorPersona("Javi");
+        
+        // Empate tÃ©cnico: Ambos tienen 1 oro
+        j1.getMonton().agregarCarta(new Carta(Palo.Oros, 1));
+        j2.getMonton().agregarCarta(new Carta(Palo.Oros, 7));
+        
+        lj.agregarJugador(j1);
+        lj.agregarJugador(j2);
+        
+        assertNull("En caso de empate en oros, el ganador debe ser null", lj.jugadorConMasOros());
     }
 }

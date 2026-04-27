@@ -1,6 +1,7 @@
 package org.pmoo.packageescoba;
 import static org.junit.Assert.*; 
 import org.junit.Test;
+
 public class JugadorIATest {
 
     @Test
@@ -63,8 +64,9 @@ public class JugadorIATest {
         Carta cartaJugada = new Carta(Palo.Oros, 7);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
         int suma = 0;
-        java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) suma += it.next().getValor();
+        for (int i = 0; i < resultado.tamaño(); i++) {
+            suma += resultado.obtenerCarta(i).getValor();
+        }
         assertEquals(8, suma);
     }
 
@@ -75,8 +77,8 @@ public class JugadorIATest {
         mesa.agregarCarta(new Carta(Palo.Oros, 10));
         Carta cartaJugada = new Carta(Palo.Copas, 5);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        assertEquals(1, resultado.tamaÃ±o());
-        assertEquals(10, resultado.getIterador().next().getValor());
+        assertEquals(1, resultado.tamaño());
+        assertEquals(10, resultado.obtenerCarta(0).getValor());
     }
 
     @Test
@@ -88,8 +90,9 @@ public class JugadorIATest {
         Carta cartaJugada = new Carta(Palo.Espadas, 5);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
         int suma = 0;
-        java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) suma += it.next().getValor();
+        for (int i = 0; i < resultado.tamaño(); i++) {
+            suma += resultado.obtenerCarta(i).getValor();
+        }
         assertEquals(10, suma);
     }
 
@@ -104,8 +107,9 @@ public class JugadorIATest {
         Carta cartaJugada = new Carta(Palo.Bastos, 10);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
         int suma = 0;
-        java.util.Iterator<Carta> it = resultado.getIterador();
-        while (it.hasNext()) suma += it.next().getValor();
+        for (int i = 0; i < resultado.tamaño(); i++) {
+            suma += resultado.obtenerCarta(i).getValor();
+        }
         assertEquals(5, suma);
     }
 }
