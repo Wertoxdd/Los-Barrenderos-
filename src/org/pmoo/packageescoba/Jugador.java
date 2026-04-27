@@ -20,9 +20,9 @@ public abstract class Jugador {
 	// metodos
 	
 	/*
-	 * Añade un punto a un jugador
+	 * Aï¿½ade un punto a un jugador
 	 */
-	public void añadirPunto() {
+	public void aÃ±adirPunto() {
 		this.puntos++;
 	}
 	
@@ -51,7 +51,7 @@ public abstract class Jugador {
 	}
 	
 	/**
-	 * Añade una carta a un jugador en su mano, usando polimorfismo
+	 * Aï¿½ade una carta a un jugador en su mano, usando polimorfismo
 	 * @param pCarta (una carta)
 	 */
 	public void recibirCarta(Carta pCarta) {
@@ -72,8 +72,8 @@ public abstract class Jugador {
 		this.monton.agregarCartas(pLista);
 	}
 	
-	// metodo para añadir una escoba al contador de escobas de un jugador
-	public void añadirEscoba() {
+	// metodo para aï¿½adir una escoba al contador de escobas de un jugador
+	public void aÃ±adirEscoba() {
 		this.escobas++;
 	}
 	
@@ -84,7 +84,7 @@ public abstract class Jugador {
 	
 	// metodo para contar las cartas de un monton de un jugador
 	public int totalCartas() {
-		return this.monton.tamaño();
+		return this.monton.tamaÃ±o();
 	}
 	
 	// metodo para contar los oros de un monton de un jugador
@@ -107,11 +107,11 @@ public abstract class Jugador {
 	protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, ListaCartasMonton listaActual) {
 		
 		if (objetivo == 0) {
-			pLista.añadirCombinacion(listaActual);
+			pLista.aÃ±adirCombinacion(listaActual);
 			return;
 		}
 		
-		if (i >= pLista.tamaño()) return;
+		if (i >= pLista.tamaÃ±o()) return;
 		Carta c = pLista.obtener(i);
 		if (c.getValor() <= objetivo) {
 			ListaCartasMonton nuevaLista = new ListaCartasMonton();
