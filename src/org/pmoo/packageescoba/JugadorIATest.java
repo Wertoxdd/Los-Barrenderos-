@@ -1,5 +1,5 @@
 package org.pmoo.packageescoba;
-import static org.junit.Assert.*;
+import static org.junit.Assert.*; 
 import org.junit.Test;
 public class JugadorIATest {
 
@@ -75,7 +75,7 @@ public class JugadorIATest {
         mesa.agregarCarta(new Carta(Palo.Oros, 10));
         Carta cartaJugada = new Carta(Palo.Copas, 5);
         ListaCartasMonton resultado = ia.elegirCaptura(mesa, cartaJugada);
-        assertEquals(1, resultado.tamaño());
+        assertEquals(1, resultado.tamaÃ±o());
         assertEquals(10, resultado.getIterador().next().getValor());
     }
 

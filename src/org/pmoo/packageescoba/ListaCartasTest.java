@@ -8,9 +8,9 @@ import java.util.Iterator;
 public class ListaCartasTest {
 
     @Test
-    public void testTamaño() {
+    public void testTamaÃ±o() {
         ListaCartas lista = new ListaCartas();
-        assertEquals(0, lista.tamaño());
+        assertEquals(0, lista.tamaÃ±o());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class ListaCartasTest {
         lista.agregarCarta(new Carta(Palo.Oros, 1));
         lista.agregarCarta(new Carta(Palo.Copas, 2));
         
-        assertEquals(2, lista.tamaño());
+        assertEquals(2, lista.tamaÃ±o());
     }
 
     @Test
