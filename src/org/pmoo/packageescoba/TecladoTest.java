@@ -34,7 +34,7 @@ public class TecladoTest {
     public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException {
         System.setIn(new ByteArrayInputStream("\n\n".getBytes()));
         
-        ListaListas posiblesCombinaciones = new ListaListas();
+        ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         ListaCartasMonton montonUnico = new ListaCartasMonton();
         montonUnico.agregarCarta(new Carta(Palo.Espadas, 10));
         posiblesCombinaciones.add(montonUnico);
@@ -48,7 +48,7 @@ public class TecladoTest {
     public void testLeerCapturaEligeCorrectamenteConVariasOpciones() throws IndiceCombinacionInvalidoException {
         System.setIn(new ByteArrayInputStream("2\n\n\n".getBytes()));
         
-        ListaListas posiblesCombinaciones = new ListaListas();
+        ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         ListaCartasMonton monton1 = new ListaCartasMonton();
         ListaCartasMonton monton2 = new ListaCartasMonton();
         

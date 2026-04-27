@@ -26,7 +26,7 @@ public class Teclado {
 	}
 
 
-	public static ListaCartasMonton leerCaptura(ListaListas pLista) throws IndiceCombinacionInvalidoException {
+	public static ListaCartasMonton leerCaptura(ListaCartasCombinaciones pLista) throws IndiceCombinacionInvalidoException {
 		for (int i = 0; i < pLista.size(); i++) {
 			System.out.println("Combinacion " + (i+1) + ":");
 			ListaCartasMonton cartasCombinacion = pLista.get(i);

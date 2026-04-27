@@ -23,7 +23,7 @@ public class JugadorPersona extends Jugador {
     @Override
     public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
         ListaCartasAuxiliar cartasMesa = new ListaCartasAuxiliar();
-        ListaListas posiblesCombinaciones = new ListaListas();
+        ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         
         mesa.agregarCartas(cartasMesa);
         

@@ -7,7 +7,7 @@ import java.util.Iterator;
  * Estructura de datos diseñada para almacenar y gestionar múltiples colecciones 
  * de cartas capturadas (objetos ListaCartasMonton).
  */
-public class ListaListas {
+public class ListaCartasCombinaciones {
 	
 	/** Lista que contiene los diferentes montones de cartas capturadas. */
 	private ArrayList<ListaCartasMonton> lista;
@@ -15,7 +15,7 @@ public class ListaListas {
 	/**
 	 * Constructor que inicializa la estructura de listas vacía.
 	 */
-	public ListaListas() {
+	public ListaCartasCombinaciones() {
 		this.lista = new ArrayList<ListaCartasMonton>();
 	}
 
@@ -41,7 +41,7 @@ public class ListaListas {
 	 * Recupera un montón de cartas específico según su posición.
 	 * Implementa un recorrido mediante iterador para localizar el elemento.
 	 * 
-	 * @param pPos Índice del montón deseado.
+	 * @param pPos �?ndice del montón deseado.
 	 * @return La colección ListaCartasMonton en dicha posición, o null si no existe.
 	 */
 	public ListaCartasMonton get(int pPos) {

@@ -72,7 +72,7 @@ public abstract class Jugador {
     public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
     
     protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, 
-            ListaCartasMonton listaActual, ListaListas posiblesCombinaciones) {
+            ListaCartasMonton listaActual, ListaCartasCombinaciones posiblesCombinaciones) {
         
         if (objetivo == 0) {
             posiblesCombinaciones.add(listaActual);
