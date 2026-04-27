@@ -1,28 +1,22 @@
 package org.pmoo.packageescoba;
 
-import java.util.Iterator;
-
 public class ListaCartasMano extends ListaCartas {
-	// atributos -> heredados
-	
-	// constructora
-	public ListaCartasMano() {}
-	
-	
-	// METODOS (propios)
-		
-	public Carta obtenerCarta(int pos) {
-		return getCartas().get(pos);
-	}
-	
-	public Carta elegirCarta(int pos){
-		return this.getCartas().remove(pos); // lo elimina y lo devuelve a la vez.
-	}
-	
-	public boolean estaVacia() {
-		return this.getCartas().size() == 0;
-	}
-
-	    
-	}
-
+    
+    public ListaCartasMano() {}
+    
+    // ✅ Usar métodos heredados de ListaCartas
+    public Carta obtenerCarta(int pos) {
+        return super.obtenerCarta(pos);
+    }
+    
+    // ✅ elegirCarta() elimina y devuelve (diferente de obtenerCarta())
+    public Carta elegirCarta(int pos) {
+        return super.eliminarCarta(pos);
+    }
+    
+    public boolean estaVacia() {
+        return this.tamaño() == 0;
+    }
+    
+    // ✅ NO necesita getIterador() - no lo usa para su funcionalidad
+}

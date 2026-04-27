@@ -15,7 +15,7 @@ public class Teclado {
 		return sc.nextInt();
 	}
 	
-	public static Carta leerCarta(ListaCartasMano pMano) {
+	public static Carta leerCarta(ListaCartasMano pMano) throws IndiceCartaInvalidoException {
 		// ✅ Usar bucle con índice en vez de iterador
 		for (int i = 0; i < pMano.tamaño(); i++) {
 			System.out.print(pMano.obtenerCarta(i).toString() + "  ");
@@ -23,11 +23,14 @@ public class Teclado {
 		System.out.println();
 		
 		int eleccion = leerNumero("Elige una carta(1-" + pMano.tamaño() + "): ");
+        if (eleccion < 1 || eleccion > pMano.tamaño()) {
+            throw new IndiceCartaInvalidoException(eleccion, pMano.tamaño());
+        }
 		return pMano.elegirCarta(eleccion - 1);
 	}
 
 
-	public static ListaCartasMonton leerCaptura(ListaListas pLista) {
+	public static ListaCartasMonton leerCaptura(ListaListas pLista) throws IndiceCombinacionInvalidoException {
 		for (int i = 0; i < pLista.size(); i++) {
 			System.out.println("Combinacion " + (i+1) + ":");
 			ListaCartasMonton cartasCombinacion = pLista.get(i);
@@ -46,6 +49,9 @@ public class Teclado {
 		}
 		
 		int eleccion = leerNumero("Elige combinacion (1-" + pLista.size() + "): ");
+        if (eleccion < 1 || eleccion > pLista.size()) {
+            throw new IndiceCombinacionInvalidoException(eleccion, pLista.size());
+        }
 		System.out.println("\nPulsa enter para continuar");
 		sc.nextLine();
 		sc.nextLine();
