@@ -100,16 +100,4 @@ public class ListaJugadores {
 		}
 		return null;
 	}
-	
-	// ✅ Método para ejecutar acción en todos los jugadores (evita exponer iterador)
-	public void ejecutarEnTodos(AccionJugador accion) {
-		Iterator<Jugador> it = getIterador();
-		while (it.hasNext()) {
-			accion.ejecutar(it.next());
-		}
-	}
-	
-	public interface AccionJugador {
-		void ejecutar(Jugador j);
-	}
 }

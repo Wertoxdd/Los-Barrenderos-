@@ -1,7 +1,18 @@
 package org.pmoo.packageescoba;
 
+/**
+ * 
+ * Representa una carta individual.
+ * 
+ * Guarda su palo y su valor. 
+ * 
+ */
+
+
 public class Carta {
-	// atributos
+	/**
+	 * 
+	 */
 	private Palo palo;
 	private int valor;
 	
