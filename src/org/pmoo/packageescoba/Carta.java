@@ -1,22 +1,49 @@
 package org.pmoo.packageescoba;
 
+/**
+ * 
+ * Cartas: Representa una única carta de la baraja con su valor y su palo. 
+ *
+ */
+
 public class Carta {
-	private Palo palo;
+	
+	// Atributos ------------------------------------------------------------------------------------------------------------------
+	private Palo palo; 
 	private int valor;
 	
+	// Constructora ---------------------------------------------------------------------------------------------------------------
 	public Carta(Palo pPalo, int pValor) {
 		this.palo = pPalo;
 		this.valor = pValor;
 	}
 	
+	// Metodos --------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * getPalo(): Método para devolver el palo de una carta.
+	 * @return palo
+	 */
 	public Palo getPalo() {
 		return this.palo;
 	}
 	
+	/**
+	 * getValor(): Método para devolver el valor de una carta.
+	 * @return valor
+	 */
 	public int getValor() {
 		return this.valor;
 	}
 
+	
+	/**
+	 * toString(): Método para convertir una carta en formato String.
+	 * 
+	 * @Override porque toString es un metodo que ya existe. Por eso lo que hacemos es sobreescribirlo.
+	 * 
+	 * @return
+	 */
 	@Override
 	public String toString() {
 	    String val;

@@ -3,7 +3,21 @@ package org.pmoo.packageescoba;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * 
+ * Mazo: Gestión del mazo completo de la baraja. 
+ *
+ * En esta clase se implementa el patrón Singleton, ya que solamente puede haber un mazo en todo el juego. 
+ *
+ */
 public class Mazo {
+	
+	// Atributos
+	
+	/**
+	 * @baraja: 
+	 */
 	private ArrayList<Carta> baraja;
 	private static Mazo miMazo = null;
 	
