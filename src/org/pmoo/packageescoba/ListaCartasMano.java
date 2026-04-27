@@ -16,7 +16,7 @@ public class ListaCartasMano extends ListaCartas {
      * @param pos Índice de la carta.
      * @return La carta en la posición indicada.
      */
-    public Carta obtenerCarta(int pos) {
+    public Carta consultarCarta(int pos) {
         return super.obtenerCarta(pos);
     }
     

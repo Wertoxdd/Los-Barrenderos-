@@ -5,9 +5,21 @@ import java.util.Iterator;
 
 public class ListaJugadores {
 	private ArrayList<Jugador> jugadores;
+	private static ListaJugadores miListaJugadores = null;
 	
-	public ListaJugadores() {
+	private ListaJugadores() {
 		this.jugadores = new ArrayList<Jugador>();
+	}
+
+	public static ListaJugadores getListaJugadores() {
+		if (miListaJugadores == null) {
+			miListaJugadores = new ListaJugadores();
+		}
+		return miListaJugadores;
+	}
+
+	public void resetear() {
+		this.jugadores.clear();
 	}
 	
 	private Iterator<Jugador> getIterador(){

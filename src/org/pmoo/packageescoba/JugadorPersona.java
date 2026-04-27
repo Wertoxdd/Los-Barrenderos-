@@ -2,8 +2,8 @@ package org.pmoo.packageescoba;
 
 public class JugadorPersona extends Jugador {
     
-    public JugadorPersona() {
-        super("Jugador 1");
+    public JugadorPersona(String pNombre) {
+        super(pNombre);
     }
     
     @Override

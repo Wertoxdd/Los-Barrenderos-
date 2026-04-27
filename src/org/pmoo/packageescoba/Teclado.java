@@ -14,7 +14,7 @@ public class Teclado {
 	
 	public static Carta leerCarta(ListaCartasMano pMano) throws IndiceCartaInvalidoException {
 		for (int i = 0; i < pMano.tamaño(); i++) {
-			System.out.print(pMano.obtenerCarta(i).toString() + "  ");
+			System.out.print(pMano.consultarCarta(i).toString() + "  ");
 		}
 		System.out.println();
 		

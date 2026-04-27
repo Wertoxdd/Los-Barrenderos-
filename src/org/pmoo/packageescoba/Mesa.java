@@ -7,19 +7,17 @@ import java.io.FileWriter;
 
 public class Mesa {
     
-    private ListaJugadores jugadores;
     private ListaCartasMesa cartasMesa;
     private static Mesa miMesa = null;
     
-    private static final int jugador1 = 0;
-    private static final int jugador2 = 1;
     private static final int PuntosFinalPartida = 15;
     private static final String ficheroTexto = "ranking.txt";
     
     private Mesa() {
-        jugadores = new ListaJugadores();
-        jugadores.agregarJugador(new JugadorPersona());
-        jugadores.agregarJugador(new JugadorIA());
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        lj.agregarJugador(new JugadorPersona("Jugador 1"));
+        lj.agregarJugador(new JugadorPersona("Jugador 2"));
+        lj.agregarJugador(new JugadorIA());
         cartasMesa = new ListaCartasMesa();
     }
     
@@ -32,6 +30,7 @@ public class Mesa {
     
     private void repartirCartas(boolean esRepartoInicial) {
         Mazo mazo = Mazo.getMazo();
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
         
         if (esRepartoInicial) {
             for (int i = 0; i < 4; i++) {
@@ -39,8 +38,8 @@ public class Mesa {
             }
         }
         
-        for (int i = 0; i < jugadores.tamaño(); i++) {
-            Jugador j = jugadores.obtenerJugador(i);
+        for (int i = 0; i < lj.tamaño(); i++) {
+            Jugador j = lj.obtenerJugador(i);
             for (int k = 0; k < 3; k++) {
                 j.recibirCarta(mazo.darCarta());
             }
@@ -93,124 +92,126 @@ public class Mesa {
     }
     
     private void contarPuntos() {
-        Jugador j1 = jugadores.obtenerJugador(jugador1);
-        Jugador j2 = jugadores.obtenerJugador(jugador2);
-        
-        j1.resetearPuntosRonda();
-        j2.resetearPuntosRonda();
-        
-        if (j1.totalCartas() > j2.totalCartas()) {
-            j1.añadirPuntosRonda(1);
-        } else if (j2.totalCartas() > j1.totalCartas()) {
-            j2.añadirPuntosRonda(1);
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        for (int i = 0; i < lj.tamaño(); i++) {
+            lj.obtenerJugador(i).resetearPuntosRonda();
         }
-        
-        if (j1.totalOros() > j2.totalOros()) {
-            j1.añadirPuntosRonda(1);
-        } else if (j2.totalOros() > j1.totalOros()) {
-            j2.añadirPuntosRonda(1);
+
+        Jugador jMasCartas = lj.jugadorConMasCartas();
+        if (jMasCartas != null) {
+            jMasCartas.añadirPuntosRonda(1);
         }
-        
-        if (j1.totalSietes() > j2.totalSietes()) {
-            j1.añadirPuntosRonda(1);
-        } else if (j2.totalSietes() > j1.totalSietes()) {
-            j2.añadirPuntosRonda(1);
+
+        Jugador jMasOros = lj.jugadorConMasOros();
+        if (jMasOros != null) {
+            jMasOros.añadirPuntosRonda(1);
         }
-        
-        if (j1.tieneSieteDeOros()) {
-            j1.añadirPuntosRonda(1);
+
+        Jugador jMasSietes = lj.jugadorConMasSietes();
+        if (jMasSietes != null) {
+            jMasSietes.añadirPuntosRonda(1);
         }
-        if (j2.tieneSieteDeOros()) {
-            j2.añadirPuntosRonda(1);
+
+        Jugador jSieteOros = lj.jugadorConElSieteDeOros();
+        if (jSieteOros != null) {
+            jSieteOros.añadirPuntosRonda(1);
         }
-        
-        j1.añadirPuntosRonda(j1.obtenerEscobas());
-        j2.añadirPuntosRonda(j2.obtenerEscobas());
-        
-        j1.añadirPuntosAcumulados(j1.getPuntosRonda());
-        j2.añadirPuntosAcumulados(j2.getPuntosRonda());
+
+        for (int i = 0; i < lj.tamaño(); i++) {
+            Jugador j = lj.obtenerJugador(i);
+            j.añadirPuntosRonda(j.obtenerEscobas());
+            j.añadirPuntosAcumulados(j.getPuntosRonda());
+        }
     }
     
     private void mostrarResultados() {
-        Jugador j1 = jugadores.obtenerJugador(jugador1);
-        Jugador j2 = jugadores.obtenerJugador(jugador2);
-        
         System.out.println("\n================| RESULTADO FINAL |================");
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
         
-        System.out.println("\n" + j1.getNombre() + ":");
-        System.out.println("  Cartas:      " + j1.totalCartas());
-        System.out.println("  Oros:        " + j1.totalOros());
-        System.out.println("  7s:          " + j1.totalSietes());
-        System.out.println("  7 de Oros:   " + j1.tieneSieteDeOros());
-        System.out.println("  Escobas:     " + j1.obtenerEscobas());
-        System.out.println("  PUNTOS:      " + j1.getPuntosRonda());
+        int maxPuntos = -1;
+        Jugador ganadorRonda = null;
+        boolean empate = false;
+
+        for (int i = 0; i < lj.tamaño(); i++) {
+            Jugador j = lj.obtenerJugador(i);
+            System.out.println("\n" + j.getNombre() + ":");
+            System.out.println("  Cartas:      " + j.totalCartas());
+            System.out.println("  Oros:        " + j.totalOros());
+            System.out.println("  7s:          " + j.totalSietes());
+            System.out.println("  7 de Oros:   " + j.tieneSieteDeOros());
+            System.out.println("  Escobas:     " + j.obtenerEscobas());
+            System.out.println("  PUNTOS:      " + j.getPuntosRonda());
+
+            if (j.getPuntosRonda() > maxPuntos) {
+                maxPuntos = j.getPuntosRonda();
+                ganadorRonda = j;
+                empate = false;
+            } else if (j.getPuntosRonda() == maxPuntos) {
+                empate = true;
+            }
+        }
         
-        System.out.println("\n" + j2.getNombre() + ":");
-        System.out.println("  Cartas:      " + j2.totalCartas());
-        System.out.println("  Oros:        " + j2.totalOros());
-        System.out.println("  7s:          " + j2.totalSietes());
-        System.out.println("  7 de Oros:   " + j2.tieneSieteDeOros());
-        System.out.println("  Escobas:     " + j2.obtenerEscobas());
-        System.out.println("  PUNTOS:      " + j2.getPuntosRonda());
+        System.out.println("\n================================================");
         
-        System.out.println("================================================");
-        
-        if (j1.getPuntosRonda() > j2.getPuntosRonda()) {
-            System.out.println("GANADOR DE LA RONDA: " + j1.getNombre());
-        } else if (j1.getPuntosRonda() < j2.getPuntosRonda()) {
-            System.out.println("GANADOR DE LA RONDA: " + j2.getNombre());
+        if (empate) {
+            System.out.println("EMPATE EN LA RONDA");
         } else {
-            System.out.println("EMPATE");
+            System.out.println("GANADOR DE LA RONDA: " + ganadorRonda.getNombre());
         }
     }
     
     private void cargarRanking() {
-        try {
-            Scanner sc = new Scanner(new File(ficheroTexto));
-            jugadores.obtenerJugador(jugador1).añadirPuntosAcumulados(sc.nextInt());
-            jugadores.obtenerJugador(jugador2).añadirPuntosAcumulados(sc.nextInt());
-            sc.close();
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        try (Scanner sc = new Scanner(new File(ficheroTexto))) {
+            for (int i = 0; i < lj.tamaño(); i++) {
+                if (sc.hasNextInt()) {
+                    lj.obtenerJugador(i).añadirPuntosAcumulados(sc.nextInt());
+                }
+            }
         } catch (Exception e) {
             System.out.println("No se encontró archivo de ranking. Iniciando desde 0.");
         }
     }
     
     private void guardarRanking() {
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(ficheroTexto)); 
-            pw.println(jugadores.obtenerJugador(jugador1).getPuntosAcumulados());
-            pw.println(jugadores.obtenerJugador(jugador2).getPuntosAcumulados());
-            pw.close();
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        try (PrintWriter pw = new PrintWriter(new FileWriter(ficheroTexto))) { 
+            for (int i = 0; i < lj.tamaño(); i++) {
+                pw.println(lj.obtenerJugador(i).getPuntosAcumulados());
+            }
         } catch (Exception e) {
             System.out.println("Error al guardar el ranking.");
         }
     }
     
     private void mostrarRanking() {
-        Jugador j1 = jugadores.obtenerJugador(jugador1);
-        Jugador j2 = jugadores.obtenerJugador(jugador2);
-        
         System.out.println("\n================| RANKING |================");
-        System.out.println(j1.getNombre() + ": " + j1.getPuntosAcumulados() + " puntos.");
-        System.out.println(j2.getNombre() + ": " + j2.getPuntosAcumulados() + " puntos.");
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        Jugador ganadorPartida = null;
+
+        for (int i = 0; i < lj.tamaño(); i++) {
+            Jugador j = lj.obtenerJugador(i);
+            System.out.println(j.getNombre() + ": " + j.getPuntosAcumulados() + " puntos.");
+            if (j.getPuntosAcumulados() >= PuntosFinalPartida) {
+                if (ganadorPartida == null || j.getPuntosAcumulados() > ganadorPartida.getPuntosAcumulados()) {
+                    ganadorPartida = j;
+                }
+            }
+        }
         
-        if (j1.getPuntosAcumulados() >= PuntosFinalPartida) {
-            System.out.println("GANADOR DE LA PARTIDA: " + j1.getNombre());
-        } else if (j2.getPuntosAcumulados() >= PuntosFinalPartida) {
-            System.out.println("GANADOR DE LA PARTIDA: " + j2.getNombre());
+        if (ganadorPartida != null) {
+            System.out.println("\n¡GANADOR DE LA PARTIDA: " + ganadorPartida.getNombre() + "!");
         }
     }
     
     public void jugarPartida() {
         cargarRanking();
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
         
-        while (jugadores.obtenerJugador(jugador1).getPuntosAcumulados() < PuntosFinalPartida 
-            && jugadores.obtenerJugador(jugador2).getPuntosAcumulados() < PuntosFinalPartida) {
+        boolean alguienHaGanado = false;
+        while (!alguienHaGanado) {
             
             cartasMesa = new ListaCartasMesa();
-            jugadores = new ListaJugadores();
-            jugadores.agregarJugador(new JugadorPersona());
-            jugadores.agregarJugador(new JugadorIA());
             
             Mazo mazo = Mazo.getMazo();
             mazo.resetear();
@@ -218,16 +219,16 @@ public class Mesa {
             mazo.barajarMazo();
             repartirCartas(true);
             
-            Jugador ultimoEnCapturar = jugadores.obtenerJugador(jugador1);
+            Jugador ultimoEnCapturar = lj.obtenerJugador(0);
             
-            while (!jugadores.todosConSusManosVacias() || !mazo.estaVacio()) {
+            while (!lj.todosConSusManosVacias() || !mazo.estaVacio()) {
                 
-                for (int i = 0; i < jugadores.tamaño(); i++) {
-                    Jugador j = jugadores.obtenerJugador(i);
+                for (int i = 0; i < lj.tamaño(); i++) {
+                    Jugador j = lj.obtenerJugador(i);
                     ultimoEnCapturar = turnoJugador(j, ultimoEnCapturar);
                 }
                 
-                if (jugadores.todosConSusManosVacias() && !mazo.estaVacio()) {
+                if (lj.todosConSusManosVacias() && !mazo.estaVacio()) {
                     repartirCartas(false);
                 }
             }
@@ -240,9 +241,14 @@ public class Mesa {
             
             contarPuntos();
             mostrarResultados();
-            
             guardarRanking();
             mostrarRanking();
+
+            for (int i = 0; i < lj.tamaño(); i++) {
+                if (lj.obtenerJugador(i).getPuntosAcumulados() >= PuntosFinalPartida) {
+                    alguienHaGanado = true;
+                }
+            }
         }
         
         System.out.println("\n¡PARTIDA TERMINADA!");
