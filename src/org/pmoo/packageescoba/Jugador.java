@@ -38,6 +38,8 @@ public abstract class Jugador {
     }
     
     public int obtenerEscobas() { return escobas; }
+    
+    
     public boolean manoVacia() { return mano.estaVacia(); }
     
     // ✅ MÉTODOS DE PUNTUACIÓN (ahora en Jugador, no en Mesa)
