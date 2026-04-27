@@ -5,10 +5,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 public class Teclado {
-	// sin atributos ni constructora porque es una utilidad para imprimir por pantalla
-	
 	private static Scanner sc = new Scanner(System.in);
-	// METODOS
 	
 	public static int leerNumero(String mensajeAMostrar) {
 		System.out.println(mensajeAMostrar);
@@ -16,7 +13,6 @@ public class Teclado {
 	}
 	
 	public static Carta leerCarta(ListaCartasMano pMano) throws IndiceCartaInvalidoException {
-		// ✅ Usar bucle con índice en vez de iterador
 		for (int i = 0; i < pMano.tamaño(); i++) {
 			System.out.print(pMano.obtenerCarta(i).toString() + "  ");
 		}

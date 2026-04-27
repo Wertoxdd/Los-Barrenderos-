@@ -27,7 +27,6 @@ public class JugadorPersona extends Jugador {
         
         mesa.agregarCartas(cartasMesa);
         
-        // ✅ Usar método heredado de Jugador (sin duplicar código)
         buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), 
                            new ListaCartasMonton(), posiblesCombinaciones);
         

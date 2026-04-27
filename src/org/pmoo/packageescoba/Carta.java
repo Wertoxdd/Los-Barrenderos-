@@ -1,50 +1,22 @@
 package org.pmoo.packageescoba;
 
-/**
- * 
- * Representa una carta individual.
- * 
- * Guarda su palo y su valor. 
- * 
- */
-
-
 public class Carta {
-	/**
-	 * 
-	 */
 	private Palo palo;
 	private int valor;
 	
-	// constructora
 	public Carta(Palo pPalo, int pValor) {
 		this.palo = pPalo;
 		this.valor = pValor;
 	}
 	
-	// METODOS
-	
-	/**
-	 * Devuelve la figura de la carta.
-	 * @return tipo de palo de la carta
-	 */
 	public Palo getPalo() {
 		return this.palo;
 	}
 	
-	/**
-	 * Devuelve el valor de la carta
-	 * @return valor de la carta
-	 */
 	public int getValor() {
 		return this.valor;
 	}
 
-	/**
-	 * Este metodo convierte un objeto tipo Carta a String
-	 * cambiando además con un if el valor de la carta. 
-	 * @return
-	 */
 	@Override
 	public String toString() {
 	    String val;

@@ -10,7 +10,6 @@ public class ListaJugadores {
 		this.jugadores = new ArrayList<Jugador>();
 	}
 	
-	// ✅ PRIVATE - No exponer
 	private Iterator<Jugador> getIterador(){
 		return this.jugadores.iterator();
 	}
@@ -28,7 +27,7 @@ public class ListaJugadores {
 	}
 	
 	public boolean todosConSusManosVacias() {
-		Iterator<Jugador> it = getIterador();  // Uso interno OK
+		Iterator<Jugador> it = getIterador(); 
 		while (it.hasNext()) {
 			Jugador j = it.next();
 			if (!j.manoVacia()) return false;

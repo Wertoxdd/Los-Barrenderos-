@@ -7,7 +7,6 @@ public abstract class Jugador {
     private ListaCartasMonton monton;
     private int escobas;
     
-    // ✅ NUEVO: Puntos almacenados en el Jugador (no en Mesa)
     private int puntosRonda;
     private int puntosAcumulados;
     
@@ -20,7 +19,6 @@ public abstract class Jugador {
         this.puntosAcumulados = 0;
     }
     
-    // Getters y setters básicos
     public String getNombre() { return nombre; }
     public ListaCartasMano getMano() { return mano; }
     public ListaCartasMonton getMonton() { return monton; }
@@ -39,10 +37,8 @@ public abstract class Jugador {
     
     public int obtenerEscobas() { return escobas; }
     
-    
     public boolean manoVacia() { return mano.estaVacia(); }
     
-    // ✅ MÉTODOS DE PUNTUACIÓN (ahora en Jugador, no en Mesa)
     public int totalCartas() { return monton.tamaño(); }
     
     public int totalOros() {
@@ -57,7 +53,6 @@ public abstract class Jugador {
         return monton.tieneSieteDeOros();
     }
     
-    // ✅ NUEVO: Gestión de puntos en el Jugador
     public int getPuntosRonda() { return puntosRonda; }
     public int getPuntosAcumulados() { return puntosAcumulados; }
     
@@ -73,11 +68,9 @@ public abstract class Jugador {
         this.puntosRonda = 0;
     }
     
-    // ✅ MÉTODO ABSTRACTO - Cada tipo de jugador implementa su forma de elegir
     public abstract Carta elegirCarta();
     public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
     
-    // ✅ buscarCombinaciones() AHORA EN LA SUPERCLASE (código común)
     protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, 
             ListaCartasMonton listaActual, ListaListas posiblesCombinaciones) {
         

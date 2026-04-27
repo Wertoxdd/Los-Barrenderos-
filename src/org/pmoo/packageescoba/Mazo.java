@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Mazo {
-	// atributos
 	private ArrayList<Carta> baraja;
 	private static Mazo miMazo = null;
 	
-	// constructora
 	private Mazo () {
 		this.baraja = new ArrayList<Carta >();
 	}
 	
-	
-	// Singleton
 	public static Mazo getMazo() {
 		if (miMazo == null) {
 			miMazo = new Mazo();
@@ -22,33 +18,27 @@ public class Mazo {
 		return miMazo;
 	}
 	
-	// METODOS
-	
 	public void generarMazo() {
 		int i;
 		
-		// OROS
 		i = 1;
 		while (i <= 10) {
 			baraja.add(new Carta(Palo.Oros, i));
 			i++;
 		}
 		
-		// COPAS
 		i = 1;
 		while (i <= 10) {
 			baraja.add(new Carta(Palo.Copas, i));
 			i++;
 		}
 		
-		// ESPADAS
 		i = 1;
 		while (i <= 10) {
 			baraja.add(new Carta(Palo.Espadas, i));
 			i++;
 		}
 		
-		// BASTOS
 		i = 1;
 		while (i <= 10) {
 			baraja.add(new Carta(Palo.Bastos, i));
@@ -60,11 +50,10 @@ public class Mazo {
 		Random random = new Random();
 		int i = baraja.size() - 1;
 		while(i > 0) {
-			int j = random.nextInt(i + 1); // nuevo indice para el random, que comprueba si hay una siguiente carta.
-										   // si la hay la asigna.
-			Carta aux = baraja.get(i); // Carta auxiliar para que no se pierda la carta.
-			baraja.set(i, baraja.get(j)); // asigna en la posicion i la carta que esta en una posicion random.
-			baraja.set(j,  aux); // asigna la carta que queda pendiente en la posicion auxiliar.
+			int j = random.nextInt(i + 1);
+			Carta aux = baraja.get(i);
+			baraja.set(i, baraja.get(j));
+			baraja.set(j,  aux);
 			i--;
 		}
 	}
@@ -72,7 +61,7 @@ public class Mazo {
 	public Carta darCarta() {
 		return baraja.remove(baraja.size()-1);
 	}
-		
+	
 	public boolean estaVacio() {
 		return baraja.isEmpty();
 	}
@@ -84,7 +73,4 @@ public class Mazo {
 	public void resetear() {
 		baraja.clear();
 	}
-	
-	
-	
 }

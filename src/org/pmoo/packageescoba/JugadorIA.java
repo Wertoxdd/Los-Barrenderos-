@@ -26,11 +26,9 @@ public class JugadorIA extends Jugador {
         
         mesa.agregarCartas(cartasMesa);
         
-        // ✅ Usar método heredado de Jugador (sin duplicar código)
         buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), 
                            new ListaCartasMonton(), posiblesCombinaciones);
         
-        // IA elige automáticamente la primera combinación
         if (posiblesCombinaciones.size() > 0) {
             return posiblesCombinaciones.get(0);
         }
