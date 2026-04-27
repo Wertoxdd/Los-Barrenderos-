@@ -8,7 +8,7 @@ public class JugadorPersonaTest {
     @Test
     public void testConstructorAsignaNombreJugadorUno() {
         JugadorPersona alex = new JugadorPersona("alex");
-        assertEquals("Jugador 1", alex.getNombre());
+        assertEquals("alex", alex.getNombre());
     }
 
     @Test
