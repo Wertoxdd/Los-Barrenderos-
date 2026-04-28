@@ -7,20 +7,19 @@ package org.pmoo.packageescoba;
 public class IndiceCartaInvalidoException extends Exception {
 
     /**
-     * Constructor por defecto que asigna un mensaje genérico de error.
+     * Constructora por defecto que asigna un mensaje genérico de error.
      */
     public IndiceCartaInvalidoException() {
         super("Índice de carta invalido");
     }
     
     /**
-     * Constructor que detalla el índice erróneo y el rango de valores permitidos.
+     * Constructora que detalla el índice erróneo y el rango de valores permitidos.
      * 
-     * @param indice El valor numérico introducido incorrectamente.
-     * @param maximo El límite superior de los índices válidos.
+     * @param indice: El valor numérico introducido incorrectamente.
+     * @param maximo: El límite superior de los índices válidos.
      */
     public IndiceCartaInvalidoException(int indice, int maximo) {
-        super("Índice de carta inválido: " + indice + 
-              " (debe estar entre 1 y " + maximo + ")");
+        super("Índice de carta inválido: " + indice + " (debe estar entre 1 y " + maximo + ")");
     }
 }
