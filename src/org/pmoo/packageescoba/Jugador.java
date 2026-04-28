@@ -36,8 +36,8 @@ public abstract class Jugador {
     
     
     // ==============   Constructora   ==============
-    public Jugador(String nombre) {
-        this.nombre = nombre;
+    public Jugador(String pNombre) {
+        this.nombre = pNombre;
         this.mano = new ListaCartasMano();
         this.monton = new ListaCartasMonton();
         this.escobas = 0;
@@ -191,20 +191,20 @@ public abstract class Jugador {
      * 
      * Método que añade los puntos que ha hecho durante la ronda al atributo de puntosRonda
      * 
-     * @param puntos que se han hecho durante la ronda
+     * @param pPuntos que se han hecho durante la ronda
      */
-    public void añadirPuntosRonda(int puntos) {
-        this.puntosRonda += puntos;
+    public void añadirPuntosRonda(int pPuntos) {
+        this.puntosRonda += pPuntos;
     }
     
     /**
      * 
      * Método que añade los puntos que ha hecho en total al atributo de puntosAcumulados
      * 
-     * @param puntos que se han hecho durante la partida
+     * @param pPuntos que se han hecho durante la partida
      */
-    public void añadirPuntosAcumulados(int puntos) {
-        this.puntosAcumulados += puntos;
+    public void añadirPuntosAcumulados(int pPuntos) {
+        this.puntosAcumulados += pPuntos;
     }
     
     /**
@@ -228,7 +228,7 @@ public abstract class Jugador {
     
     // ==============   Métodos abstractos   ==============
     public abstract Carta elegirCarta();
-    public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta);
+    public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa pMesa, Carta pCarta);
     
     
     /**
@@ -247,37 +247,37 @@ public abstract class Jugador {
      * 	  * Saltando la carta actual, así se exploran todas las combinaciones posibles.
      *  
      * @param pLista: Recibe la lista de cartas auxiliares de la mesa sobre la que se realiza la búsqueda.
-     * @param i: Recibe el índice que indica qué carta de la lista se esta evaluando en este paso. 
-     * @param objetivo: Recibe el valor númerico que falta para completar la suma de 15.
-     * @param listaActual: La combinación temporal de cartas que se va formando durante la exploración de combinaciones.
+     * @param pI: Recibe el índice que indica qué carta de la lista se esta evaluando en este paso. 
+     * @param pObjetivo: Recibe el valor númerico que falta para completar la suma de 15.
+     * @param pListaActual: La combinación temporal de cartas que se va formando durante la exploración de combinaciones.
      */
-    protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int i, int objetivo, ListaCartasMonton listaActual) {
+    protected void buscarCombinaciones(ListaCartasAuxiliar pLista, int pI, int pObjetivo, ListaCartasMonton pListaActual) {
     	
         // INICIALIZACIÓN
-    	if (i == 0) {
+    	if (pI == 0) {
             this.posiblesCombinaciones = new ListaCartasCombinaciones();
         }
     	
     	// CASO 1
-        if (objetivo == 0) {
+        if (pObjetivo == 0) {
             ListaCartasMonton copia = new ListaCartasMonton();
-            listaActual.copiarA(copia);
+            pListaActual.copiarA(copia);
             this.posiblesCombinaciones.add(copia);
             return;
         }
         
         // CASO 2
-        if (i >= pLista.tamaño()) return;
+        if (pI >= pLista.tamaño()) return;
 
-        Carta c = pLista.obtener(i);
+        Carta c = pLista.obtenerCarta(pI);
         
         // RECURSIVIDAD
-        if (c.getValor() <= objetivo) {
-            listaActual.agregarCarta(c);
-            buscarCombinaciones(pLista, i + 1, objetivo - c.getValor(), listaActual);
-            listaActual.eliminarCarta(listaActual.tamaño() - 1);
+        if (c.getValor() <= pObjetivo) {
+            pListaActual.agregarCarta(c);
+            buscarCombinaciones(pLista, pI + 1, pObjetivo - c.getValor(), pListaActual);
+            pListaActual.eliminarCarta(pListaActual.tamaño() - 1);
         }
 
-        buscarCombinaciones(pLista, i + 1, objetivo, listaActual);
+        buscarCombinaciones(pLista, pI + 1, pObjetivo, pListaActual);
     }
 }
