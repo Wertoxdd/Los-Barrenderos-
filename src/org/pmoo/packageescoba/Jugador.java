@@ -73,7 +73,7 @@ public abstract class Jugador {
      * 
      * Método que devuelve el monton de cartas acumuladas de un jugador.
      * 
-     * @return
+     * @return monton
      */
     public ListaCartasMonton getMonton() { return this.monton; }
     
