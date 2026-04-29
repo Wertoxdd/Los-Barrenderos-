@@ -11,7 +11,7 @@ public class JugadorPersona extends Jugador {
 
         try {
             return Teclado.leerCarta(getMano());
-        } catch (IndiceCartaInvalidoException e) {
+        } catch (IndiceCartaInvalidoException | FormatoIncorrectoException e) {
             System.out.println("XX " + e.getMessage());
             System.out.println("Por favor, inténtalo de nuevo.\n");
             return elegirCarta();
@@ -27,7 +27,7 @@ public class JugadorPersona extends Jugador {
 
         try {
             return Teclado.leerCaptura(getPosiblesCombinaciones());
-        } catch (IndiceCombinacionInvalidoException e) {
+        } catch (IndiceCombinacionInvalidoException | FormatoIncorrectoException e) {
             System.out.println("XX " + e.getMessage());
             System.out.println("Por favor, inténtalo de nuevo.\n");
             return elegirCaptura(mesa, pCarta);

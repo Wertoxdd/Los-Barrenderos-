@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream;
 public class TecladoTest {
 
     @Test
-    public void testLeerNumeroDevuelveValorIntroducido() {
+    public void testLeerNumeroDevuelveValorIntroducido() throws FormatoIncorrectoException {
         System.setIn(new ByteArrayInputStream("5\n".getBytes()));
         
         int resultado = Teclado.leerNumero("Introduce un numero: ");
@@ -15,8 +15,14 @@ public class TecladoTest {
         assertEquals(5, resultado);
     }
 
+    @Test(expected = FormatoIncorrectoException.class)
+    public void testLeerNumeroLanzaExcepcionConLetra() throws FormatoIncorrectoException {
+        System.setIn(new ByteArrayInputStream("a\n".getBytes()));
+        Teclado.leerNumero("Introduce un numero: ");
+    }
+
     @Test
-    public void testLeerCartaEligeCorrectamenteSegunEntrada() throws IndiceCartaInvalidoException {
+    public void testLeerCartaEligeCorrectamenteSegunEntrada() throws IndiceCartaInvalidoException, FormatoIncorrectoException {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         
         ListaCartasMano mano = new ListaCartasMano();
@@ -31,7 +37,7 @@ public class TecladoTest {
     }
 
     @Test
-    public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException {
+    public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
         System.setIn(new ByteArrayInputStream("\n\n".getBytes()));
         
         ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
@@ -45,7 +51,7 @@ public class TecladoTest {
     }
 
     @Test
-    public void testLeerCapturaEligeCorrectamenteConVariasOpciones() throws IndiceCombinacionInvalidoException {
+    public void testLeerCapturaEligeCorrectamenteConVariasOpciones() throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
         System.setIn(new ByteArrayInputStream("2\n\n\n".getBytes()));
         
         ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();

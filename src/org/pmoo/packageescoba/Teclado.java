@@ -1,8 +1,7 @@
 package org.pmoo.packageescoba;
 
 import java.util.Scanner;
-import java.util.Iterator;
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 
 /**
@@ -24,10 +23,16 @@ public class Teclado {
 	 * 
 	 * @param mensajeAMostrar: Recibe el mensaje que se quiere imprimir por pantalla.
 	 * @return número a leer.
+	 * @throws FormatoIncorrectoException: Error si se introduce una letra en lugar de un número.
 	 */
-	public static int leerNumero(String mensajeAMostrar) {
+	public static int leerNumero(String mensajeAMostrar) throws FormatoIncorrectoException {
 		System.out.println(mensajeAMostrar);
-		return sc.nextInt();
+		try {
+			return sc.nextInt();
+		} catch (InputMismatchException e) {
+			sc.next(); // Limpiar el buffer del scanner
+			throw new FormatoIncorrectoException();
+		}
 	}
 	
 	/**
@@ -37,8 +42,9 @@ public class Teclado {
 	 * @param pMano: Recibe la lista de cartas de la mano que contiene las cartas actuales del jugador.
 	 * @return la carta seleccionada por el usuario.
 	 * @throws IndiceCartaInvalidoException: Error si el indice esta fuera de rango.
+	 * @throws FormatoIncorrectoException: Error si no se introduce un número.
 	 */
-	public static Carta leerCarta(ListaCartasMano pMano) throws IndiceCartaInvalidoException {
+	public static Carta leerCarta(ListaCartasMano pMano) throws IndiceCartaInvalidoException, FormatoIncorrectoException {
 		for (int i = 0; i < pMano.tamaño(); i++) {
 			System.out.print(pMano.consultarCarta(i).toString() + "  ");
 		}
@@ -62,8 +68,9 @@ public class Teclado {
 	 * @param pLista: Recibe la lista de las opciones de combinaciones.
 	 * @return 
 	 * @throws IndiceCombinacionInvalidoException: Error si el indice esta fuera de rango.
+	 * @throws FormatoIncorrectoException: Error si no se introduce un número.
 	 */
-	public static ListaCartasMonton leerCaptura(ListaCartasCombinaciones pLista) throws IndiceCombinacionInvalidoException {
+	public static ListaCartasMonton leerCaptura(ListaCartasCombinaciones pLista) throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
 		for (int i = 0; i < pLista.size(); i++) {
 			System.out.println("Combinacion " + (i+1) + ":");
 			ListaCartasMonton cartasCombinacion = pLista.get(i);
