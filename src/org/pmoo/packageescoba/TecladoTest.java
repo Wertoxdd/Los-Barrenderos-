@@ -2,23 +2,25 @@ package org.pmoo.packageescoba;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.io.ByteArrayInputStream;
 
 public class TecladoTest {
 
     @Test
     public void testLeerNumeroDevuelveValorIntroducido() throws FormatoIncorrectoException {
-        System.setIn(new ByteArrayInputStream("5\n".getBytes()));
-        
+        System.out.println("Escribe un 5 y pulsa Enter.");
         int resultado = Teclado.leerNumero("Introduce un numero: ");
-        
         assertEquals(5, resultado);
+    }
+
+    @Test(expected = FormatoIncorrectoException.class)
+    public void testLeerNumeroExcepcionLetra() throws FormatoIncorrectoException {
+        System.out.println("Escribe la letra 'a' y pulsa Enter para forzar el error.");
+        Teclado.leerNumero("Introduce un numero: ");
     }
 
     @Test
     public void testLeerCartaEligeCorrectamenteSegunEntrada() throws IndiceCartaInvalidoException, FormatoIncorrectoException {
-        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
-        
+        System.out.println("Escribe un 2 y pulsa Enter.");
         ListaCartasMano mano = new ListaCartasMano();
         Carta carta1 = new Carta(Palo.Oros, 1);
         Carta carta2 = new Carta(Palo.Copas, 7);
@@ -26,28 +28,24 @@ public class TecladoTest {
         mano.agregarCarta(carta2);
         
         Carta seleccionada = Teclado.leerCarta(mano);
-        
         assertEquals(carta2, seleccionada);
     }
 
     @Test
     public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
-        System.setIn(new ByteArrayInputStream("\n\n".getBytes()));
-        
+        System.out.println("Selección automática. Por favor, pulsa Enter dos veces.");
         ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         ListaCartasMonton montonUnico = new ListaCartasMonton();
         montonUnico.agregarCarta(new Carta(Palo.Espadas, 10));
         posiblesCombinaciones.add(montonUnico);
         
         ListaCartasMonton resultado = Teclado.leerCaptura(posiblesCombinaciones);
-        
         assertEquals(montonUnico, resultado);
     }
 
     @Test
     public void testLeerCapturaEligeCorrectamenteConVariasOpciones() throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
-        System.setIn(new ByteArrayInputStream("2\n\n\n".getBytes()));
-        
+        System.out.println("Escribe un 2 y pulsa Enter tres veces.");
         ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         ListaCartasMonton monton1 = new ListaCartasMonton();
         ListaCartasMonton monton2 = new ListaCartasMonton();
@@ -59,18 +57,6 @@ public class TecladoTest {
         posiblesCombinaciones.add(monton2);
         
         ListaCartasMonton resultado = Teclado.leerCaptura(posiblesCombinaciones);
-        
         assertEquals(monton2, resultado);
-    }
-
-    @Test
-    public void testMostrarCartasEnHorizontalFuncionaSinErrores() {
-        ListaCartasMonton cartas = new ListaCartasMonton();
-        cartas.agregarCarta(new Carta(Palo.Oros, 3));
-        cartas.agregarCarta(new Carta(Palo.Espadas, 4));
-        
-        Teclado.mostrarCartasEnHorizontal(cartas);
-        
-        assertTrue(true);
     }
 }

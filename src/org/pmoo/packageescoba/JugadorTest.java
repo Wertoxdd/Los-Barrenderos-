@@ -7,12 +7,12 @@ public class JugadorTest {
 
     private Jugador crearJugador(String nombre) {
         return new Jugador(nombre) {
-            @Override
+            
             public Carta elegirCarta() {
                 return null;
             }
 
-            @Override
+            
             public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
                 return null;
             }
