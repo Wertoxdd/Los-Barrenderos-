@@ -34,7 +34,6 @@ public class Mesa {
     private Mesa() {
         ListaJugadores jugadores = ListaJugadores.getListaJugadores();
         jugadores.agregarJugador(new JugadorPersona("Jugador 1"));
-        jugadores.agregarJugador(new JugadorPersona("Jugador 2"));
         jugadores.agregarJugador(new JugadorIA());
         cartasMesa = new ListaCartasMesa();
     }
