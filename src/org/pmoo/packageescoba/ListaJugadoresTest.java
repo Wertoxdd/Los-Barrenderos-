@@ -33,8 +33,6 @@ public class ListaJugadoresTest {
         assertFalse(lj.todosConSusManosVacias());
     }
 
-    // --- TEST PELIGROSO DE EMPATE ---
-
     @Test
     public void testEmpatePeligrosoEnOrosDevuelveNull() {
         ListaJugadores lj = ListaJugadores.getListaJugadores();

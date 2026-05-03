@@ -782,8 +782,16 @@
                                                 </java.beans.PropertyChangeSupport>
                                               </listeners>
                                               <source class="net.java.amateras.uml.classdiagram.model.ClassModel">
-                                                <backgroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../backgroundColor"/>
-                                                <foregroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../foregroundColor"/>
+                                                <backgroundColor>
+                                                  <red>255</red>
+                                                  <green>255</green>
+                                                  <blue>206</blue>
+                                                </backgroundColor>
+                                                <foregroundColor>
+                                                  <red>0</red>
+                                                  <green>0</green>
+                                                  <blue>0</blue>
+                                                </foregroundColor>
                                                 <showIcon>true</showIcon>
                                                 <parent class="net.java.amateras.uml.model.RootModel" reference="../../../../../../../../../../../../../../../../../../../../../../../.."/>
                                                 <listeners serialization="custom">
@@ -807,8 +815,8 @@
                                                 <targetConnections/>
                                                 <children>
                                                   <net.java.amateras.uml.classdiagram.model.OperationModel>
-                                                    <backgroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../backgroundColor"/>
-                                                    <foregroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../foregroundColor"/>
+                                                    <backgroundColor reference="../../../backgroundColor"/>
+                                                    <foregroundColor reference="../../../foregroundColor"/>
                                                     <showIcon>true</showIcon>
                                                     <parent class="net.java.amateras.uml.classdiagram.model.ClassModel" reference="../../.."/>
                                                     <listeners serialization="custom">
@@ -829,8 +837,8 @@
                                                     <isFinal>false</isFinal>
                                                   </net.java.amateras.uml.classdiagram.model.OperationModel>
                                                   <net.java.amateras.uml.classdiagram.model.OperationModel>
-                                                    <backgroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../backgroundColor"/>
-                                                    <foregroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../foregroundColor"/>
+                                                    <backgroundColor reference="../../../backgroundColor"/>
+                                                    <foregroundColor reference="../../../foregroundColor"/>
                                                     <showIcon>true</showIcon>
                                                     <parent class="net.java.amateras.uml.classdiagram.model.ClassModel" reference="../../.."/>
                                                     <listeners serialization="custom">
@@ -1035,7 +1043,7 @@
                                               <type>void</type>
                                               <params>
                                                 <net.java.amateras.uml.classdiagram.model.Argument>
-                                                  <name>cartas</name>
+                                                  <name>pCartas</name>
                                                   <type>ListaCartasMonton</type>
                                                 </net.java.amateras.uml.classdiagram.model.Argument>
                                               </params>
@@ -5257,7 +5265,7 @@
           <type>void</type>
           <params>
             <net.java.amateras.uml.classdiagram.model.Argument>
-              <name>cartas</name>
+              <name>pCartas</name>
               <type>ListaCartasMonton</type>
             </net.java.amateras.uml.classdiagram.model.Argument>
           </params>

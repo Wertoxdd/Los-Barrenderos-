@@ -81,7 +81,7 @@ public class Teclado {
 			System.out.println();
 		}
 		
-		// SELECCION AUTOMATICA
+		// SELECCION AUTOMATICA 
 		if (pLista.size() == 1){
 			System.out.println("\nPulsa enter para continuar...");
 			sc.nextLine();

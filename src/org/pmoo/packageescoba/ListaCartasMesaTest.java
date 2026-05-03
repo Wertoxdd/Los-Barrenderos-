@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ListaCartasMesaTest {
 
     @Test
-    public void testEstaVaciaDevuelveTrueAlCrearMesa() {
+    public void testEstaVaciaAlCrearMesa() {
         ListaCartasMesa mesa = new ListaCartasMesa();
         assertTrue(mesa.estaVacia());
     }
@@ -21,7 +21,7 @@ public class ListaCartasMesaTest {
     }
 
     @Test
-    public void testSumaQuinceDevuelveTrueCombinandoVariasCartasEnMesa() {
+    public void testSumaQuinceCombinandoVariasCartasEnMesa() {
         ListaCartasMesa mesa = new ListaCartasMesa();
         mesa.agregarCarta(new Carta(Palo.Copas, 2));
         mesa.agregarCarta(new Carta(Palo.Espadas, 3));

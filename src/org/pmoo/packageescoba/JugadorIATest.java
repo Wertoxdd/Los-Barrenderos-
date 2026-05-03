@@ -11,7 +11,7 @@ public class JugadorIATest {
     }
 
     @Test
-    public void testElegirCartaDevuelveCartaNoNula() {
+    public void testElegirCarta() {
         JugadorIA ia = new JugadorIA();
         ia.recibirCarta(new Carta(Palo.Oros, 5));
         ia.recibirCarta(new Carta(Palo.Copas, 3));
@@ -19,7 +19,7 @@ public class JugadorIATest {
     }
 
     @Test
-    public void testElegirCartaConUnaCartaEnManoDevuelveEsaCarta() {
+    public void testElegirCartaConUnaCartaEnMano() {
         JugadorIA ia = new JugadorIA();
         Carta unica = new Carta(Palo.Bastos, 6);
         ia.recibirCarta(unica);

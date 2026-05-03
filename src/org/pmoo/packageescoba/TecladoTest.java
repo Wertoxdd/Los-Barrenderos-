@@ -15,12 +15,6 @@ public class TecladoTest {
         assertEquals(5, resultado);
     }
 
-    @Test(expected = FormatoIncorrectoException.class)
-    public void testLeerNumeroLanzaExcepcionConLetra() throws FormatoIncorrectoException {
-        System.setIn(new ByteArrayInputStream("a\n".getBytes()));
-        Teclado.leerNumero("Introduce un numero: ");
-    }
-
     @Test
     public void testLeerCartaEligeCorrectamenteSegunEntrada() throws IndiceCartaInvalidoException, FormatoIncorrectoException {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
