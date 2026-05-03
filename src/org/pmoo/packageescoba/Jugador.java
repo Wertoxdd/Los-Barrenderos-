@@ -211,8 +211,31 @@ public abstract class Jugador {
      * 
      * Método para resetear los puntos de la ronda a cada jugador.
      * 
+     * Si los puntos de la ronda son menores que 0, significa que se está iniciando una nueva ronda (señal de Mazo.resetear) 
+     * y se procede a limpiar el montón y las escobas.
+     * Además, si alguien ha alcanzado el límite de 15 puntos, se resetean los puntos acumulados para la siguiente partida.
+     * 
      */
     public void resetearPuntosRonda() {
+        if (this.puntosRonda < 0) {
+            this.escobas = 0;
+            this.monton = new ListaCartasMonton();
+
+            // Comprobamos si la partida terminó para resetear el acumulado (Ranking)
+            ListaJugadores lj = ListaJugadores.getListaJugadores();
+            boolean finPartida = false;
+            
+            for (int i = 0; i < lj.tamaño(); i++) {
+                if (lj.obtenerJugador(i).getPuntosAcumulados() >= 15) {
+                    finPartida = true;
+                    break;
+                }
+            }
+
+            if (finPartida) {
+                this.puntosAcumulados = 0;
+            }
+        }
         this.puntosRonda = 0;
     }
 

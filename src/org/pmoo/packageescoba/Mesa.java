@@ -331,6 +331,7 @@ public class Mesa {
             
             contarPuntos();
             mostrarResultados();
+     
             guardarRanking();
             mostrarRanking();
 
@@ -342,5 +343,6 @@ public class Mesa {
         }
         
         System.out.println("\n¡PARTIDA TERMINADA!");
+                
     }
 }

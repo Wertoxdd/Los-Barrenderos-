@@ -35,7 +35,6 @@ public class Mazo extends ListaCartas {
 	
 	// ==============   Métodos   ==============
 	
-	
 	/**
 	 * 
 	 * Método que crea las cartas y las agrega en la lista de cartas de la baraja.
@@ -116,5 +115,22 @@ public class Mazo extends ListaCartas {
 	 */
 	public boolean estaVacio() {
 		return this.tamaño() == 0;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * Método para resetear el mazo y el estado temporal de los jugadores (monton y escobas) al inicio de cada ronda.
+	 * 
+	 */
+	public void resetear() {
+		super.resetear();
+		ListaJugadores jugadores = ListaJugadores.getListaJugadores();
+		for (int i = 0; i < jugadores.tamaño(); i++) {
+			Jugador j = jugadores.obtenerJugador(i);
+			j.añadirPuntosRonda(-j.getPuntosRonda() - 1);
+			j.resetearPuntosRonda();
+		}
 	}
 }
