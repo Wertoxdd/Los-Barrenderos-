@@ -62,13 +62,13 @@ public class ListaCartasMontonTest {
     @Test
     public void testConteoDetalladoOrosYSietes() {
         ListaCartasMonton monton = new ListaCartasMonton();
-        // Escenario: 5 oros en total, de los cuales 2 son sietes.
-        monton.agregarCarta(new Carta(Palo.Oros, 7));  // Oro + Siete
-        monton.agregarCarta(new Carta(Palo.Oros, 1));  // Oro
-        monton.agregarCarta(new Carta(Palo.Oros, 2));  // Oro
-        monton.agregarCarta(new Carta(Palo.Oros, 3));  // Oro
-        monton.agregarCarta(new Carta(Palo.Oros, 4));  // Oro
-        monton.agregarCarta(new Carta(Palo.Copas, 7)); // Siete (no oro)
+        
+        monton.agregarCarta(new Carta(Palo.Oros, 7));  
+        monton.agregarCarta(new Carta(Palo.Oros, 1));  
+        monton.agregarCarta(new Carta(Palo.Oros, 2));  
+        monton.agregarCarta(new Carta(Palo.Oros, 3));  
+        monton.agregarCarta(new Carta(Palo.Oros, 4));  
+        monton.agregarCarta(new Carta(Palo.Copas, 7)); 
         
         assertEquals("Debe contar exactamente 5 oros", 5, monton.contarOros());
         assertEquals("Debe contar exactamente 2 sietes", 2, monton.contarSietes());

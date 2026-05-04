@@ -41,8 +41,8 @@ public class ListaCartasMesaTest {
         ListaCartasMesa mesa = new ListaCartasMesa();
         mesa.agregarCarta(new Carta(Palo.Bastos, 5));
         mesa.agregarCarta(new Carta(Palo.Bastos, 2));
-        // 5 + 2 + 7 = 14 (No llega a 15)
+        // 5+2+7 = 14 (No llega a 15)
         Carta miCarta = new Carta(Palo.Oros, 7);
-        assertFalse("No debe permitir captura si la suma es diferente de 15", mesa.sumaQuince(miCarta));
+        assertFalse("No debe permitir captura si la suma no es 15", mesa.sumaQuince(miCarta));
     }
 }

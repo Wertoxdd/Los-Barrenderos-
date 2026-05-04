@@ -5,18 +5,8 @@ import org.junit.Test;
 
 public class JugadorTest {
 
-    private Jugador crearJugador(String nombre) {
-        return new Jugador(nombre) {
-            
-            public Carta elegirCarta() {
-                return null;
-            }
-
-            
-            public ListaCartasMonton elegirCaptura(ListaCartasMesa mesa, Carta pCarta) {
-                return null;
-            }
-        };
+    private Jugador crearJugador(String pNombre) {
+        return new JugadorPersona(pNombre);
     }
 
     @Test
