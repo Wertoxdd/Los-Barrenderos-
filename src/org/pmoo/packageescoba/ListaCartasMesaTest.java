@@ -26,7 +26,7 @@ public class ListaCartasMesaTest {
         mesa.agregarCarta(new Carta(Palo.Copas, 2));
         mesa.agregarCarta(new Carta(Palo.Espadas, 3));
         mesa.agregarCarta(new Carta(Palo.Bastos, 10));
-        assertTrue(mesa.sumaQuince(new Carta(Palo.Oros, 0))); // 2+3+10 = 15
+        assertTrue(mesa.sumaQuince(new Carta(Palo.Oros, 0))); 
     }
 
     @Test

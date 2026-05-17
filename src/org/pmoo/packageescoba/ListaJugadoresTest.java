@@ -41,7 +41,6 @@ public class ListaJugadoresTest {
         Jugador j1 = new JugadorPersona("Alex");
         Jugador j2 = new JugadorPersona("Javi");
         
-        // Empate técnico: Ambos tienen 1 oro
         j1.getMonton().agregarCarta(new Carta(Palo.Oros, 1));
         j2.getMonton().agregarCarta(new Carta(Palo.Oros, 7));
         
