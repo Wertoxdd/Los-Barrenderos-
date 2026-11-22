@@ -1,25 +1,25 @@
 package org.pmoo.packageescoba;
 
 /**
- * ExcepciÛn personalizada que se lanza cuando el usuario selecciona una 
- * combinaciÛn de captura inexistente entre las opciones presentadas.
+ * Excepci√≥n personalizada que se lanza cuando el usuario selecciona una 
+ * combinaci√≥n de captura inexistente entre las opciones presentadas.
  */
 public class IndiceCombinacionInvalidoException extends Exception {
 
     /**
-     * Constructora por defecto que asigna un mensaje genÈrico de error.
+     * Constructora por defecto que asigna un mensaje gen√©rico de error.
      */
     public IndiceCombinacionInvalidoException() {
-        super("Indice de combinaciÛn inv·lido");
+        super("Indice de combinaci√≥n inv√°lido");
     }
     
     /**
-     * Constructora que detalla el Ìndice erroneo y la cantidad m·xima de combinaciones disponibles.
+     * Constructora que detalla el √≠ndice erroneo y la cantidad m√°xima de combinaciones disponibles.
      * 
-     * @param indice: El valor numÈrico introducido incorrectamente por el usuario.
-     * @param maximo: El n˙mero total de combinaciones entre las que se podÌa elegir.
+     * @param indice: El valor num√©rico introducido incorrectamente por el usuario.
+     * @param maximo: El n√∫mero total de combinaciones entre las que se pod√≠a elegir.
      */
     public IndiceCombinacionInvalidoException(int indice, int maximo) {
-        super("Indice de combinaciÛn inv·lido: " + indice + " (debe estar entre 1 y " + maximo + ")");
+        super("Indice de combinaci√≥n inv√°lido: " + indice + " (debe estar entre 1 y " + maximo + ")");
     }
 }

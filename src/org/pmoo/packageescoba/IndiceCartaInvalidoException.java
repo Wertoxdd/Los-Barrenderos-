@@ -1,25 +1,25 @@
 package org.pmoo.packageescoba;
 
 /**
- * ExcepciÛn personalizada que se lanza cuando se intenta acceder a una carta 
- * mediante un Ìndice que no existe en la mano del jugador.
+ * Excepci√≥n personalizada que se lanza cuando se intenta acceder a una carta 
+ * mediante un √≠ndice que no existe en la mano del jugador.
  */
 public class IndiceCartaInvalidoException extends Exception {
 
     /**
-     * Constructora por defecto que asigna un mensaje genÈrico de error.
+     * Constructora por defecto que asigna un mensaje gen√©rico de error.
      */
     public IndiceCartaInvalidoException() {
-        super("Õndice de carta invalido");
+        super("√çndice de carta invalido");
     }
     
     /**
-     * Constructora que detalla el Ìndice errÛneo y el rango de valores permitidos.
+     * Constructora que detalla el √≠ndice err√≥neo y el rango de valores permitidos.
      * 
-     * @param indice: El valor numÈrico introducido incorrectamente.
-     * @param maximo: El lÌmite superior de los Ìndices v·lidos.
+     * @param indice: El valor num√©rico introducido incorrectamente.
+     * @param maximo: El l√≠mite superior de los √≠ndices v√°lidos.
      */
     public IndiceCartaInvalidoException(int indice, int maximo) {
-        super("Õndice de carta inv·lido: " + indice + " (debe estar entre 1 y " + maximo + ")");
+        super("√çndice de carta inv√°lido: " + indice + " (debe estar entre 1 y " + maximo + ")");
     }
 }

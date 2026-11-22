@@ -3,7 +3,7 @@ package org.pmoo.packageescoba;
 public class FormatoIncorrectoException extends Exception {
 
     public FormatoIncorrectoException() {
-        super("Error: Se ha introducido un car·cter no numÈrico.");
+        super("Error: Se ha introducido un car√°cter no num√©rico.");
     }
 
     public FormatoIncorrectoException(String mensaje) {

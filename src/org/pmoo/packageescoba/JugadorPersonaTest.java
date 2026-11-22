@@ -14,7 +14,7 @@ public class JugadorPersonaTest {
     @Test
     public void testManoNoTieneElementosAlInicio() {
         JugadorPersona ahmed = new JugadorPersona("ahmed");
-        assertEquals(0, ahmed.getMano().tamaño());
+        assertEquals(0, ahmed.getMano().tamaÃ±o());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class JugadorPersonaTest {
         samuel.recibirCarta(cartaOros);
         samuel.recibirCarta(cartaCopas);
         
-        assertEquals(2, samuel.getMano().tamaño());
+        assertEquals(2, samuel.getMano().tamaÃ±o());
         assertEquals(cartaOros, samuel.getMano().obtenerCarta(0));
         assertEquals(cartaCopas, samuel.getMano().obtenerCarta(1));
     }
@@ -49,8 +49,8 @@ public class JugadorPersonaTest {
         JugadorPersona alex = new JugadorPersona("alex");
         assertEquals(0, alex.obtenerEscobas());
         
-        alex.añadirEscoba();
-        alex.añadirEscoba();
+        alex.aÃ±adirEscoba();
+        alex.aÃ±adirEscoba();
         
         assertEquals(2, alex.obtenerEscobas());
     }

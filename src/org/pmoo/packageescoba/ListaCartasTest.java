@@ -6,9 +6,9 @@ import org.junit.Test;
 public class ListaCartasTest {
 
     @Test
-    public void testTamaño() {
+    public void testTamaÃ±o() {
         ListaCartas lista = new ListaCartas();
-        assertEquals(0, lista.tamaño());
+        assertEquals(0, lista.tamaÃ±o());
     }
 
     @Test
@@ -17,7 +17,7 @@ public class ListaCartasTest {
         lista.agregarCarta(new Carta(Palo.Oros, 1));
         lista.agregarCarta(new Carta(Palo.Copas, 2));
         
-        assertEquals(2, lista.tamaño());
+        assertEquals(2, lista.tamaÃ±o());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ListaCartasTest {
         Carta carta = new Carta(Palo.Bastos, 5);
         lista.agregarCarta(carta);
         
-        assertEquals(1, lista.tamaño());
+        assertEquals(1, lista.tamaÃ±o());
         assertEquals(carta, lista.obtenerCarta(0));
     }
 
@@ -39,7 +39,7 @@ public class ListaCartasTest {
         lista.agregarCarta(carta1);
         lista.agregarCarta(carta2);
         
-        assertEquals(2, lista.tamaño());
+        assertEquals(2, lista.tamaÃ±o());
         assertEquals(carta1, lista.obtenerCarta(0));
         assertEquals(carta2, lista.obtenerCarta(1));
     }

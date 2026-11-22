@@ -11,7 +11,7 @@ public class ListaJugadoresTest {
         lj.resetear();
         lj.agregarJugador(new JugadorPersona("Test1"));
         lj.agregarJugador(new JugadorIA());
-        assertEquals(2, lj.tamaño());
+        assertEquals(2, lj.tamaÃ±o());
     }
 
     @Test

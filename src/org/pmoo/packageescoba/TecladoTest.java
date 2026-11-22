@@ -33,7 +33,7 @@ public class TecladoTest {
 
     @Test
     public void testLeerCapturaDevuelveMontonUnicoDirectamente() throws IndiceCombinacionInvalidoException, FormatoIncorrectoException {
-        System.out.println("SelecciÛn autom·tica. Por favor, pulsa Enter dos veces.");
+        System.out.println("Selecci√≥n autom√°tica. Por favor, pulsa Enter dos veces.");
         ListaCartasCombinaciones posiblesCombinaciones = new ListaCartasCombinaciones();
         ListaCartasMonton montonUnico = new ListaCartasMonton();
         montonUnico.agregarCarta(new Carta(Palo.Espadas, 10));

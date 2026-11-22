@@ -38,7 +38,7 @@ public class JugadorTest {
     @Test
     public void testAnadirEscobaIncrementaContadorEnUno() {
         Jugador jugador = crearJugador("Ahmed");
-        jugador.añadirEscoba();
+        jugador.aÃ±adirEscoba();
         assertEquals(1, jugador.obtenerEscobas());
     }
 
@@ -79,9 +79,9 @@ public class JugadorTest {
     @Test
     public void testAnadirEscobaVariasVecesAcumulaCorrectamente() {
         Jugador jugador = crearJugador("Alex");
-        jugador.añadirEscoba();
-        jugador.añadirEscoba();
-        jugador.añadirEscoba();
+        jugador.aÃ±adirEscoba();
+        jugador.aÃ±adirEscoba();
+        jugador.aÃ±adirEscoba();
         assertEquals(3, jugador.obtenerEscobas());
     }
 
@@ -150,8 +150,8 @@ public class JugadorTest {
     public void testEscobasDeUnJugadorNoAfectanAlOtro() {
         Jugador jugador1 = crearJugador("Jon");
         Jugador jugador2 = crearJugador("Ahmed");
-        jugador1.añadirEscoba();
-        jugador1.añadirEscoba();
+        jugador1.aÃ±adirEscoba();
+        jugador1.aÃ±adirEscoba();
         assertEquals(2, jugador1.obtenerEscobas());
         assertEquals(0, jugador2.obtenerEscobas());
     }

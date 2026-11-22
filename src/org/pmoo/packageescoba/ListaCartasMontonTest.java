@@ -16,7 +16,7 @@ public class ListaCartasMontonTest {
 
         montonPrincipal.agregarCartas(montonAdicional);
 
-        assertEquals(3, montonPrincipal.tamaño());
+        assertEquals(3, montonPrincipal.tamaÃ±o());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ListaCartasMontonTest {
         for (int i = 0; i < 20; i++) {
             monton.agregarCarta(new Carta(Palo.Espadas, 1));
         }
-        assertEquals("Debe poder gestionar y contar correctamente 20 cartas", 20, monton.tamaño());
+        assertEquals("Debe poder gestionar y contar correctamente 20 cartas", 20, monton.tamaÃ±o());
     }
 
     @Test

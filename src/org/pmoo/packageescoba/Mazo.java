@@ -7,9 +7,9 @@ import java.util.Random;
  * 
  * Mazo: Representa la baraja de 40 cartas. 
  * 
- * Hereda a ListaCartas para aprovechar su gestión de listas. 
+ * Hereda a ListaCartas para aprovechar su gestiÃ³n de listas. 
  * 
- * Utiliza el Patrón Singleton porque es una MAE (no pueden haber dos barajas en una partida).
+ * Utiliza el PatrÃ³n Singleton porque es una MAE (no pueden haber dos barajas en una partida).
  * 
  */
 
@@ -25,7 +25,7 @@ public class Mazo extends ListaCartas {
 		super();
 	}
 	
-	// ==============   Patrón Singleton   ==============	
+	// ==============   PatrÃ³n Singleton   ==============	
 	public static Mazo getMazo() {
 		if (miMazo == null) {
 			miMazo = new Mazo();
@@ -33,11 +33,11 @@ public class Mazo extends ListaCartas {
 		return miMazo;
 	}
 	
-	// ==============   Métodos   ==============
+	// ==============   MÃ©todos   ==============
 	
 	/**
 	 * 
-	 * Método que crea las cartas y las agrega en la lista de cartas de la baraja.
+	 * MÃ©todo que crea las cartas y las agrega en la lista de cartas de la baraja.
 	 * 
 	 */
 	public void generarMazo() {
@@ -74,7 +74,7 @@ public class Mazo extends ListaCartas {
 	
 	
 	/**
-	 * Método que baraja el mazo, usando Random.
+	 * MÃ©todo que baraja el mazo, usando Random.
 	 * 
 	 * NOTA: Extrae las cartas a una lista auxiliar, para luego volver a insertarlo en la lista anterior con un orden aleatorio.
 	 * 
@@ -82,7 +82,7 @@ public class Mazo extends ListaCartas {
 	public void barajarMazo() {
 		Random random = new Random();
 		ArrayList<Carta> aux = new ArrayList<Carta>();
-		int total = this.tamaño();
+		int total = this.tamaÃ±o();
 		for (int i = 0; i < total; i++) {
 			aux.add(this.eliminarCarta(0));
 		}
@@ -96,40 +96,40 @@ public class Mazo extends ListaCartas {
 	
 	/**
 	 * 
-	 * Método para dar una carta. 
+	 * MÃ©todo para dar una carta. 
 	 * 
 	 * Entrega la ultima carta de la baraja (la de encima del mazo) y la quita de la lista usando la propiedad de remove.
 	 * 
 	 * @return una carta.
 	 */
 	public Carta darCarta() {
-		return this.eliminarCarta(this.tamaño() - 1);
+		return this.eliminarCarta(this.tamaÃ±o() - 1);
 	}
 	
 	
 	/**
 	 * 
-	 * Método para saber si la baraja esta vacia.
+	 * MÃ©todo para saber si la baraja esta vacia.
 	 * 
 	 * @return booleano.
 	 */
 	public boolean estaVacio() {
-		return this.tamaño() == 0;
+		return this.tamaÃ±o() == 0;
 	}
 	
 	
 	
 	/**
 	 * 
-	 * Método para resetear el mazo y el estado temporal de los jugadores (monton y escobas) al inicio de cada ronda.
+	 * MÃ©todo para resetear el mazo y el estado temporal de los jugadores (monton y escobas) al inicio de cada ronda.
 	 * 
 	 */
 	public void resetear() {
 		super.resetear();
 		ListaJugadores jugadores = ListaJugadores.getListaJugadores();
-		for (int i = 0; i < jugadores.tamaño(); i++) {
+		for (int i = 0; i < jugadores.tamaÃ±o(); i++) {
 			Jugador j = jugadores.obtenerJugador(i);
-			j.añadirPuntosRonda(-j.getPuntosRonda() - 1);
+			j.aÃ±adirPuntosRonda(-j.getPuntosRonda() - 1);
 			j.resetearPuntosRonda();
 		}
 	}

@@ -15,7 +15,7 @@ public class MazoTest {
         Mazo mazo = Mazo.getMazo();
         mazo.resetear();
         mazo.generarMazo();
-        assertEquals(40, mazo.tamaño());
+        assertEquals(40, mazo.tamaÃ±o());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class MazoTest {
         mazo.generarMazo();
         mazo.resetear();
         assertTrue(mazo.estaVacio());
-        assertEquals(0, mazo.tamaño());
+        assertEquals(0, mazo.tamaÃ±o());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MazoTest {
         mazo.resetear();
         mazo.generarMazo();
         mazo.darCarta();
-        assertEquals(39, mazo.tamaño());
+        assertEquals(39, mazo.tamaÃ±o());
     }
 
     @Test
@@ -59,6 +59,6 @@ public class MazoTest {
         mazo.resetear();
         mazo.generarMazo();
         mazo.barajarMazo();
-        assertEquals(40, mazo.tamaño());
+        assertEquals(40, mazo.tamaÃ±o());
     }
 }

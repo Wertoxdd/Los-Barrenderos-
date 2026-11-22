@@ -2,7 +2,7 @@ package org.pmoo.packageescoba;
 
 /**
  * 
- * Carta: Representa una única carta de la baraja con su valor y su palo. 
+ * Carta: Representa una Ãºnica carta de la baraja con su valor y su palo. 
  *
  */
 
@@ -23,7 +23,7 @@ public class Carta {
 	// ==============   Metodos   ==============
 	
 	/**
-	 * Método para devolver el palo de una carta.
+	 * MÃ©todo para devolver el palo de una carta.
 	 * @return palo
 	 */
 	public Palo getPalo() {
@@ -31,7 +31,7 @@ public class Carta {
 	}
 	
 	/**
-	 * Método para devolver el valor de una carta.
+	 * MÃ©todo para devolver el valor de una carta.
 	 * @return valor
 	 */
 	public int getValor() {
@@ -40,7 +40,7 @@ public class Carta {
 
 	
 	/**
-	 * Método para convertir una carta en formato String.
+	 * MÃ©todo para convertir una carta en formato String.
 	 * 
 	 * "Override" porque toString es un metodo que ya existe. Por eso lo que hacemos es sobreescribirlo.
 	 * 
