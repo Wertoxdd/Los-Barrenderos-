@@ -175,4 +175,30 @@ public class JugadorTest {
         jugador.recibirCarta(new Carta(Palo.Bastos, 5));
         assertFalse(jugador.manoVacia());
     }
+
+    @Test
+    public void testNuevaRondaVaciaMontonEscobasYMano() {
+        Jugador jugador = new JugadorPersona("Alex");
+        jugador.recibirCarta(new Carta(Palo.Oros, 3));
+        jugador.getMonton().agregarCarta(new Carta(Palo.Oros, 7));
+        jugador.añadirEscoba();
+        jugador.añadirPuntosRonda(4);
+        jugador.añadirPuntosAcumulados(9);
+
+        jugador.nuevaRonda();
+
+        assertTrue(jugador.manoVacia());
+        assertEquals(0, jugador.totalCartas());
+        assertEquals(0, jugador.obtenerEscobas());
+        assertEquals(0, jugador.getPuntosRonda());
+        assertEquals("Los puntos acumulados se conservan entre rondas", 9, jugador.getPuntosAcumulados());
+    }
+
+    @Test
+    public void testReiniciarPuntosAcumulados() {
+        Jugador jugador = new JugadorPersona("Alex");
+        jugador.añadirPuntosAcumulados(16);
+        jugador.reiniciarPuntosAcumulados();
+        assertEquals(0, jugador.getPuntosAcumulados());
+    }
 }

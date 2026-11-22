@@ -121,16 +121,10 @@ public class Mazo extends ListaCartas {
 	
 	/**
 	 * 
-	 * Método para resetear el mazo y el estado temporal de los jugadores (monton y escobas) al inicio de cada ronda.
-	 * 
+	 * Método para vaciar el mazo. El estado de los jugadores al empezar cada ronda lo prepara Mesa (Jugador.nuevaRonda).
+	 *
 	 */
 	public void resetear() {
 		super.resetear();
-		ListaJugadores jugadores = ListaJugadores.getListaJugadores();
-		for (int i = 0; i < jugadores.tamaño(); i++) {
-			Jugador j = jugadores.obtenerJugador(i);
-			j.añadirPuntosRonda(-j.getPuntosRonda() - 1);
-			j.resetearPuntosRonda();
-		}
 	}
 }

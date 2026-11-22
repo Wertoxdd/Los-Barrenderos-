@@ -209,34 +209,33 @@ public abstract class Jugador {
     
     /**
      * 
-     * Método para resetear los puntos de la ronda a cada jugador.
-     * 
-     * Si los puntos de la ronda son menores que 0, significa que se está iniciando una nueva ronda (señal de Mazo.resetear) 
-     * y se procede a limpiar el montón y las escobas.
-     * Además, si alguien ha alcanzado el límite de 15 puntos, se resetean los puntos acumulados para la siguiente partida.
-     * 
+     * Método para resetear los puntos de la ronda del jugador.
+     *
      */
     public void resetearPuntosRonda() {
-        if (this.puntosRonda < 0) {
-            this.escobas = 0;
-            this.monton = new ListaCartasMonton();
-
-            // Comprobamos si la partida terminó para resetear el acumulado (Ranking)
-            ListaJugadores lj = ListaJugadores.getListaJugadores();
-            boolean finPartida = false;
-            
-            for (int i = 0; i < lj.tamaño(); i++) {
-                if (lj.obtenerJugador(i).getPuntosAcumulados() >= 15) {
-                    finPartida = true;
-                    break;
-                }
-            }
-
-            if (finPartida) {
-                this.puntosAcumulados = 0;
-            }
-        }
         this.puntosRonda = 0;
+    }
+
+    /**
+     *
+     * Método que prepara al jugador para una nueva ronda: vacía la mano y el montón, y pone a 0 las escobas y los puntos de la ronda.
+     * Los puntos acumulados de la partida se mantienen.
+     *
+     */
+    public void nuevaRonda() {
+        this.mano = new ListaCartasMano();
+        this.monton = new ListaCartasMonton();
+        this.escobas = 0;
+        this.puntosRonda = 0;
+    }
+
+    /**
+     *
+     * Método que pone a 0 los puntos acumulados, para empezar una partida nueva.
+     *
+     */
+    public void reiniciarPuntosAcumulados() {
+        this.puntosAcumulados = 0;
     }
 
     /**
@@ -251,6 +250,18 @@ public abstract class Jugador {
     
     // ==============   Métodos abstractos   ==============
     public abstract Carta elegirCarta();
+
+    /**
+     *
+     * Método para elegir carta conociendo las cartas de la mesa. Por defecto ignora la mesa (la persona ya la ve por pantalla);
+     * JugadorIA lo sobrescribe para decidir qué carta le conviene más.
+     *
+     * @param pMesa: Recibe las cartas que hay en la mesa.
+     * @return la carta elegida (se quita de la mano).
+     */
+    public Carta elegirCarta(ListaCartasMesa pMesa) {
+        return elegirCarta();
+    }
     public abstract ListaCartasMonton elegirCaptura(ListaCartasMesa pMesa, Carta pCarta);
     
     

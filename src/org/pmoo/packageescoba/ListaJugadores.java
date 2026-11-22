@@ -57,6 +57,7 @@ public class ListaJugadores {
 			if (j.totalCartas() > max) {
 				max = j.totalCartas();
 				ganador = j;
+				empate = false; // un nuevo máximo anula cualquier empate anterior
 			} else if (j.totalCartas() == max) {
 				empate = true;
 			}
@@ -75,6 +76,7 @@ public class ListaJugadores {
 			if (j.totalOros() > max) {
 				max = j.totalOros();
 				ganador = j;
+				empate = false; // un nuevo máximo anula cualquier empate anterior
 			} else if (j.totalOros() == max) {
 				empate = true;
 			}
@@ -93,6 +95,7 @@ public class ListaJugadores {
 			if (j.totalSietes() > max) {
 				max = j.totalSietes();
 				ganador = j;
+				empate = false; // un nuevo máximo anula cualquier empate anterior
 			} else if (j.totalSietes() == max) {
 				empate = true;
 			}

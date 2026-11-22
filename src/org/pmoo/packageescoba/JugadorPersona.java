@@ -25,6 +25,7 @@ public class JugadorPersona extends Jugador {
 
         buscarCombinaciones(cartasMesa, 0, 15 - pCarta.getValor(), new ListaCartasMonton());
 
+        System.out.println("\nCombinaciones posibles: ");
         try {
             return Teclado.leerCaptura(getPosiblesCombinaciones());
         } catch (IndiceCombinacionInvalidoException | FormatoIncorrectoException e) {

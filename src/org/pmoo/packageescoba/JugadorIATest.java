@@ -112,4 +112,47 @@ public class JugadorIATest {
         }
         assertEquals(5, suma);
     }
+
+    @Test
+    public void testConstructorConNombre() {
+        JugadorIA ia = new JugadorIA("IA 2");
+        assertEquals("IA 2", ia.getNombre());
+    }
+
+    @Test
+    public void testElegirCartaConMesaPrefiereLaEscoba() {
+        JugadorIA ia = new JugadorIA();
+        ListaCartasMesa mesa = new ListaCartasMesa();
+        mesa.agregarCarta(new Carta(Palo.Copas, 4));
+        mesa.agregarCarta(new Carta(Palo.Bastos, 6));
+        // Con el 5 se lleva toda la mesa (escoba); con el 9 solo el 6
+        ia.recibirCarta(new Carta(Palo.Espadas, 9));
+        ia.recibirCarta(new Carta(Palo.Espadas, 5));
+        assertEquals(5, ia.elegirCarta(mesa).getValor());
+    }
+
+    @Test
+    public void testElegirCapturaPrefiereElSieteDeOros() {
+        JugadorIA ia = new JugadorIA();
+        ListaCartasMesa mesa = new ListaCartasMesa();
+        mesa.agregarCarta(new Carta(Palo.Copas, 7));
+        mesa.agregarCarta(new Carta(Palo.Oros, 7));
+        mesa.agregarCarta(new Carta(Palo.Bastos, 1));
+        // Con un 8 puede llevarse cualquiera de los dos sietes
+        ListaCartasMonton resultado = ia.elegirCaptura(mesa, new Carta(Palo.Espadas, 8));
+        assertEquals(1, resultado.tamaño());
+        assertEquals(Palo.Oros, resultado.obtenerCarta(0).getPalo());
+    }
+
+    @Test
+    public void testElegirCartaSinCapturaNoSeDescartaDelSieteDeOros() {
+        JugadorIA ia = new JugadorIA();
+        ListaCartasMesa mesa = new ListaCartasMesa();
+        mesa.agregarCarta(new Carta(Palo.Copas, 10)); // nada suma 15 con estas cartas
+        ia.recibirCarta(new Carta(Palo.Oros, 7));
+        ia.recibirCarta(new Carta(Palo.Bastos, 2));
+        Carta jugada = ia.elegirCarta(mesa);
+        assertEquals(Palo.Bastos, jugada.getPalo());
+        assertEquals(2, jugada.getValor());
+    }
 }

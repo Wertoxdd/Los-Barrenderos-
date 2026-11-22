@@ -36,7 +36,22 @@ public class Teclado {
 	}
 	
 	/**
-	 * 
+	 *
+	 * Método que lee una línea de texto.
+	 *
+	 * @param mensajeAMostrar: Recibe el mensaje que se quiere imprimir por pantalla.
+	 * @return el texto introducido, sin espacios al principio ni al final (puede ser vacío).
+	 */
+	public static String leerTexto(String mensajeAMostrar) {
+		System.out.println(mensajeAMostrar);
+		if (!sc.hasNextLine()) {
+			return "";
+		}
+		return sc.nextLine().trim();
+	}
+
+	/**
+	 *
 	 * Método que muestra las cartas de la mano del jugador y permite seleccionar una.
 	 * 
 	 * @param pMano: Recibe la lista de cartas de la mano que contiene las cartas actuales del jugador.

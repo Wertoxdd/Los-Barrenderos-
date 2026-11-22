@@ -28,14 +28,13 @@ public class Mesa {
     
     // ficheroTexto: El nombre del archivo para guardar los resultados.
     private static final String ficheroTexto = "ranking.txt";
+
+    // maxIAs: Número máximo de IAs (con 4 jugadores el mazo de 40 cartas se reparte justo).
+    private static final int maxIAs = 3;
     
     
     // ==============   Constructora (privada)   ==============
     private Mesa() {
-        ListaJugadores jugadores = ListaJugadores.getListaJugadores();
-        jugadores.agregarJugador(new JugadorPersona("Jugador 1"));
-        jugadores.agregarJugador(new JugadorIA());
-        jugadores.agregarJugador(new JugadorIA());
         cartasMesa = new ListaCartasMesa();
     }
     
@@ -48,9 +47,59 @@ public class Mesa {
     }
     
     // ==============   Métodos   ==============
-    
-    
+
+
     /**
+     *
+     * Método que pregunta el nombre del jugador y contra cuántas IAs quiere jugar, y los añade a la lista de jugadores.
+     *
+     */
+    private void configurarJugadores() {
+        ListaJugadores jugadores = ListaJugadores.getListaJugadores();
+        jugadores.resetear();
+
+        // El ';' se usa como separador en ranking.txt, así que no se permite en el nombre
+        String nombre = Teclado.leerTexto("¿Cómo te llamas?").replace(";", "");
+        if (nombre.isEmpty()) {
+            nombre = "Jugador 1";
+        }
+        jugadores.agregarJugador(new JugadorPersona(nombre));
+
+        int numIAs = 0;
+        while (numIAs < 1 || numIAs > maxIAs) {
+            try {
+                numIAs = Teclado.leerNumero("¿Contra cuántas IAs quieres jugar? (1-" + maxIAs + "): ");
+                if (numIAs < 1 || numIAs > maxIAs) {
+                    System.out.println("XX Elige un número entre 1 y " + maxIAs + ".\n");
+                }
+            } catch (FormatoIncorrectoException e) {
+                System.out.println("XX " + e.getMessage());
+                System.out.println("Por favor, inténtalo de nuevo.\n");
+            }
+        }
+        for (int i = 1; i <= numIAs; i++) {
+            jugadores.agregarJugador(new JugadorIA("IA " + i));
+        }
+    }
+
+    /**
+     *
+     * Método que comprueba si algún jugador ha llegado a los puntos necesarios para ganar la partida.
+     *
+     * @return booleano
+     */
+    private boolean hayGanador() {
+        ListaJugadores lj = ListaJugadores.getListaJugadores();
+        for (int i = 0; i < lj.tamaño(); i++) {
+            if (lj.obtenerJugador(i).getPuntosAcumulados() >= puntosFinalPartida) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
      * 
      * Metodo que reparte 3 cartas a cada jugador de la partida.
      * 
@@ -110,23 +159,24 @@ public class Mesa {
         }
         System.out.println();
         
-        Carta cartaElegida = pJugador.elegirCarta();
-        
+        Carta cartaElegida = pJugador.elegirCarta(cartasMesa);
+
         if (cartasMesa.sumaQuince(cartaElegida)) {
-            System.out.println("\nCombinaciones posibles: ");
-            
             ListaCartasMonton cartasCapturadas = pJugador.elegirCaptura(cartasMesa, cartaElegida);
-            
+
+            System.out.print("\n" + pJugador.getNombre() + " captura con el " + cartaElegida.toString() + ": ");
+            Teclado.mostrarCartasEnHorizontal(cartasCapturadas);
+
             for (int i = cartasCapturadas.tamaño() - 1; i >= 0; i--) {
                 Carta c = cartasCapturadas.obtenerCarta(i);
                 cartasMesa.eliminarCarta(c);
             }
-            
+
             cartasCapturadas.agregarCarta(cartaElegida);
             pJugador.agregarCapturadas(cartasCapturadas);
             ultimoEnCapturar = pJugador;
-            
-            System.out.println("\nCartas en tu montón: " + pJugador.totalCartas());
+
+            System.out.println("Cartas en el montón de " + pJugador.getNombre() + ": " + pJugador.totalCartas());
             
             if (esEscoba()) {
                 pJugador.añadirEscoba();
@@ -134,8 +184,7 @@ public class Mesa {
             }
         } else {
             cartasMesa.agregarCarta(cartaElegida);
-            System.out.println("Sin captura. El " + cartaElegida.getValor() + " de " + 
-                cartaElegida.getPalo() + " se añade a la mesa.");
+            System.out.println("Sin captura. El " + cartaElegida.toString() + " se añade a la mesa.");
         }
         
         return ultimoEnCapturar;
@@ -228,18 +277,38 @@ public class Mesa {
     
     /**
      * 
-     * Método que accede a ranking.txt y recupera los puntos acumulados de cada jugador. 
-     * 
-     * Si el archivo no existe, se crea uno nuevo.
-     * 
+     * Método que accede a ranking.txt y recupera los puntos acumulados de cada jugador.
+     *
+     * Cada línea tiene el formato "nombre;puntos" y los puntos se asignan al jugador con ese nombre.
+     * (Por compatibilidad, si una línea solo tiene un número, se asigna por posición, como en versiones anteriores.)
+     *
+     * Si el archivo no existe, se empieza desde 0 y se creará al terminar la primera ronda.
+     *
      */
     private void cargarRanking() {
         ListaJugadores lj = ListaJugadores.getListaJugadores();
         try (Scanner sc = new Scanner(new File(ficheroTexto))) {
-            for (int i = 0; i < lj.tamaño(); i++) {
-                if (sc.hasNextInt()) {
-                    lj.obtenerJugador(i).añadirPuntosAcumulados(sc.nextInt());
+            int posicion = 0;
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine().trim();
+                if (linea.isEmpty()) continue;
+                try {
+                    int separador = linea.lastIndexOf(';');
+                    if (separador >= 0) {
+                        String nombre = linea.substring(0, separador);
+                        int puntos = Integer.parseInt(linea.substring(separador + 1).trim());
+                        for (int i = 0; i < lj.tamaño(); i++) {
+                            if (lj.obtenerJugador(i).getNombre().equals(nombre)) {
+                                lj.obtenerJugador(i).añadirPuntosAcumulados(puntos);
+                            }
+                        }
+                    } else if (posicion < lj.tamaño()) {
+                        lj.obtenerJugador(posicion).añadirPuntosAcumulados(Integer.parseInt(linea));
+                    }
+                } catch (NumberFormatException e) {
+                    // Línea mal formada: se ignora
                 }
+                posicion++;
             }
         } catch (Exception e) {
             System.out.println("No se encontró archivo de ranking. Iniciando desde 0.");
@@ -256,7 +325,8 @@ public class Mesa {
         ListaJugadores lj = ListaJugadores.getListaJugadores();
         try (PrintWriter pw = new PrintWriter(new FileWriter(ficheroTexto))) { 
             for (int i = 0; i < lj.tamaño(); i++) {
-                pw.println(lj.obtenerJugador(i).getPuntosAcumulados());
+                Jugador j = lj.obtenerJugador(i);
+                pw.println(j.getNombre() + ";" + j.getPuntosAcumulados());
             }
         } catch (Exception e) {
             System.out.println("Error al guardar el ranking.");
@@ -296,14 +366,26 @@ public class Mesa {
      * 
      */
     public void jugarPartida() {
+        configurarJugadores();
         cargarRanking();
         ListaJugadores lj = ListaJugadores.getListaJugadores();
-        
+
+        // Si el ranking guardado es de una partida que ya terminó, se empieza una partida nueva desde 0 para todos
+        if (hayGanador()) {
+            System.out.println("La partida anterior ya terminó. Empieza una partida nueva.");
+            for (int i = 0; i < lj.tamaño(); i++) {
+                lj.obtenerJugador(i).reiniciarPuntosAcumulados();
+            }
+        }
+
         boolean alguienHaGanado = false;
         while (!alguienHaGanado) {
-            
+
             cartasMesa = new ListaCartasMesa();
-            
+            for (int i = 0; i < lj.tamaño(); i++) {
+                lj.obtenerJugador(i).nuevaRonda();
+            }
+
             Mazo mazo = Mazo.getMazo();
             mazo.resetear();
             mazo.generarMazo();
@@ -336,11 +418,7 @@ public class Mesa {
             guardarRanking();
             mostrarRanking();
 
-            for (int i = 0; i < lj.tamaño(); i++) {
-                if (lj.obtenerJugador(i).getPuntosAcumulados() >= puntosFinalPartida) {
-                    alguienHaGanado = true;
-                }
-            }
+            alguienHaGanado = hayGanador();
         }
         
         System.out.println("\n¡PARTIDA TERMINADA!");
